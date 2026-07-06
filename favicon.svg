@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Raceplast">
+  <rect width="64" height="64" rx="12" fill="#ffffff"/>
+  <path d="M13 18h22c8 0 14 5 14 13 0 6-3 10-8 12l8 12H37l-7-10h-7v10H13V18Zm10 9v9h11c3 0 5-2 5-4.5S37 27 34 27H23Z" fill="#00346f"/>
+  <path d="M8 12h21v7H15v9H8V12Zm43 4h5v22h-7V23H37v-7h14ZM15 45h17v7H8V31h7v14Zm34-3h7v10H39v-7h10v-3Z" fill="#82c341"/>
+</svg>

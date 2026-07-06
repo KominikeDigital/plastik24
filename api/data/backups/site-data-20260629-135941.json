@@ -1,0 +1,1456 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-06-29T13:55:14.980Z",
+  "settings": {
+    "siteTitle": "Raceplast Industrial",
+    "defaultLanguage": "tr",
+    "enabledLanguages": [
+      "tr",
+      "en"
+    ],
+    "logoUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuAaS0oUtuzWopRondlmKz4buNUQ2TKaxobMD7xWYE9bPES_XWqLO4EInRBWju03iYLdzXScHMhcdTmGVZgQQuIp-c8JYKUDYAG9K1aQvVJFP6ACswiH1F2vzNUzrzoOJZgzWEPYr8r_1G8dugPDa5ClxetNyMBq0BKwN-3SYauWqDFN56EBR0ct8rFbtgXmeaHZpbCJL1RY4oksKeQiVRDspxQkDo7RcYFJRb90_tUIh89vCijpy3Yk-DHsDbh4DrBOvoTb3t5huFj2",
+    "footerLogoUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuAaS0oUtuzWopRondlmKz4buNUQ2TKaxobMD7xWYE9bPES_XWqLO4EInRBWju03iYLdzXScHMhcdTmGVZgQQuIp-c8JYKUDYAG9K1aQvVJFP6ACswiH1F2vzNUzrzoOJZgzWEPYr8r_1G8dugPDa5ClxetNyMBq0BKwN-3SYauWqDFN56EBR0ct8rFbtgXmeaHZpbCJL1RY4oksKeQiVRDspxQkDo7RcYFJRb90_tUIh89vCijpy3Yk-DHsDbh4DrBOvoTb3t5huFj2",
+    "isoBadgeUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuB_S-gtoy89-81onBHLTdYXilORfnGr3icTUHHcAsOn0lAOxy42w7t4ubfayTtT-UNd6Bc4OirpZFVTcTJGTQjiYh1lzADPfOmEe8JZKGpPQDUr2xsm_1DKx2zqgStKeDmIwcGVvnsj7ntaZGdPpOqlftESHcPmL5iukp8_Ju2BQXOT1IYlKVkANuCROLKeK5fcOoIhVQoN-IPU35GnxLKongQ-cIbZU4U-EeYOzpX0e_RxLv7jd1QMhUYnco1hkNrRi8rLbh3_338R",
+    "fdaBadgeUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuCXaUIAdi-kR44PvYtneyUGWu66I6T0P-A4QDgA04CAWaRn0rslTOCLvk2orPHpI2JBOMjbgqsbHbqC69eOyl7ArzT1p16AlzkQv5FfAK6BA7yvx6wCiuiLapylMWxqjp-9uuzD3TsSKC_xx12K5_44KDQgzRP1ETjpGDdIBQtBLux1i3lNHo4QUewmJRiPb_jW_XNexH9hm3YdMF0HITGa7sT9M_A1AitvWFeLDNAvCCKsizO4Xtr03kcvcrLMnqx6j5n9gu9_LGbB",
+    "email": "info@raceplast.com.tr",
+    "phone": "0507 119 16 79",
+    "whatsapp": "0507 119 16 79",
+    "address": "Malıköy Başkent OSB, 19. Cd. No:45, 06909 Sincan/Ankara",
+    "companyDescription": "Makine ve gıda işleme endüstrileri için yenilikçi mühendislik plastik çözümleri. Stoklu teknik polimer ve yarı mamul tedarik platformu.",
+    "copyrightCompany": "Raceplast Industrial",
+    "seoTitle": "Raceplast Industrial | Ürünlerimiz ve Stok Çözümleri",
+    "seoDescription": "Raceplast teknik plastik ürünleri, stoklu yarı mamuller ve teknik polimer tedarik platformu.",
+    "seoTitleEn": "Raceplast Industrial | Products and Stock Solutions",
+    "seoDescriptionEn": "Raceplast engineering plastics, cut-to-size stock, technical polymers and industrial procurement platform."
+  },
+  "pageTexts": {
+    "hero": {
+      "badge": "Alman Kalite Standartları",
+      "title": "Stoktan Hızlı Teknik Plastik Çözümleri",
+      "description": "Stoklu teknik polimerler, yarı mamul ürünler ve endüstriyel tedarik süreçlerinde hızlı çözüm ortağınız.",
+      "primaryCta": "Ürünleri İncele",
+      "restCta": "Rest Ürünleri Gör",
+      "quoteCta": "Teklif Al",
+      "searchPlaceholder": "POM-C, PA6, PEEK veya malzeme adı ile arayın...",
+      "searchButton": "Hızlı Bul",
+      "backgroundWord": "RACEPLAST"
+    },
+    "home": {
+      "popularEyebrow": "ENDÜSTRİYEL ÇÖZÜMLER",
+      "popularTitle": "Popüler Ürünlerimiz",
+      "popularAction": "Tüm Ürünleri Gör",
+      "restEyebrow": "ANLIK REST STOKLARI",
+      "restTitle": "Artabil Parçalar, Uygun Fiyatlar",
+      "restDescription": "Projenize uygun boyuttaki fireleri/restleri listeleyin, tam plaka alma zorunluluğundan kurtulun. Gerçek zamanlı depo verisi.",
+      "restAction": "Tüm Restleri Gör",
+      "sectorsEyebrow": "HAREKET GÜCÜMÜZ",
+      "sectorsTitle": "Çözüm Sunduğumuz Sektörler"
+    },
+    "portfolio": {
+      "title": "Ürünlerimiz",
+      "description": "Zorlu endüstriyel uygulamalar için yüksek performanslı teknik polimerler. Projeniz için mükemmel eşleşmeyi bulmak üzere teknik özelliklere veya sertifikalara göre filtreleyin.",
+      "emptyTitle": "Eşleşen Teknik Malzeme Bulunamadı",
+      "emptyDescription": "Arama kriterinizi veya teknik filtrelerinizi temizlemeyi deneyin. Özel ölçü istekleri için doğrudan teknik ekibimizle teklif formu üzerinden irtibata geçebilirsiniz."
+    },
+    "sectors": {
+      "eyebrow": "UYGULAMA ALANLARI",
+      "title": "Endüstrinin Nabzını Tutuyoruz",
+      "description": "Savunma sanayi füzelerinden ambalajlama yıldızlarına kadar her sektöre uygun yüksek kimyasal mukavemet ve kayganlık özelliklerine sahip polimerler tasarlıyoruz."
+    },
+    "blog": {
+      "eyebrow": "TEKNİK BİLGİ MERKEZİ",
+      "title": "Blog & Uygulama Rehberleri",
+      "description": "Mühendislik plastikleri, stok seçimi, gıda uyumluluğu ve endüstriyel parça tasarımı hakkında pratik teknik notlar."
+    },
+    "contact": {
+      "eyebrow": "İLETİŞİM",
+      "title": "İletişim",
+      "description": "Ürün, stok, sipariş ve ödeme talepleriniz için satış ve teknik destek ekibimiz size yardımcı olur."
+    },
+    "info": {
+      "title": "Sertifikalar & Kalite Güvencesi",
+      "blocks": [
+        {
+          "id": "iso",
+          "title": "ISO 9001:2015 Belgeleri",
+          "description": "Tüm imalat ve kalite kontrol işlemlerimiz, uluslararası ISO sertifikalarına tam uyumlu sistem üzerinden izlenebilir karekodlarla takip edilir.",
+          "icon": "shield"
+        },
+        {
+          "id": "food",
+          "title": "Gıda Uyumluluğu (FDA & EU)",
+          "description": "POM-C ve PE-HD polimerlerimizin tüm fırıncılık, gıda hazırlama tesisleri ve mandıra makine parçalarında kullanımı için FDA / EU 10/2011 gıda sertifikaları mevcuttur.",
+          "icon": "layers"
+        },
+        {
+          "id": "tolerance",
+          "title": "Teknik Şartnameler & Tolerans Seviyeleri",
+          "description": "Satışını yaptığımız yarı mamullerin tolerans kalınlık seviyeleri ve teknik veri açıklamaları ürün bazında izlenebilir şekilde yönetilir.",
+          "icon": "settings"
+        }
+      ]
+    }
+  },
+  "pageTextsEn": {
+    "hero": {
+      "badge": "German Quality Standards",
+      "title": "Fast Engineering Plastic Solutions From Stock",
+      "description": "Technical polymer semi-finished products, cut-to-size sheets and industrial stock solutions for demanding applications.",
+      "primaryCta": "Browse Products",
+      "restCta": "View Rest Stocks",
+      "quoteCta": "Request Quote",
+      "searchPlaceholder": "Search POM-C, PA6, PEEK or material name...",
+      "searchButton": "Quick Search",
+      "backgroundWord": "RACEPLAST"
+    },
+    "home": {
+      "popularEyebrow": "INDUSTRIAL SOLUTIONS",
+      "popularTitle": "Popular Products",
+      "popularAction": "View All Products",
+      "restEyebrow": "LIVE REST STOCKS",
+      "restTitle": "Offcuts and Remnants at Better Prices",
+      "restDescription": "Find suitable remnants for your project and avoid purchasing full plates when a smaller piece is enough.",
+      "restAction": "View Rest Stocks",
+      "sectorsEyebrow": "APPLICATION AREAS",
+      "sectorsTitle": "Industries We Serve"
+    },
+    "portfolio": {
+      "title": "Our Products",
+      "description": "High-performance technical polymers for demanding industrial applications. Filter by material, stock and compliance.",
+      "emptyTitle": "No Matching Technical Material Found",
+      "emptyDescription": "Try clearing your search or technical filters. For custom sizes, contact our technical team."
+    },
+    "sectors": {
+      "eyebrow": "APPLICATION AREAS",
+      "title": "We Understand Industrial Requirements",
+      "description": "From food machinery to automotive and machine manufacturing, we supply polymer solutions for high wear and chemical resistance."
+    },
+    "blog": {
+      "eyebrow": "KNOWLEDGE CENTER",
+      "title": "Blog & Application Guides",
+      "description": "Practical notes on engineering plastics, stock selection, food compliance and industrial part design."
+    },
+    "contact": {
+      "eyebrow": "CONTACT",
+      "title": "Talk to the Technical Team",
+      "description": "Reach Raceplast sales and technical support for products, stock, payment and custom dimension requests."
+    },
+    "info": {
+      "title": "Certificates & Quality Assurance",
+      "blocks": [
+        {
+          "id": "iso",
+          "title": "ISO 9001:2015 Documents",
+          "description": "Production and quality control processes are traceable and aligned with international ISO standards.",
+          "icon": "shield"
+        }
+      ]
+    }
+  },
+  "heroSlides": [
+    {
+      "id": "stock-solutions",
+      "badge": "Teknik Plastik Tedariki",
+      "title": "Endüstriyel Plastiklerde Stoktan Hızlı Çözüm",
+      "description": "Levha, çubuk ve özel ölçü yarı mamul ihtiyaçlarınız için güncel stok, teknik destek ve hızlı teklif süreci.",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "primaryCta": "Ürünleri İncele",
+      "primaryTarget": "portfolio",
+      "autoplayEnabled": true,
+      "durationMs": 6000,
+      "isPublished": true,
+      "sortOrder": 1,
+      "translations": {
+        "en": {
+          "badge": "Engineering Plastic Supply",
+          "title": "Fast Stock Solutions for Industrial Plastics",
+          "description": "Current stock, technical support and rapid quotation for sheets, rods and cut-to-size semi-finished products.",
+          "primaryCta": "Browse Products"
+        }
+      }
+    },
+    {
+      "id": "cut-to-size",
+      "badge": "Özel Ölçü Hazırlık",
+      "title": "Projenize Uygun Ölçü, Malzeme ve Sertifika",
+      "description": "POM-C, PA6G, PE-HD, PTFE ve yüksek performanslı polimerlerde ölçü, tolerans ve uygulama koşullarını birlikte değerlendiriyoruz.",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "primaryCta": "Teknik Destek Al",
+      "primaryTarget": "contact",
+      "autoplayEnabled": true,
+      "durationMs": 6500,
+      "isPublished": true,
+      "sortOrder": 2,
+      "translations": {
+        "en": {
+          "badge": "Cut-to-size Planning",
+          "title": "The Right Size, Material and Certificate for Your Project",
+          "description": "We evaluate dimensions, tolerances and application conditions across POM-C, PA6G, PE-HD, PTFE and high-performance polymers.",
+          "primaryCta": "Get Technical Support"
+        }
+      }
+    },
+    {
+      "id": "quality-supply",
+      "badge": "Kalite ve İzlenebilirlik",
+      "title": "Stok, Sipariş ve Teknik Bilgi Tek Ekranda",
+      "description": "Ürün görselleri, ölçü seçenekleri, stok adetleri ve teknik bilgi alanlarıyla satın alma sürecinizi sadeleştirin.",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "primaryCta": "Stokları Gör",
+      "primaryTarget": "portfolio",
+      "autoplayEnabled": true,
+      "durationMs": 7000,
+      "isPublished": true,
+      "sortOrder": 3,
+      "translations": {
+        "en": {
+          "badge": "Quality and Traceability",
+          "title": "Stock, Orders and Technical Data in One Place",
+          "description": "Simplify procurement with product images, size options, stock quantities and technical information fields.",
+          "primaryCta": "View Stock"
+        }
+      }
+    }
+  ],
+  "products": [
+    {
+      "id": "pom-c-natural",
+      "sku": "#RP-10442",
+      "name": "POM-C Natural (Beyaz)",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "category": "Plaka / Levha",
+      "material": "POM-C (Polyacetal)",
+      "dimensions": "1000x2000 mm",
+      "thickness": 20,
+      "thicknessStr": "20.0 mm",
+      "foodCompliance": [
+        "FDA",
+        "EU"
+      ],
+      "realStock": 24,
+      "stockUnit": "Adet",
+      "color": "Doğal / Beyaz",
+      "gallery": [
+        "assets/products/engineering-plastics-catalog.png"
+      ],
+      "nameEn": "POM-C Natural (Beyaz)",
+      "categoryEn": "Plaka / Levha",
+      "materialEn": "POM-C (Polyacetal)",
+      "materialType": "POM-C (Polyacetal)",
+      "length": "2000 mm",
+      "width": "1000",
+      "specificGravity": "1.41 g/cm3",
+      "isPublished": true,
+      "sortOrder": 1,
+      "description": "Raceplast Industrial premium kalitesiyle üretilen yarı mamul; yüksek aşınma dayanımı, ölçü kararlılığı ve endüstriyel işlenebilirlik için stoktan sunulur.",
+      "technicalProperties": [
+        "Yoğunluk: 1.15 - 1.41 g/cm3",
+        "Çekme Dayanımı: 65-70 MPa",
+        "Sürtünme Katsayısı: 0.15 - 0.20"
+      ],
+      "technicalPropertiesEn": [
+        "Density: 1.15 - 1.41 g/cm3",
+        "Tensile Strength: 65-70 MPa",
+        "Coefficient of Friction: 0.15 - 0.20"
+      ],
+      "tags": [
+        "Plaka / Levha",
+        "POM-C (Polyacetal)"
+      ],
+      "regularPrice": 0,
+      "salePrice": 0,
+      "currency": "EUR",
+      "taxStatus": "taxable",
+      "manageStock": true,
+      "stockStatus": "instock",
+      "backorders": "no",
+      "catalogVisibility": "visible",
+      "attributes": [
+        {
+          "name": "Malzeme",
+          "values": [
+            "POM-C (Polyacetal)"
+          ],
+          "visible": true,
+          "variation": false
+        },
+        {
+          "name": "Kategori",
+          "values": [
+            "Plaka / Levha"
+          ],
+          "visible": true,
+          "variation": false
+        }
+      ]
+    },
+    {
+      "id": "pa6-g-cast",
+      "sku": "#RP-ROD-882",
+      "name": "PA6 G (Döküm Polyamid)",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "category": "Çubuk / Yuvarlak Mil",
+      "material": "PA6 (Polyamide)",
+      "diameter": "Ø 80 mm",
+      "length": "3000 mm",
+      "weight": "18.42 kg/ad",
+      "foodCompliance": [
+        "None"
+      ],
+      "realStock": 12,
+      "stockUnit": "Adet",
+      "color": "Siyah / Kast G",
+      "gallery": [
+        "assets/products/engineering-plastics-catalog.png"
+      ],
+      "nameEn": "PA6 G (Döküm Polyamid)",
+      "categoryEn": "Çubuk / Yuvarlak Mil",
+      "materialEn": "PA6 (Polyamide)",
+      "materialType": "PA6 (Polyamide)",
+      "specificGravity": "1.15 g/cm3",
+      "calculatedWeight": "18.42 kg/ad",
+      "isPublished": true,
+      "sortOrder": 2,
+      "description": "Raceplast Industrial premium kalitesiyle üretilen yarı mamul; yüksek aşınma dayanımı, ölçü kararlılığı ve endüstriyel işlenebilirlik için stoktan sunulur.",
+      "technicalProperties": [
+        "Yoğunluk: 1.15 - 1.41 g/cm3",
+        "Çekme Dayanımı: 65-70 MPa",
+        "Sürtünme Katsayısı: 0.15 - 0.20"
+      ],
+      "technicalPropertiesEn": [
+        "Density: 1.15 - 1.41 g/cm3",
+        "Tensile Strength: 65-70 MPa",
+        "Coefficient of Friction: 0.15 - 0.20"
+      ],
+      "tags": [
+        "Çubuk / Yuvarlak Mil",
+        "PA6 (Polyamide)"
+      ],
+      "regularPrice": 0,
+      "salePrice": 0,
+      "currency": "EUR",
+      "taxStatus": "taxable",
+      "manageStock": true,
+      "stockStatus": "instock",
+      "backorders": "no",
+      "catalogVisibility": "visible",
+      "attributes": [
+        {
+          "name": "Malzeme",
+          "values": [
+            "PA6 (Polyamide)"
+          ],
+          "visible": true,
+          "variation": false
+        },
+        {
+          "name": "Kategori",
+          "values": [
+            "Çubuk / Yuvarlak Mil"
+          ],
+          "visible": true,
+          "variation": false
+        }
+      ]
+    },
+    {
+      "id": "peek-natural",
+      "sku": "#RP-PEEK-02",
+      "name": "PEEK Natural (Bej)",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "category": "Yüksek Isı Polimeri",
+      "material": "PTFE (Teflon)",
+      "thickness": 10,
+      "thicknessStr": "10.0 mm",
+      "tempRange": "+250°C / +310°C",
+      "foodCompliance": [
+        "FDA"
+      ],
+      "realStock": 3,
+      "stockUnit": "Adet",
+      "isLimitedStock": true,
+      "grade": "Premium",
+      "gallery": [
+        "assets/products/engineering-plastics-catalog.png"
+      ],
+      "nameEn": "PEEK Natural (Bej)",
+      "categoryEn": "Yüksek Isı Polimeri",
+      "materialEn": "PTFE (Teflon)",
+      "materialType": "PTFE (Teflon)",
+      "specificGravity": "",
+      "isPublished": true,
+      "sortOrder": 3,
+      "description": "Raceplast Industrial premium kalitesiyle üretilen yarı mamul; yüksek aşınma dayanımı, ölçü kararlılığı ve endüstriyel işlenebilirlik için stoktan sunulur.",
+      "technicalProperties": [
+        "Yoğunluk: 1.15 - 1.41 g/cm3",
+        "Çekme Dayanımı: 65-70 MPa",
+        "Sürtünme Katsayısı: 0.15 - 0.20"
+      ],
+      "technicalPropertiesEn": [
+        "Density: 1.15 - 1.41 g/cm3",
+        "Tensile Strength: 65-70 MPa",
+        "Coefficient of Friction: 0.15 - 0.20"
+      ],
+      "tags": [
+        "Yüksek Isı Polimeri",
+        "PTFE (Teflon)"
+      ],
+      "regularPrice": 0,
+      "salePrice": 0,
+      "currency": "EUR",
+      "taxStatus": "taxable",
+      "manageStock": true,
+      "stockStatus": "instock",
+      "backorders": "no",
+      "catalogVisibility": "visible",
+      "attributes": [
+        {
+          "name": "Malzeme",
+          "values": [
+            "PTFE (Teflon)"
+          ],
+          "visible": true,
+          "variation": false
+        },
+        {
+          "name": "Kategori",
+          "values": [
+            "Yüksek Isı Polimeri"
+          ],
+          "visible": true,
+          "variation": false
+        }
+      ]
+    },
+    {
+      "id": "pe-hd-high",
+      "sku": "#RP-HD-500",
+      "name": "PE-HD (Yüksek Yoğunluklu PE)",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "category": "İşleme Stoğu",
+      "material": "PE-HD (High Density)",
+      "dimensions": "1220x2440 mm",
+      "thickness": 15,
+      "hardness": "62 Shore D",
+      "color": "Siyah / UV Stab.",
+      "foodCompliance": [
+        "None"
+      ],
+      "realStock": 85,
+      "stockUnit": "Adet",
+      "gallery": [
+        "assets/products/engineering-plastics-catalog.png"
+      ],
+      "nameEn": "PE-HD (Yüksek Yoğunluklu PE)",
+      "categoryEn": "İşleme Stoğu",
+      "materialEn": "PE-HD (High Density)",
+      "materialType": "PE-HD (High Density)",
+      "length": "2440 mm",
+      "width": "1220",
+      "specificGravity": "",
+      "isPublished": true,
+      "sortOrder": 4,
+      "description": "Raceplast Industrial premium kalitesiyle üretilen yarı mamul; yüksek aşınma dayanımı, ölçü kararlılığı ve endüstriyel işlenebilirlik için stoktan sunulur.",
+      "technicalProperties": [
+        "Yoğunluk: 1.15 - 1.41 g/cm3",
+        "Çekme Dayanımı: 65-70 MPa",
+        "Sürtünme Katsayısı: 0.15 - 0.20"
+      ],
+      "technicalPropertiesEn": [
+        "Density: 1.15 - 1.41 g/cm3",
+        "Tensile Strength: 65-70 MPa",
+        "Coefficient of Friction: 0.15 - 0.20"
+      ],
+      "tags": [
+        "İşleme Stoğu",
+        "PE-HD (High Density)"
+      ],
+      "regularPrice": 0,
+      "salePrice": 0,
+      "currency": "EUR",
+      "taxStatus": "taxable",
+      "manageStock": true,
+      "stockStatus": "instock",
+      "backorders": "no",
+      "catalogVisibility": "visible",
+      "attributes": [
+        {
+          "name": "Malzeme",
+          "values": [
+            "PE-HD (High Density)"
+          ],
+          "visible": true,
+          "variation": false
+        },
+        {
+          "name": "Kategori",
+          "values": [
+            "İşleme Stoğu"
+          ],
+          "visible": true,
+          "variation": false
+        }
+      ]
+    },
+    {
+      "id": "ptfe-teflon-pure",
+      "sku": "#RP-PTFE-119",
+      "name": "PTFE (Saf Teflon) Levha",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "category": "Plaka / Levha",
+      "material": "PTFE (Teflon)",
+      "dimensions": "1000x1000 mm",
+      "thickness": 40,
+      "thicknessStr": "40.0 mm",
+      "foodCompliance": [
+        "FDA",
+        "EU"
+      ],
+      "realStock": 8,
+      "stockUnit": "Adet",
+      "tempRange": "-200°C / +260°C",
+      "gallery": [
+        "assets/products/engineering-plastics-catalog.png"
+      ],
+      "nameEn": "PTFE (Saf Teflon) Levha",
+      "categoryEn": "Plaka / Levha",
+      "materialEn": "PTFE (Teflon)",
+      "materialType": "PTFE (Teflon)",
+      "length": "1000 mm",
+      "width": "1000",
+      "specificGravity": "",
+      "isPublished": true,
+      "sortOrder": 5,
+      "description": "Raceplast Industrial premium kalitesiyle üretilen yarı mamul; yüksek aşınma dayanımı, ölçü kararlılığı ve endüstriyel işlenebilirlik için stoktan sunulur.",
+      "technicalProperties": [
+        "Yoğunluk: 1.15 - 1.41 g/cm3",
+        "Çekme Dayanımı: 65-70 MPa",
+        "Sürtünme Katsayısı: 0.15 - 0.20"
+      ],
+      "technicalPropertiesEn": [
+        "Density: 1.15 - 1.41 g/cm3",
+        "Tensile Strength: 65-70 MPa",
+        "Coefficient of Friction: 0.15 - 0.20"
+      ],
+      "tags": [
+        "Plaka / Levha",
+        "PTFE (Teflon)"
+      ],
+      "regularPrice": 0,
+      "salePrice": 0,
+      "currency": "EUR",
+      "taxStatus": "taxable",
+      "manageStock": true,
+      "stockStatus": "instock",
+      "backorders": "no",
+      "catalogVisibility": "visible",
+      "attributes": [
+        {
+          "name": "Malzeme",
+          "values": [
+            "PTFE (Teflon)"
+          ],
+          "visible": true,
+          "variation": false
+        },
+        {
+          "name": "Kategori",
+          "values": [
+            "Plaka / Levha"
+          ],
+          "visible": true,
+          "variation": false
+        }
+      ]
+    },
+    {
+      "id": "pe-hd-natural",
+      "sku": "#RP-HD-501",
+      "name": "PE-HD Natural Food Grade",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "category": "Plaka / Levha",
+      "material": "PE-HD (High Density)",
+      "dimensions": "1000x2000 mm",
+      "thickness": 10,
+      "thicknessStr": "10.0 mm",
+      "foodCompliance": [
+        "FDA"
+      ],
+      "realStock": 44,
+      "stockUnit": "Adet",
+      "hardness": "60 Shore D",
+      "color": "Doğal (Beyaz)",
+      "gallery": [
+        "assets/products/engineering-plastics-catalog.png"
+      ],
+      "nameEn": "PE-HD Natural Food Grade",
+      "categoryEn": "Plaka / Levha",
+      "materialEn": "PE-HD (High Density)",
+      "materialType": "PE-HD (High Density)",
+      "length": "2000 mm",
+      "width": "1000",
+      "specificGravity": "",
+      "isPublished": true,
+      "sortOrder": 6,
+      "description": "Raceplast Industrial premium kalitesiyle üretilen yarı mamul; yüksek aşınma dayanımı, ölçü kararlılığı ve endüstriyel işlenebilirlik için stoktan sunulur.",
+      "technicalProperties": [
+        "Yoğunluk: 1.15 - 1.41 g/cm3",
+        "Çekme Dayanımı: 65-70 MPa",
+        "Sürtünme Katsayısı: 0.15 - 0.20"
+      ],
+      "technicalPropertiesEn": [
+        "Density: 1.15 - 1.41 g/cm3",
+        "Tensile Strength: 65-70 MPa",
+        "Coefficient of Friction: 0.15 - 0.20"
+      ],
+      "tags": [
+        "Plaka / Levha",
+        "PE-HD (High Density)"
+      ],
+      "regularPrice": 0,
+      "salePrice": 0,
+      "currency": "EUR",
+      "taxStatus": "taxable",
+      "manageStock": true,
+      "stockStatus": "instock",
+      "backorders": "no",
+      "catalogVisibility": "visible",
+      "attributes": [
+        {
+          "name": "Malzeme",
+          "values": [
+            "PE-HD (High Density)"
+          ],
+          "visible": true,
+          "variation": false
+        },
+        {
+          "name": "Kategori",
+          "values": [
+            "Plaka / Levha"
+          ],
+          "visible": true,
+          "variation": false
+        }
+      ]
+    }
+  ],
+  "restStocks": [
+    {
+      "id": "rest-1",
+      "material": "POM-C Natural",
+      "dimensions": "320 x 450 mm",
+      "thickness": "30 mm",
+      "qty": 2,
+      "price": 24.5,
+      "sku": "#RP-10442-R1",
+      "isPublished": true
+    },
+    {
+      "id": "rest-2",
+      "material": "PE1000 Green",
+      "dimensions": "200 x 1000 mm",
+      "thickness": "10 mm",
+      "qty": 5,
+      "price": 18,
+      "sku": "#RP-PE1000-R2",
+      "isPublished": true
+    },
+    {
+      "id": "rest-3",
+      "material": "PA6 G (Cast)",
+      "dimensions": "500 x 500 mm",
+      "thickness": "50 mm",
+      "qty": 1,
+      "price": 42.1,
+      "sku": "#RP-PA6G-R3",
+      "isPublished": true
+    }
+  ],
+  "sectors": [
+    {
+      "id": "defense",
+      "title": "Savunma Sanayi",
+      "description": "Yüksek darbe ve kimyasal dayanım gerektiren zırh plakaları, kılavuz kanallar ve yalıtıcı parçalar.",
+      "isPublished": true,
+      "sortOrder": 1
+    },
+    {
+      "id": "food",
+      "title": "Gıda & Ambalaj",
+      "description": "FDA uyarınca güvenle kullanılabilen, aşınmaya dayanıklı konveyör yıldızları, kesim plakaları ve sıyırıcı bıçaklar.",
+      "isPublished": true,
+      "sortOrder": 2
+    },
+    {
+      "id": "automotive",
+      "title": "Otomotiv",
+      "description": "Hafifletme projelerinde kullanılan yüksek mukavemetli burçlar, dişliler ve titreşim sönümleyici yataklar.",
+      "isPublished": true,
+      "sortOrder": 3
+    },
+    {
+      "id": "machinery",
+      "title": "Makine İmalatı",
+      "description": "Yüksek aşınma dayanımına sahip kızaklar, zincir kılavuzları, makaralar ve sızdırmazlık elemanları.",
+      "isPublished": true,
+      "sortOrder": 4
+    }
+  ],
+  "blogPosts": [
+    {
+      "id": "pom-c-secimi",
+      "slug": "pom-c-secimi",
+      "title": "POM-C Seçerken Dikkat Edilecek Teknik Kriterler",
+      "titleEn": "Technical Criteria When Selecting POM-C",
+      "excerpt": "Ölçü kararlılığı, düşük sürtünme ve gıda uyumluluğu POM-C seçiminde birlikte değerlendirilmelidir.",
+      "excerptEn": "Dimensional stability, low friction and food compliance should be evaluated together when selecting POM-C.",
+      "content": "POM-C levha ve çubuk ürünlerde stok ölçüsü, işleme toleransı, kullanım sıcaklığı, renk ve sertifika ihtiyacı proje şartnamesiyle birlikte kontrol edilmelidir. Özellikle gıda makinelerinde FDA veya EU uygunluk belgesi talep edilmesi satın alma sonrası riskleri azaltır.",
+      "contentEn": "For POM-C sheets and rods, stock dimensions, machining tolerance, operating temperature, color and certificate needs should be checked against the project specification.",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "category": "Malzeme Rehberi",
+      "author": "Raceplast Teknik Ekip",
+      "publishedAt": "2026-06-27",
+      "isPublished": true,
+      "seoTitle": "POM-C Teknik Seçim Rehberi",
+      "seoDescription": "POM-C levha ve çubuk seçiminde teknik kriterler."
+    },
+    {
+      "id": "pa6-ve-pa6g-farki",
+      "slug": "pa6-ve-pa6g-farki",
+      "title": "PA6 ve PA6G Arasındaki Temel Farklar",
+      "titleEn": "Main Differences Between PA6 and PA6G",
+      "excerpt": "Döküm ve ekstrüzyon prosesleri, naylon malzemelerin darbe ve aşınma davranışını doğrudan etkiler.",
+      "excerptEn": "Casting and extrusion processes directly affect impact and wear behavior of nylon materials.",
+      "content": "PA6 daha dengeli standart stoklarda tercih edilirken PA6G yüksek kesitli parçalarda ve ağır yük uygulamalarında avantaj sağlar. Burç, kızak ve makine parçası seçiminde nem alma, darbe yükü ve çalışma ortamı mutlaka karşılaştırılmalıdır.",
+      "contentEn": "PA6 is often selected for standard stock parts, while PA6G is advantageous for larger sections and heavy-duty applications.",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "category": "Malzeme Rehberi",
+      "author": "Raceplast Teknik Ekip",
+      "publishedAt": "2026-06-26",
+      "isPublished": true,
+      "seoTitle": "PA6 PA6G Farkı",
+      "seoDescription": "PA6 ve PA6G mühendislik plastiklerinin farkları."
+    },
+    {
+      "id": "peek-yuksek-sicaklik",
+      "slug": "peek-yuksek-sicaklik",
+      "title": "Yüksek Sıcaklık Uygulamalarında PEEK Kullanımı",
+      "titleEn": "Using PEEK in High Temperature Applications",
+      "excerpt": "PEEK, sıcaklık, kimyasal dayanım ve mekanik performansın aynı anda gerektiği proseslerde öne çıkar.",
+      "excerptEn": "PEEK stands out where temperature, chemical resistance and mechanical performance are required together.",
+      "content": "PEEK parçalar yüksek sıcaklıkta formunu koruyabilen, kimyasal dayanımı güçlü ve hassas işlenebilen yarı mamullerdir. Maliyet yüksek olduğu için stok ölçüsü, fire oranı ve tolerans ihtiyacı sipariş öncesinde netleştirilmelidir.",
+      "contentEn": "PEEK semi-finished parts maintain form at high temperatures, provide strong chemical resistance and can be machined precisely.",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "category": "Yüksek Performans",
+      "author": "Raceplast Teknik Ekip",
+      "publishedAt": "2026-06-25",
+      "isPublished": true,
+      "seoTitle": "PEEK Yüksek Sıcaklık Kullanımı",
+      "seoDescription": "PEEK malzemenin yüksek sıcaklık uygulamalarındaki avantajları."
+    },
+    {
+      "id": "ptfe-dusuk-surtunme",
+      "slug": "ptfe-dusuk-surtunme",
+      "title": "PTFE ile Düşük Sürtünmeli Parça Tasarımı",
+      "titleEn": "Low Friction Part Design with PTFE",
+      "excerpt": "PTFE, yağsız çalışma ve kimyasal dayanım gereken yüzeylerde güçlü bir alternatiftir.",
+      "excerptEn": "PTFE is a strong option for surfaces requiring dry running and chemical resistance.",
+      "content": "PTFE plakalar ve çubuklar düşük sürtünme katsayısı sayesinde yataklama, conta ve kaydırma yüzeyi uygulamalarında kullanılır. Tasarımda sürünme davranışı ve mekanik yük sınırları dikkate alınmalıdır.",
+      "contentEn": "PTFE sheets and rods are used in bearing, sealing and sliding surface applications due to their low friction coefficient.",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "category": "Tasarım",
+      "author": "Raceplast Teknik Ekip",
+      "publishedAt": "2026-06-24",
+      "isPublished": true,
+      "seoTitle": "PTFE Düşük Sürtünme Rehberi",
+      "seoDescription": "PTFE ile düşük sürtünmeli endüstriyel parça tasarımı."
+    },
+    {
+      "id": "uhmwpe-asınma-dayanimi",
+      "slug": "uhmwpe-asinma-dayanimi",
+      "title": "UHMW-PE ile Aşınmaya Dayanıklı Hat Parçaları",
+      "titleEn": "Wear Resistant Line Parts with UHMW-PE",
+      "excerpt": "UHMW-PE, konveyör, kılavuz ve sürtünmeli hatlarda uzun servis ömrü sunar.",
+      "excerptEn": "UHMW-PE offers long service life in conveyor, guide and sliding line applications.",
+      "content": "UHMW-PE düşük sürtünme ve yüksek aşınma dayanımı nedeniyle dolum, ambalaj ve taşıma hatlarında tercih edilir. Parça boyu, bağlantı noktaları ve çalışma sıcaklığı seçimi stoktan doğru yarı mamul belirlemeyi kolaylaştırır.",
+      "contentEn": "UHMW-PE is preferred in filling, packaging and conveying lines due to low friction and high wear resistance.",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "category": "Uygulama",
+      "author": "Raceplast Teknik Ekip",
+      "publishedAt": "2026-06-23",
+      "isPublished": true,
+      "seoTitle": "UHMW-PE Aşınma Dayanımı",
+      "seoDescription": "UHMW-PE ile aşınmaya dayanıklı hat parçaları."
+    },
+    {
+      "id": "gida-uyumlu-plastikler",
+      "slug": "gida-uyumlu-plastikler",
+      "title": "Gıda Temasına Uygun Plastiklerde Sertifika Kontrolü",
+      "titleEn": "Certificate Checks for Food Contact Plastics",
+      "excerpt": "Gıda makinelerinde malzeme seçimi yalnızca teknik dayanım değil, sertifika izlenebilirliği de gerektirir.",
+      "excerptEn": "Food machinery material selection requires not only performance but also certificate traceability.",
+      "content": "FDA ve EU 10/2011 uygunluğu, ürünün gıda temasında kullanılabilirliğini destekleyen kritik belgelerdir. Sipariş aşamasında parti, renk, yarı mamul tipi ve belge kapsamı birlikte kontrol edilmelidir.",
+      "contentEn": "FDA and EU 10/2011 compliance are important documents supporting food contact use.",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "category": "Gıda Uyumu",
+      "author": "Raceplast Teknik Ekip",
+      "publishedAt": "2026-06-22",
+      "isPublished": true,
+      "seoTitle": "Gıda Uyumlu Plastik Sertifikaları",
+      "seoDescription": "FDA ve EU gıda uyumlu plastiklerde sertifika kontrolü."
+    },
+    {
+      "id": "levha-kalinlik-toleransi",
+      "slug": "levha-kalinlik-toleransi",
+      "title": "Levha Kalınlık Toleransı Neden Önemlidir?",
+      "titleEn": "Why Sheet Thickness Tolerance Matters",
+      "excerpt": "CNC işleme ve montaj başarısı, seçilen levhanın gerçek kalınlık toleransıyla doğrudan ilişkilidir.",
+      "excerptEn": "CNC machining and assembly success is directly related to actual sheet thickness tolerance.",
+      "content": "Teknik plastik levhalarda nominal kalınlık ile gerçek ölçü arasında tolerans bulunabilir. Hassas parçalarda yüzey alma payı, bitmiş ölçü ve stok kalınlığı baştan planlanmalıdır.",
+      "contentEn": "Technical plastic sheets may have a tolerance between nominal and actual thickness.",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "category": "Kalite",
+      "author": "Raceplast Teknik Ekip",
+      "publishedAt": "2026-06-21",
+      "isPublished": true,
+      "seoTitle": "Levha Kalınlık Toleransı",
+      "seoDescription": "Teknik plastik levhalarda kalınlık toleransı ve işleme planı."
+    },
+    {
+      "id": "rest-stok-avantaji",
+      "slug": "rest-stok-avantaji",
+      "title": "Rest Stok Kullanmanın Satın Alma Avantajları",
+      "titleEn": "Procurement Advantages of Rest Stock",
+      "excerpt": "Doğru ölçüde rest parça seçimi, küçük seri ve prototip işlerinde maliyeti azaltır.",
+      "excerptEn": "Selecting the right rest stock reduces cost for small series and prototypes.",
+      "content": "Rest stoklar tam plaka satın alma zorunluluğunu azaltır ve hızlı teslimata yardımcı olur. Malzeme cinsi, boy, en, kalınlık ve adet bilgisi düzenli takip edildiğinde satın alma kararı çok daha hızlı verilir.",
+      "contentEn": "Rest stocks reduce the need to buy full sheets and help shorten delivery times.",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "category": "Stok Yönetimi",
+      "author": "Raceplast Teknik Ekip",
+      "publishedAt": "2026-06-20",
+      "isPublished": true,
+      "seoTitle": "Rest Stok Avantajları",
+      "seoDescription": "Teknik plastik rest stoklarının satın alma avantajları."
+    },
+    {
+      "id": "cnc-isleme-icin-malzemeler",
+      "slug": "cnc-isleme-icin-malzemeler",
+      "title": "CNC İşleme İçin Teknik Plastik Seçimi",
+      "titleEn": "Selecting Technical Plastics for CNC Machining",
+      "excerpt": "Talaşlı imalatta malzeme davranışı, yüzey kalitesi ve ölçü kararlılığı için belirleyicidir.",
+      "excerptEn": "Material behavior determines surface quality and dimensional stability in machining.",
+      "content": "CNC işlenecek teknik plastiklerde takım yolu, talaş kaldırma miktarı, bağlama yöntemi ve soğutma yaklaşımı malzeme tipine göre değişir. POM-C, PA6G, PE ve PEEK aynı işlem parametreleriyle değerlendirilmemelidir.",
+      "contentEn": "Tool path, chip removal, clamping and cooling strategy vary by material in CNC machining.",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "category": "İşleme",
+      "author": "Raceplast Teknik Ekip",
+      "publishedAt": "2026-06-19",
+      "isPublished": true,
+      "seoTitle": "CNC Teknik Plastik Seçimi",
+      "seoDescription": "CNC işleme için teknik plastik malzeme seçimi."
+    },
+    {
+      "id": "konveyor-kilavuzlari",
+      "slug": "konveyor-kilavuzlari",
+      "title": "Konveyör Kılavuzlarında Doğru Malzeme",
+      "titleEn": "Right Material for Conveyor Guides",
+      "excerpt": "Hat hızı, sürtünme, ses ve aşınma koşulları konveyör kılavuz malzemesini belirler.",
+      "excerptEn": "Line speed, friction, noise and wear conditions determine conveyor guide material.",
+      "content": "Konveyör kılavuzlarında UHMW-PE, PE-HD ve POM-C gibi malzemeler sık tercih edilir. Parça ömrü için temas yüzeyi, yük, temizlik kimyasalları ve gıda uyumu birlikte incelenmelidir.",
+      "contentEn": "UHMW-PE, PE-HD and POM-C are commonly selected for conveyor guides.",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "category": "Uygulama",
+      "author": "Raceplast Teknik Ekip",
+      "publishedAt": "2026-06-18",
+      "isPublished": true,
+      "seoTitle": "Konveyör Kılavuz Malzemesi",
+      "seoDescription": "Konveyör kılavuzları için doğru teknik plastik seçimi."
+    },
+    {
+      "id": "kimyasal-dayanim-tablosu",
+      "slug": "kimyasal-dayanim-tablosu",
+      "title": "Kimyasal Dayanım Tablosu Nasıl Okunur?",
+      "titleEn": "How to Read a Chemical Resistance Table",
+      "excerpt": "Kimyasal dayanım verileri sıcaklık, konsantrasyon ve temas süresi olmadan tek başına yeterli değildir.",
+      "excerptEn": "Chemical resistance data is not sufficient without temperature, concentration and contact time.",
+      "content": "Teknik plastik seçiminde kimyasal dayanım tablosu ilk kontrol noktasıdır. Ancak gerçek çalışma koşulları, sıcaklık döngüsü, mekanik yük ve temizlik prosedürü tablo yorumunu değiştirebilir.",
+      "contentEn": "A chemical resistance table is the first checkpoint in technical plastic selection.",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "category": "Teknik Bilgi",
+      "author": "Raceplast Teknik Ekip",
+      "publishedAt": "2026-06-17",
+      "isPublished": true,
+      "seoTitle": "Kimyasal Dayanım Tablosu",
+      "seoDescription": "Teknik plastiklerde kimyasal dayanım tablosu okuma rehberi."
+    },
+    {
+      "id": "oz-agirlik-ve-agirlik-hesabi",
+      "slug": "oz-agirlik-ve-agirlik-hesabi",
+      "title": "Öz Ağırlık ve Ürün Ağırlığı Nasıl Hesaplanır?",
+      "titleEn": "How Specific Gravity and Part Weight Are Calculated",
+      "excerpt": "Boy, en, kalınlık ve öz ağırlık bilgileri ürün ağırlığını ve nakliye planını doğrudan etkiler.",
+      "excerptEn": "Length, width, thickness and specific gravity directly affect part weight and shipping planning.",
+      "content": "Levha ve çubuk ürünlerde ağırlık hesabı satın alma, kargo ve depo planlaması için gereklidir. Malzemenin öz ağırlığı ve ölçü bilgisi doğru tutulduğunda teklif ve sevkiyat süreci hızlanır.",
+      "contentEn": "Weight calculation is necessary for procurement, shipping and warehouse planning.",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "category": "Hesaplama",
+      "author": "Raceplast Teknik Ekip",
+      "publishedAt": "2026-06-16",
+      "isPublished": true,
+      "seoTitle": "Öz Ağırlık ve Ağırlık Hesabı",
+      "seoDescription": "Teknik plastiklerde öz ağırlık ve ürün ağırlığı hesabı."
+    },
+    {
+      "id": "teknik-plastik-depolama",
+      "slug": "teknik-plastik-depolama",
+      "title": "Teknik Plastik Levha ve Çubuklar Nasıl Depolanmalı?",
+      "titleEn": "How to Store Technical Plastic Sheets and Rods",
+      "excerpt": "Doğru depolama; eğilme, yüzey hasarı ve ölçü değişimi riskini azaltır.",
+      "excerptEn": "Proper storage reduces bending, surface damage and dimensional change risks.",
+      "content": "Levhalar düz zeminde destekli, çubuklar ise uygun taşıyıcılarla depolanmalıdır. Güneş, aşırı sıcaklık ve nem koşulları özellikle naylon bazlı malzemelerde takip edilmelidir.",
+      "contentEn": "Sheets should be stored flat with support, while rods need suitable carriers.",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "category": "Depolama",
+      "author": "Raceplast Teknik Ekip",
+      "publishedAt": "2026-06-15",
+      "isPublished": true,
+      "seoTitle": "Teknik Plastik Depolama",
+      "seoDescription": "Teknik plastik levha ve çubukların doğru depolanması."
+    },
+    {
+      "id": "makine-parcalarinda-pom",
+      "slug": "makine-parcalarinda-pom",
+      "title": "Makine Parçalarında POM Kullanım Alanları",
+      "titleEn": "POM Applications in Machine Parts",
+      "excerpt": "POM-C, dişli, yatak, kızak ve hassas işlenmiş parçalar için dengeli bir mühendislik plastiğidir.",
+      "excerptEn": "POM-C is a balanced engineering plastic for gears, bearings, guides and machined parts.",
+      "content": "POM-C iyi işlenebilirliği, düşük sürtünmesi ve ölçü kararlılığıyla makine imalatında çok yönlü kullanılır. Metal yerine plastik dönüşümünde yük, sıcaklık ve bağlantı detayı birlikte incelenmelidir.",
+      "contentEn": "POM-C is widely used in machine manufacturing thanks to machinability, low friction and dimensional stability.",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "category": "Makine İmalatı",
+      "author": "Raceplast Teknik Ekip",
+      "publishedAt": "2026-06-14",
+      "isPublished": true,
+      "seoTitle": "Makine Parçalarında POM",
+      "seoDescription": "POM-C mühendislik plastiğinin makine parçalarındaki kullanım alanları."
+    },
+    {
+      "id": "savunma-sanayi-plastikleri",
+      "slug": "savunma-sanayi-plastikleri",
+      "title": "Savunma Sanayinde Teknik Plastik Kullanımı",
+      "titleEn": "Technical Plastics in Defense Industry",
+      "excerpt": "Hafiflik, izolasyon ve hassas işleme kabiliyeti teknik plastikleri savunma uygulamalarında değerli kılar.",
+      "excerptEn": "Lightweight, insulation and precision machining make technical plastics valuable in defense applications.",
+      "content": "Savunma sanayi parçalarında izlenebilirlik, kalite belgesi ve tolerans kontrolü kritik önemdedir. Malzeme seçimi yalnızca mekanik değerlerle değil, proje şartnamesi ve tedarik güvenilirliğiyle yapılmalıdır.",
+      "contentEn": "Traceability, quality documents and tolerance control are critical in defense industry parts.",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "category": "Sektör",
+      "author": "Raceplast Teknik Ekip",
+      "publishedAt": "2026-06-13",
+      "isPublished": true,
+      "seoTitle": "Savunma Sanayi Teknik Plastikleri",
+      "seoDescription": "Savunma sanayi uygulamalarında teknik plastik kullanımı."
+    },
+    {
+      "id": "otomotivde-teknik-plastik",
+      "slug": "otomotivde-teknik-plastik",
+      "title": "Otomotiv Uygulamalarında Teknik Plastik Seçimi",
+      "titleEn": "Selecting Technical Plastics in Automotive Applications",
+      "excerpt": "Otomotiv parçalarında sıcaklık, aşınma ve kimyasal temas koşulları birlikte değerlendirilir.",
+      "excerptEn": "Temperature, wear and chemical contact conditions are evaluated together in automotive parts.",
+      "content": "Otomotiv ekipmanlarında teknik plastikler fikstür, kılavuz, izolatör ve aşınma parçası olarak kullanılabilir. Parça ömrü için çalışma frekansı ve ortam kimyasalları seçime dahil edilmelidir.",
+      "contentEn": "Technical plastics can be used as fixtures, guides, insulators and wear parts in automotive equipment.",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "category": "Sektör",
+      "author": "Raceplast Teknik Ekip",
+      "publishedAt": "2026-06-12",
+      "isPublished": true,
+      "seoTitle": "Otomotiv Teknik Plastik Seçimi",
+      "seoDescription": "Otomotiv sektöründe teknik plastik malzeme seçimi."
+    },
+    {
+      "id": "ambalaj-hatlarinda-pe",
+      "slug": "ambalaj-hatlarinda-pe",
+      "title": "Ambalaj Hatlarında PE Malzemelerin Rolü",
+      "titleEn": "The Role of PE Materials in Packaging Lines",
+      "excerpt": "PE-HD ve UHMW-PE, ambalaj hatlarında düşük sürtünme ve darbe dayanımıyla öne çıkar.",
+      "excerptEn": "PE-HD and UHMW-PE stand out in packaging lines with low friction and impact resistance.",
+      "content": "Ambalaj makinelerinde ürün akışını korumak için kılavuz, yıldız, kızak ve tampon parçalarında PE grubu malzemeler kullanılır. Temizlik, gıda uyumu ve hat hızı seçimde belirleyicidir.",
+      "contentEn": "PE materials are used in guides, stars, slides and buffer parts to protect product flow in packaging machines.",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "category": "Ambalaj",
+      "author": "Raceplast Teknik Ekip",
+      "publishedAt": "2026-06-11",
+      "isPublished": true,
+      "seoTitle": "Ambalaj Hatlarında PE",
+      "seoDescription": "Ambalaj hatlarında PE-HD ve UHMW-PE kullanımı."
+    },
+    {
+      "id": "malzeme-rengi-ve-izlenebilirlik",
+      "slug": "malzeme-rengi-ve-izlenebilirlik",
+      "title": "Malzeme Rengi ve İzlenebilirlik Neden Önemli?",
+      "titleEn": "Why Material Color and Traceability Matter",
+      "excerpt": "Renk, kalite kontrol ve sektör uyumluluğu açısından yalnızca estetik bir tercih değildir.",
+      "excerptEn": "Color is not only an aesthetic choice; it affects quality control and industry compliance.",
+      "content": "Gıda hatlarında mavi veya doğal renkli malzemeler, kalite kontrol ve görsel ayrım için tercih edilebilir. Aynı ürün görseli farklı renk veya grade bilgisiyle farklı stok kaydı olarak tutulmalıdır.",
+      "contentEn": "Blue or natural materials can be preferred in food lines for visual control and separation.",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "category": "Kalite",
+      "author": "Raceplast Teknik Ekip",
+      "publishedAt": "2026-06-10",
+      "isPublished": true,
+      "seoTitle": "Malzeme Rengi ve İzlenebilirlik",
+      "seoDescription": "Teknik plastiklerde renk ve stok izlenebilirliği."
+    },
+    {
+      "id": "stok-tablosu-kolonlari",
+      "slug": "stok-tablosu-kolonlari",
+      "title": "Ürün Stok Tablosunda Hangi Kolonlar Olmalı?",
+      "titleEn": "Which Columns Should a Product Stock Sheet Have?",
+      "excerpt": "Malzeme cinsi, boy, en, kalınlık, adet, birim, öz ağırlık ve ağırlık kolonları stok yönetimini hızlandırır.",
+      "excerptEn": "Material type, length, width, thickness, quantity, unit, specific gravity and weight columns speed up stock management.",
+      "content": "Google Sheet veya Excel ile stok yönetiminde kolon adlarının tutarlı olması önemlidir. SKU, ürün adı, malzeme cinsi, boy, en, kalınlık, adet, birim, öz ağırlık, ağırlık, fiyat ve görsel URL alanları ürün ekleme sürecini standartlaştırır.",
+      "contentEn": "Consistent column names are important when managing stock with Google Sheets or Excel.",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "category": "Stok Yönetimi",
+      "author": "Raceplast Teknik Ekip",
+      "publishedAt": "2026-06-09",
+      "isPublished": true,
+      "seoTitle": "Ürün Stok Tablosu Kolonları",
+      "seoDescription": "Google Sheet ve Excel ürün stok tablosu kolonları."
+    },
+    {
+      "id": "plastik-metal-donusumu",
+      "slug": "plastik-metal-donusumu",
+      "title": "Metal Parçayı Teknik Plastiğe Çevirirken Nelere Bakılır?",
+      "titleEn": "What to Check When Replacing Metal with Technical Plastic",
+      "excerpt": "Ağırlık azaltma ve sürtünme avantajı için yük, sıcaklık ve bağlantı tasarımı doğru analiz edilmelidir.",
+      "excerptEn": "Load, temperature and connection design must be analyzed for weight reduction and friction benefits.",
+      "content": "Metalden teknik plastiğe geçişte her parça birebir kopyalanmamalıdır. Malzemenin elastik davranışı, ısıl genleşmesi ve bağlama noktaları yeni tasarımda yeniden değerlendirilmelidir.",
+      "contentEn": "When replacing metal with technical plastic, the part should not always be copied one-to-one.",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "category": "Tasarım",
+      "author": "Raceplast Teknik Ekip",
+      "publishedAt": "2026-06-08",
+      "isPublished": true,
+      "seoTitle": "Metalden Teknik Plastiğe Dönüşüm",
+      "seoDescription": "Metal parçaları teknik plastikle değiştirme rehberi."
+    },
+    {
+      "id": "sertlik-ve-darbe-dayanimi",
+      "slug": "sertlik-ve-darbe-dayanimi",
+      "title": "Sertlik ve Darbe Dayanımı Aynı Şey Değildir",
+      "titleEn": "Hardness and Impact Resistance Are Not the Same",
+      "excerpt": "Malzeme seçiminde sadece sertlik değerine bakmak, darbe yüklerinde yanlış sonuç verebilir.",
+      "excerptEn": "Looking only at hardness can lead to wrong choices under impact loads.",
+      "content": "Sertlik yüzey davranışı hakkında fikir verirken darbe dayanımı ani yük altında kırılma riskini gösterir. PA6G, POM-C ve PEEK gibi malzemeler bu iki başlıkta farklı performans gösterir.",
+      "contentEn": "Hardness indicates surface behavior, while impact resistance shows fracture risk under sudden load.",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "category": "Teknik Bilgi",
+      "author": "Raceplast Teknik Ekip",
+      "publishedAt": "2026-06-07",
+      "isPublished": true,
+      "seoTitle": "Sertlik ve Darbe Dayanımı",
+      "seoDescription": "Teknik plastiklerde sertlik ve darbe dayanımı farkı."
+    },
+    {
+      "id": "isi-genlesmesi",
+      "slug": "isi-genlesmesi",
+      "title": "Teknik Plastiklerde Isıl Genleşme Planlaması",
+      "titleEn": "Thermal Expansion Planning in Technical Plastics",
+      "excerpt": "Sıcaklık değişimi, teknik plastik parçalarda montaj boşluğu ve tolerans planını etkiler.",
+      "excerptEn": "Temperature changes affect clearance and tolerance planning in technical plastic parts.",
+      "content": "Teknik plastikler metale göre daha farklı ısıl genleşme davranışı gösterir. Uzun parçalar, kızaklar ve kapalı montaj yuvalarında çalışma sıcaklığına göre boşluk bırakılmalıdır.",
+      "contentEn": "Technical plastics have different thermal expansion behavior than metals.",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "category": "Tasarım",
+      "author": "Raceplast Teknik Ekip",
+      "publishedAt": "2026-06-06",
+      "isPublished": true,
+      "seoTitle": "Teknik Plastik Isıl Genleşme",
+      "seoDescription": "Teknik plastik parçalarda ısıl genleşme planlaması."
+    },
+    {
+      "id": "teklif-icin-gerekli-bilgiler",
+      "slug": "teklif-icin-gerekli-bilgiler",
+      "title": "Teklif İsterken Hangi Bilgiler Hazır Olmalı?",
+      "titleEn": "Which Details Are Needed for a Quote Request?",
+      "excerpt": "Doğru teklif için malzeme, ölçü, adet, kullanım yeri, sertifika ve teslimat bilgisi açık olmalıdır.",
+      "excerptEn": "Material, dimensions, quantity, application, certificates and delivery details should be clear for an accurate quote.",
+      "content": "Teklif sürecini hızlandırmak için SKU veya malzeme adı, boy, en, kalınlık, adet, birim, tolerans beklentisi ve varsa teknik resim paylaşılmalıdır. Bu bilgiler yanlış ürün seçimi riskini azaltır.",
+      "contentEn": "To speed up quoting, share SKU or material name, length, width, thickness, quantity, unit, tolerance expectations and drawings if available.",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "category": "Satın Alma",
+      "author": "Raceplast Teknik Ekip",
+      "publishedAt": "2026-06-05",
+      "isPublished": true,
+      "seoTitle": "Teklif İçin Gerekli Bilgiler",
+      "seoDescription": "Teknik plastik teklif talebinde paylaşılması gereken bilgiler."
+    },
+    {
+      "id": "kalite-belgesi-ve-parti-takibi",
+      "slug": "kalite-belgesi-ve-parti-takibi",
+      "title": "Kalite Belgesi ve Parti Takibi Nasıl Yönetilir?",
+      "titleEn": "How to Manage Quality Certificates and Batch Tracking",
+      "excerpt": "Teknik plastik tedarikinde belge ve parti izlenebilirliği, tekrar siparişlerde süreklilik sağlar.",
+      "excerptEn": "Certificate and batch traceability provide continuity in repeat orders.",
+      "content": "Ürün adı, SKU, parti, sertifika ve sevkiyat bilgisi aynı kayıt yapısında tutulduğunda kalite süreçleri kolaylaşır. Admin panelden düzenlenebilir ürün alanları bu izlenebilirliği destekler.",
+      "contentEn": "Keeping product, SKU, batch, certificate and shipping details in the same record simplifies quality workflows.",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "category": "Kalite",
+      "author": "Raceplast Teknik Ekip",
+      "publishedAt": "2026-06-04",
+      "isPublished": true,
+      "seoTitle": "Kalite Belgesi ve Parti Takibi",
+      "seoDescription": "Teknik plastik tedarikinde kalite belgesi ve parti takibi."
+    },
+    {
+      "id": "dogru-gorsel-kullanimi",
+      "slug": "dogru-gorsel-kullanimi",
+      "title": "Aynı Görseli Kullanan Farklı Ürünler Nasıl Ayrılır?",
+      "titleEn": "How to Separate Different Products Using the Same Image",
+      "excerpt": "Bazı teknik plastik ürünler aynı görsele sahip olabilir; ayırıcı bilgi SKU, ölçü ve malzeme detaylarıdır.",
+      "excerptEn": "Some technical plastic products can share the same image; SKU, dimensions and material details separate them.",
+      "content": "Levha ve çubuk ürünlerde görsel aynı olsa bile kalınlık, boy, en, grade ve sertifika bilgisi ürünü farklılaştırır. Galeri yapısında aynı görsel birden fazla ürüne bağlanabilir.",
+      "contentEn": "For sheets and rods, products can share an image while thickness, dimensions, grade and certificates differentiate them.",
+      "image": "assets/products/engineering-plastics-catalog.png",
+      "category": "Ürün Yönetimi",
+      "author": "Raceplast Teknik Ekip",
+      "publishedAt": "2026-06-03",
+      "isPublished": true,
+      "seoTitle": "Ürün Görseli ve Galeri Yönetimi",
+      "seoDescription": "Aynı görseli kullanan farklı teknik plastik ürünlerin yönetimi."
+    }
+  ],
+  "aboutPage": {
+    "title": "Hakkımızda",
+    "titleEn": "About Us",
+    "subtitle": "Raceplast, teknik plastikler konusunda uzmanlaşmış; her sektör için hızlı, kaliteli ve müşteri odaklı çözümler sunan bir tedarik ve çözüm ortağıdır.",
+    "subtitleEn": "Raceplast is a solution partner specialized in technical plastics, providing fast, quality-focused and customer-oriented solutions for every industry.",
+    "content": "Raceplast 2007 yılında kurulmuş olup teknik plastikler alanında uzmanlaşmıştır. Geleceğe dönük çalışma anlayışıyla müşterilerine teknik danışmanlık, doğru malzeme seçimi ve sektöre özel çözüm desteği sunar. Orta ölçekli ve çevik yapısı sayesinde pazar gelişmelerine ve müşteri taleplerine hızlı yanıt verir; ihtiyaçlara tam uygun çözümler oluşturmak için müşterileriyle birlikte çalışır. Raceplast için kalite, adil koşullar ve uzun vadeli iş ortaklığı temel önceliklerdir. Müşteri memnuniyeti; doğru ürün, güvenilir tedarik, profesyonel iletişim ve sürdürülebilir kalite yaklaşımıyla desteklenir.",
+    "contentEn": "Raceplast was founded in 2007 and specializes in technical plastics. With a future-oriented approach, it provides technical consulting, material selection support and industry-specific solutions. Its agile structure allows quick responses to market developments and customer requirements.",
+    "image": "assets/products/engineering-plastics-catalog.png",
+    "sourceUrl": "https://raceplast.com.tr/unternehmen.html",
+    "highlights": [
+      {
+        "id": "experience",
+        "title": "2007’den Beri Uzmanlık",
+        "description": "Teknik plastik yarı mamul ve endüstriyel parça çözümlerinde deneyimli ekip."
+      },
+      {
+        "id": "quality",
+        "title": "Kalite Odaklı Tedarik",
+        "description": "Belge, stok ve ürün bilgisi izlenebilirliğiyle güvenilir satın alma süreci."
+      },
+      {
+        "id": "solutions",
+        "title": "Sektöre Özel Çözümler",
+        "description": "Gıda, makine, otomotiv, ambalaj ve savunma uygulamalarına uygun malzeme seçimi."
+      }
+    ]
+  },
+  "legalPages": [
+    {
+      "id": "mesafeli-satis-sozlesmesi",
+      "slug": "mesafeli-satis-sozlesmesi",
+      "title": "Mesafeli Satış Sözleşmesi",
+      "titleEn": "Distance Sales Agreement",
+      "sortOrder": 1,
+      "isPublished": true,
+      "content": "Bu Mesafeli Satış Sözleşmesi, Raceplast üzerinden talep edilen ürün ve hizmetlerin satış koşullarını düzenlemek amacıyla hazırlanmıştır. Alıcı; ürün adı, teknik özellik, adet, teslimat adresi, ödeme yöntemi ve sipariş toplamını onaylayarak sözleşme şartlarını kabul eder. Teknik plastik ürünler çoğu zaman proje, ölçü veya stok durumuna göre tekliflendirilir. Özel ölçü, kesim, müşteri talebine göre hazırlanan veya tekrar satışı mümkün olmayan ürünlerde iptal ve iade koşulları ayrıca değerlendirilir. Satıcı, siparişin hazırlanması ve teslimatı sürecinde alıcıya e-posta veya telefon ile bilgilendirme yapabilir.",
+      "contentEn": "This Distance Sales Agreement defines the sales conditions for products and services requested through Raceplast. Custom sized or project-specific technical plastic products may be subject to separate cancellation and return conditions."
+    },
+    {
+      "id": "gizlilik-cerez-politikasi",
+      "slug": "gizlilik-cerez-politikasi",
+      "title": "Gizlilik ve Çerez Politikası",
+      "titleEn": "Privacy and Cookie Policy",
+      "sortOrder": 2,
+      "isPublished": true,
+      "content": "Raceplast, ziyaretçi ve müşteri bilgilerinin gizliliğini korumayı taahhüt eder. Site üzerinden paylaşılan ad, soyad, şirket, telefon, e-posta, adres, talep içeriği ve teknik dokümanlar yalnızca iletişim, teklif, sipariş, teslimat ve müşteri desteği amacıyla işlenir. Çerezler; site performansını ölçmek, güvenliği sağlamak, tercihleri hatırlamak ve kullanıcı deneyimini iyileştirmek için kullanılabilir. Tarayıcı ayarlarından çerez tercihleri değiştirilebilir. Kişisel veriler yasal yükümlülükler dışında üçüncü kişilerle paylaşılmaz.",
+      "contentEn": "Raceplast processes visitor and customer data for communication, quotation, order, delivery and support purposes. Cookies may be used to improve performance, security and user experience."
+    },
+    {
+      "id": "iptal-iade-degisim",
+      "slug": "iptal-iade-degisim",
+      "title": "İptal, İade ve Değişim Şartları",
+      "titleEn": "Cancellation, Return and Exchange Terms",
+      "sortOrder": 3,
+      "isPublished": true,
+      "content": "Standart stok ürünlerinde iptal, iade ve değişim talepleri ürün tesliminden sonra makul süre içinde yazılı olarak iletilmelidir. Ürünün kullanılmamış, hasar görmemiş ve tekrar satılabilir durumda olması gerekir. Özel kesim, müşteri ölçüsüne göre hazırlanan, CNC işlenen, proje için ayrılan veya teknik özellikleri müşterinin talebine göre değiştirilen ürünlerde iade kabul edilmeyebilir. Hatalı, eksik veya taşıma sırasında zarar görmüş ürünlerde durum teslimat anında kayıt altına alınmalı ve Raceplast ile paylaşılmalıdır.",
+      "contentEn": "Return and exchange requests for standard stock products should be submitted in writing within a reasonable period. Custom cut, machined or project-specific products may not be returnable."
+    },
+    {
+      "id": "teslimat-kargo-bilgileri",
+      "slug": "teslimat-kargo-bilgileri",
+      "title": "Teslimat ve Kargo Bilgileri",
+      "titleEn": "Delivery and Shipping Information",
+      "sortOrder": 4,
+      "isPublished": true,
+      "content": "Teslimat süresi ürünün stok durumuna, ölçüsüne, hazırlık ihtiyacına ve sevkiyat adresine göre değişebilir. Stoktaki ürünler için tahmini sevkiyat bilgisi teklif veya sipariş onayı sırasında paylaşılır. Ağır, hacimli veya özel paketleme gerektiren teknik plastiklerde taşıma yöntemi ayrıca planlanabilir. Alıcı, teslimat sırasında koli ve ürün durumunu kontrol etmekle yükümlüdür. Hasar tespit edilirse kargo görevlisiyle tutanak tutulmalı ve Raceplast ekibine iletilmelidir.",
+      "contentEn": "Delivery time may vary depending on stock status, dimensions, preparation needs and shipping address. Heavy or bulky technical plastic products may require special shipping planning."
+    },
+    {
+      "id": "odeme-yontemleri",
+      "slug": "odeme-yontemleri",
+      "title": "Ödeme Yöntemleri",
+      "titleEn": "Payment Methods",
+      "sortOrder": 5,
+      "isPublished": true,
+      "content": "Raceplast siparişlerinde banka havalesi/EFT, cari hesap, kredi kartı veya aktif edilen çevrim içi ödeme sağlayıcıları kullanılabilir. Geçerli ödeme yöntemleri teklif, proforma veya sipariş ekranında belirtilir. Ödeme tamamlanmadan özel sipariş hazırlığı başlatılmayabilir. Banka havalesi açıklamasında teklif veya sipariş numarası belirtilmelidir. Vergi, kargo, paketleme ve ek hizmet bedelleri sipariş toplamına ayrıca yansıtılabilir.",
+      "contentEn": "Orders may be paid by bank transfer, current account, credit card or enabled online payment providers. Available methods are shown on the quotation, proforma or order screen."
+    },
+    {
+      "id": "kvkk-aydinlatma-metni",
+      "slug": "kvkk-aydinlatma-metni",
+      "title": "KVKK Aydınlatma Metni",
+      "titleEn": "KVKK Privacy Notice",
+      "sortOrder": 6,
+      "isPublished": true,
+      "content": "6698 sayılı Kişisel Verilerin Korunması Kanunu kapsamında Raceplast; kimlik, iletişim, şirket, talep, sipariş, ödeme ve teslimat bilgilerinin veri sorumlusu sıfatıyla işlenebileceğini bildirir. Kişisel veriler; teklif hazırlama, sözleşme kurulması, sipariş takibi, fatura, sevkiyat, müşteri ilişkileri, teknik destek ve yasal yükümlülüklerin yerine getirilmesi amaçlarıyla sınırlı olarak işlenir. İlgili kişiler KVKK kapsamındaki bilgi alma, düzeltme, silme, itiraz ve zararın giderilmesini talep etme haklarını info@raceplast.com.tr adresinden kullanabilir.",
+      "contentEn": "Within the scope of Turkish Personal Data Protection Law No. 6698, Raceplast may process identity, contact, company, request, order, payment and delivery data for quotation, order tracking, invoicing, delivery and legal obligations."
+    }
+  ],
+  "contactPage": {
+    "title": "Raceplast Plastik A.Ş.",
+    "titleEn": "Contact Raceplast",
+    "description": "Ürün, stok, sipariş ve ödeme talepleriniz için satış ve teknik destek ekibimiz size yardımcı olur.",
+    "descriptionEn": "Our sales and technical support team can help with products, stock, orders and payment requests.",
+    "email": "info@raceplast.com.tr",
+    "phone": "0507 119 16 79",
+    "whatsapp": "0507 119 16 79",
+    "address": "Malıköy Başkent OSB, 19. Cd. No:45, 06909 Sincan/Ankara",
+    "workingHours": "Hafta içi 09:00 - 18:00",
+    "departments": [
+      {
+        "id": "sales",
+        "title": "Satış",
+        "email": "satis@raceplast.com.tr",
+        "phone": "0507 119 16 79"
+      },
+      {
+        "id": "support",
+        "title": "Teknik Destek",
+        "email": "destek@raceplast.com.tr",
+        "phone": "0507 119 16 79"
+      }
+    ]
+  },
+  "formSettings": {
+    "quoteFormEmail": "info@raceplast.com.tr",
+    "contactFormEmail": "info@raceplast.com.tr",
+    "requireGdprConsent": true,
+    "successMessage": "Talebiniz alındı. Ekibimiz en kısa sürede sizinle iletişime geçecek.",
+    "successMessageEn": "Your request has been received. Our team will contact you shortly.",
+    "fields": [
+      {
+        "id": "name",
+        "label": "Ad Soyad",
+        "type": "text",
+        "required": true,
+        "enabled": true
+      },
+      {
+        "id": "company",
+        "label": "Şirket Adı",
+        "type": "text",
+        "required": true,
+        "enabled": true
+      },
+      {
+        "id": "email",
+        "label": "E-posta",
+        "type": "email",
+        "required": true,
+        "enabled": true
+      },
+      {
+        "id": "phone",
+        "label": "Telefon",
+        "type": "tel",
+        "required": false,
+        "enabled": true
+      },
+      {
+        "id": "message",
+        "label": "Mesaj",
+        "type": "textarea",
+        "required": true,
+        "enabled": true
+      }
+    ]
+  },
+  "membershipSettings": {
+    "title": "Kurumsal Üyelik",
+    "description": "Firma müşterileri için e-posta doğrulamalı üyelik başvurusu. Sipariş, ödeme ve teklif süreçlerinde firma bilgileri esas alınır.",
+    "emailVerificationRequired": true,
+    "requireCompanyInfo": true,
+    "approvalMode": "manual",
+    "successMessage": "Üyelik başvurunuz ve e-posta doğrulamanız alındı. Raceplast ekibi firma bilgilerinizi kontrol ettikten sonra hesabınızı aktif eder.",
+    "companyFields": [
+      {
+        "id": "companyName",
+        "label": "Firma Adı",
+        "required": true
+      },
+      {
+        "id": "address",
+        "label": "Firma Adresi",
+        "required": true
+      },
+      {
+        "id": "taxNo",
+        "label": "Vergi No",
+        "required": true
+      },
+      {
+        "id": "taxOffice",
+        "label": "Vergi Dairesi",
+        "required": true
+      },
+      {
+        "id": "authorizedName",
+        "label": "Yetkili Adı",
+        "required": true
+      },
+      {
+        "id": "authorizedPhone",
+        "label": "Yetkili Telefonu",
+        "required": true
+      },
+      {
+        "id": "authorizedEmail",
+        "label": "Yetkili E-postası",
+        "required": true
+      }
+    ]
+  },
+  "emailSettings": {
+    "senderName": "Raceplast Plastik A.Ş.",
+    "senderEmail": "info@raceplast.com.tr",
+    "accountingEmail": "muhasebe@raceplast.com.tr",
+    "orderDetailTemplateId": "order-details",
+    "paymentReceivedTemplateId": "payment-received",
+    "verificationTemplateId": "email-verification",
+    "templates": [
+      {
+        "id": "email-verification",
+        "name": "Üyelik E-posta Doğrulama",
+        "trigger": "email-verification",
+        "subject": "Raceplast üyelik e-posta doğrulama kodunuz",
+        "body": "Merhaba {{authorizedName}},\n\nRaceplast kurumsal üyeliğinizi tamamlamak için doğrulama kodunuz: {{verificationCode}}\n\nFirma: {{companyName}}\n\nBu kodu üyelik ekranındaki doğrulama alanına girerek başvurunuzu tamamlayabilirsiniz.",
+        "enabled": true
+      },
+      {
+        "id": "order-details",
+        "name": "Sipariş Detayı",
+        "trigger": "order-details",
+        "subject": "Raceplast sipariş detayınız - {{orderNumber}}",
+        "body": "Merhaba {{customerName}},\n\n{{orderNumber}} numaralı siparişiniz alınmıştır.\n\nSipariş kalemleri:\n{{orderItems}}\n\nAra toplam: {{subtotal}} {{currency}}\nKDV: {{taxTotal}} {{currency}}\nGenel toplam: {{grandTotal}} {{currency}}\n\nFaturanız sipariş sonrası muhasebe birimimiz tarafından manuel olarak gönderilecektir.",
+        "enabled": true
+      },
+      {
+        "id": "payment-received",
+        "name": "Ödeme Alındı",
+        "trigger": "payment-received",
+        "subject": "Raceplast ödemeniz alındı - {{orderNumber}}",
+        "body": "Merhaba {{customerName}},\n\n{{orderNumber}} numaralı siparişiniz için {{grandTotal}} {{currency}} tutarındaki ödemeniz alınmıştır.\n\nSiparişiniz hazırlık sürecine aktarılmıştır. Fatura, muhasebe birimimiz tarafından ayrıca paylaşılacaktır.",
+        "enabled": true
+      }
+    ]
+  },
+  "mediaLibrary": [
+    {
+      "id": "default-product-catalog",
+      "url": "assets/products/engineering-plastics-catalog.png",
+      "name": "Varsayılan ürün katalog görseli",
+      "createdAt": "2026-06-29"
+    }
+  ],
+  "socialLinks": {
+    "linkedin": "",
+    "instagram": "",
+    "facebook": "",
+    "youtube": "",
+    "whatsapp": "0507 119 16 79"
+  },
+  "paymentSettings": {
+    "currency": "EUR",
+    "taxEnabled": true,
+    "providers": [
+      {
+        "id": "bank-transfer",
+        "name": "Banka Havalesi",
+        "enabled": true,
+        "mode": "live",
+        "description": "IBAN ile ödeme"
+      },
+      {
+        "id": "iyzico",
+        "name": "Iyzico",
+        "enabled": false,
+        "mode": "test"
+      },
+      {
+        "id": "stripe",
+        "name": "Stripe",
+        "enabled": false,
+        "mode": "test"
+      },
+      {
+        "id": "paypal",
+        "name": "PayPal",
+        "enabled": false,
+        "mode": "test"
+      }
+    ],
+    "bankAccounts": [
+      {
+        "id": "eur-main",
+        "bankName": "Örnek Bank",
+        "accountName": "Raceplast Industrial",
+        "iban": "TR00 0000 0000 0000 0000 0000 00",
+        "currency": "EUR",
+        "enabled": true
+      }
+    ]
+  },
+  "orders": [
+    {
+      "id": "order-sample",
+      "orderNumber": "RP-1001",
+      "status": "pending",
+      "customerName": "Örnek Müşteri",
+      "customerEmail": "musteri@example.com",
+      "customerPhone": "+90 000 000 00 00",
+      "billingAddress": "İstanbul",
+      "shippingAddress": "İstanbul",
+      "paymentMethod": "Banka Havalesi",
+      "shippingMethod": "Depo Sevkiyat",
+      "currency": "EUR",
+      "subtotal": 120,
+      "taxTotal": 24,
+      "shippingTotal": 0,
+      "grandTotal": 144,
+      "createdAt": "2026-06-26",
+      "notes": "Örnek sipariş kaydı",
+      "items": [
+        {
+          "sku": "#RP-10442",
+          "name": "POM-C Natural (Beyaz)",
+          "quantity": 2,
+          "unitPrice": 60,
+          "total": 120
+        }
+      ]
+    }
+  ],
+  "importSettings": {
+    "googleSheetCsvUrl": "",
+    "syncMode": "upsert-products",
+    "skuColumn": "sku",
+    "stockColumn": "stock"
+  }
+}

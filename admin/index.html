@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.svg" />
+    <title>Raceplast Admin Panel</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <section id="loginView" class="login-shell" hidden>
+      <form id="loginForm" class="login-panel">
+        <div class="brand-mark">RP</div>
+        <h1>Raceplast Yönetim</h1>
+        <p>Ürün, stok, blog, hero, sipariş, ödeme, formlar ve görselleri yönetin.</p>
+        <label>
+          Kullanıcı adı
+          <input name="username" autocomplete="username" value="admin" required />
+        </label>
+        <label>
+          Şifre
+          <input name="password" type="password" autocomplete="current-password" placeholder="İlk giriş: admin123" required />
+        </label>
+        <button class="primary-action" type="submit">Panele Giriş</button>
+        <small id="loginMessage"></small>
+      </form>
+    </section>
+
+    <section id="appView" class="admin-shell" hidden>
+      <aside class="sidebar">
+        <div class="sidebar-brand">
+          <div class="brand-mark">RP</div>
+          <div>
+            <strong>Raceplast</strong>
+            <span>Industrial Admin</span>
+          </div>
+        </div>
+
+        <nav id="mainNav" class="main-nav"></nav>
+
+        <div class="sidebar-status">
+          <span class="status-dot"></span>
+          <div>
+            <strong>cPanel JSON</strong>
+            <span id="syncStatus">Hazır</span>
+          </div>
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div>
+            <span class="eyebrow">Yönetim Paneli</span>
+            <h1 id="viewTitle">Dashboard</h1>
+          </div>
+          <div class="topbar-actions">
+            <input id="globalSearch" class="search-input" placeholder="SKU, ürün, malzeme ara..." />
+            <a class="ghost-action" href="../" target="_blank" rel="noreferrer">Siteyi Aç</a>
+            <button id="saveButton" class="primary-action" type="button">Kaydet</button>
+            <button id="logoutButton" class="icon-action" type="button" title="Çıkış">Çıkış</button>
+          </div>
+        </header>
+
+        <div id="alertBar" class="alert-bar" hidden></div>
+        <section id="mainContent" class="content-area"></section>
+      </main>
+
+      <aside id="editorDrawer" class="editor-drawer" hidden></aside>
+    </section>
+
+    <div id="toast" class="toast" hidden></div>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="./admin.js" type="module"></script>
+  </body>
+</html>
