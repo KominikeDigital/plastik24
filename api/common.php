@@ -16,6 +16,8 @@ session_start();
 
 define('RACEPLAST_DATA_DIR', __DIR__ . '/data');
 define('RACEPLAST_CONTENT_FILE', RACEPLAST_DATA_DIR . '/site-data.json');
+define('RACEPLAST_MEMBERS_FILE', RACEPLAST_DATA_DIR . '/members.json');
+define('RACEPLAST_NEWSLETTER_FILE', RACEPLAST_DATA_DIR . '/newsletter-subscribers.json');
 define('RACEPLAST_ADMIN_FILE', RACEPLAST_DATA_DIR . '/admin.json');
 define('RACEPLAST_BACKUP_DIR', RACEPLAST_DATA_DIR . '/backups');
 define('RACEPLAST_UPLOAD_DIR', dirname(__DIR__) . '/uploads/products');

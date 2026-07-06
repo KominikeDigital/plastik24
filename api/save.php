@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 rp_require_auth();
 
 $payload = rp_request_json();
-$arrayFields = ['products', 'restStocks', 'sectors', 'heroSlides', 'blogPosts', 'legalPages', 'mediaLibrary', 'orders'];
+$arrayFields = ['products', 'restStocks', 'sectors', 'heroSlides', 'blogPosts', 'legalPages', 'mediaLibrary', 'orders', 'members', 'newsletterSubscribers'];
 
 foreach ($arrayFields as $key) {
     if (!isset($payload[$key])) {
@@ -31,6 +31,9 @@ if (!isset($payload['pageTexts']) || !is_array($payload['pageTexts'])) {
 
 $payload['schemaVersion'] = 1;
 $payload['updatedAt'] = gmdate('c');
+$members = $payload['members'];
+$newsletterSubscribers = $payload['newsletterSubscribers'];
+unset($payload['members'], $payload['newsletterSubscribers']);
 
 foreach ($payload['products'] as $index => &$product) {
     if (empty($product['id'])) {
@@ -44,6 +47,8 @@ foreach ($payload['products'] as $index => &$product) {
 unset($product);
 
 rp_backup_content();
+rp_write_json(RACEPLAST_MEMBERS_FILE, $members);
+rp_write_json(RACEPLAST_NEWSLETTER_FILE, $newsletterSubscribers);
 rp_write_json(RACEPLAST_CONTENT_FILE, $payload);
 
 rp_json_response([

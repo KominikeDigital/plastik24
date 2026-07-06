@@ -27,7 +27,7 @@ const navGroups = [
       ['sectors', 'Sektörler'],
       ['blog', 'Blog'],
       ['contact', 'İletişim'],
-      ['legal', 'Yasal Sayfalar'],
+      ['legal', 'Bilgi Sayfaları'],
     ],
   },
   {
@@ -36,6 +36,8 @@ const navGroups = [
     items: [
       ['orders', 'Siparişler'],
       ['membership', 'Üyelik'],
+      ['members', 'Üyeler'],
+      ['newsletter', 'Bülten Üyeleri'],
       ['emails', 'E-postalar'],
       ['forms', 'Form Ayarları'],
       ['payments', 'Ödeme'],
@@ -125,6 +127,8 @@ const defaultContentPatch = {
     successMessage: '',
     companyFields: [],
   },
+  members: [],
+  newsletterSubscribers: [],
   emailSettings: {
     senderName: 'Raceplast Plastik A.Ş.',
     senderEmail: '',
@@ -278,6 +282,8 @@ function ensureContentShape() {
   if (!Array.isArray(state.content.contactPage.departments)) state.content.contactPage.departments = [];
   if (!Array.isArray(state.content.formSettings.fields)) state.content.formSettings.fields = [];
   if (!Array.isArray(state.content.membershipSettings.companyFields)) state.content.membershipSettings.companyFields = [];
+  if (!Array.isArray(state.content.members)) state.content.members = [];
+  if (!Array.isArray(state.content.newsletterSubscribers)) state.content.newsletterSubscribers = [];
   if (!Array.isArray(state.content.emailSettings.templates)) state.content.emailSettings.templates = [];
   if (!Array.isArray(state.content.mediaLibrary)) state.content.mediaLibrary = [];
   if (!Array.isArray(state.content.paymentSettings.providers)) state.content.paymentSettings.providers = [];
@@ -382,16 +388,22 @@ function handleAuthError(error) {
 
 async function loadContent() {
   try {
-    const response = await fetch(`${API_BASE}content.php`, { cache: 'no-store' });
+    const response = await fetch(`${API_BASE}admin-data.php`, { cache: 'no-store', credentials: 'same-origin' });
     const data = await response.json();
-    state.content = data;
+    if (!response.ok || data.ok === false) {
+      const error = new Error(data.message || 'Admin verisi yüklenemedi.');
+      error.status = response.status;
+      throw error;
+    }
+    state.content = data.content || data;
     ensureContentShape();
-    setSyncStatus('API verisi yüklendi');
-  } catch {
-    const response = await fetch(`${API_BASE}data/site-data.json`, { cache: 'no-store' });
+    setSyncStatus('Admin API verisi yüklendi');
+  } catch (error) {
+    if (handleAuthError(error)) return;
+    const response = await fetch(`${API_BASE}content.php`, { cache: 'no-store' });
     state.content = await response.json();
     ensureContentShape();
-    setSyncStatus('Statik JSON yüklendi');
+    setSyncStatus('Public içerik verisi yüklendi');
   }
 }
 
@@ -502,6 +514,8 @@ function render() {
     legal: renderLegal,
     orders: renderOrders,
     membership: renderMembership,
+    members: renderMembers,
+    newsletter: renderNewsletterSubscribers,
     emails: renderEmails,
     contact: renderContact,
     forms: renderForms,
@@ -1439,12 +1453,12 @@ function aboutHighlightTemplate(item, index) {
 
 function renderLegal() {
   return renderCompactCollectionEditor({
-    title: 'Yasal Sayfalar',
+    title: 'Bilgi Sayfaları',
     collectionKey: 'legalPages',
     items: state.content.legalPages || [],
     selectedId: state.selectedLegalPageId,
-    emptyText: 'Henüz yasal sayfa yok.',
-    addLabel: 'Yeni Yasal Sayfa',
+    emptyText: 'Henüz bilgi sayfası yok.',
+    addLabel: 'Yeni Bilgi Sayfası',
     renderEditor: legalTemplate,
     summary: (item) => `Sıra ${item.sortOrder || '-'} · ${item.slug || 'slug yok'}`,
   });
@@ -1537,6 +1551,62 @@ function membershipFieldTemplate(item, index) {
       ${collectionField('ID', 'membershipSettings.companyFields', index, 'id', item.id)}
       ${collectionField('Etiket', 'membershipSettings.companyFields', index, 'label', item.label)}
       <label class="check-pill"><input type="checkbox" data-collection="membershipSettings.companyFields" data-index="${index}" data-field="required" data-kind="checkbox" ${item.required ? 'checked' : ''} /> Zorunlu</label>
+    </div>
+  `;
+}
+
+function renderMembers() {
+  return collectionPanel('Üyeler', 'members', state.content.members || [], memberTemplate);
+}
+
+function memberTemplate(item, index) {
+  return `
+    <div class="form-grid three">
+      ${collectionField('ID', 'members', index, 'id', item.id)}
+      <label>
+        Durum
+        <select data-collection="members" data-index="${index}" data-field="status">
+          ${option('pending', 'Onay bekliyor', item.status || 'pending')}
+          ${option('approved', 'Onaylandı', item.status || 'pending')}
+          ${option('rejected', 'Reddedildi', item.status || 'pending')}
+          ${option('inactive', 'Pasif', item.status || 'pending')}
+        </select>
+      </label>
+      ${collectionField('Kayıt Tarihi', 'members', index, 'createdAt', item.createdAt || '', 'text', 'text')}
+      ${collectionField('Firma Adı', 'members', index, 'companyName', item.companyName || '', 'text', 'text', true)}
+      ${collectionField('Vergi No', 'members', index, 'taxNo', item.taxNo || '', 'text', 'text')}
+      ${collectionField('Vergi Dairesi', 'members', index, 'taxOffice', item.taxOffice || '')}
+      ${collectionTextarea('Adres', 'members', index, 'address', item.address || '')}
+      ${collectionField('Yetkili Adı', 'members', index, 'authorizedName', item.authorizedName || '')}
+      ${collectionField('Yetkili Telefonu', 'members', index, 'authorizedPhone', item.authorizedPhone || '', 'text', 'tel')}
+      ${collectionField('Yetkili E-postası', 'members', index, 'authorizedEmail', item.authorizedEmail || '', 'text', 'email')}
+      <label class="check-pill"><input type="checkbox" data-collection="members" data-index="${index}" data-field="emailVerified" data-kind="checkbox" ${item.emailVerified ? 'checked' : ''} /> Mail doğrulandı</label>
+      <label class="check-pill"><input type="checkbox" data-collection="members" data-index="${index}" data-field="agreement" data-kind="checkbox" ${item.agreement ? 'checked' : ''} /> Koşullar kabul edildi</label>
+      ${collectionTextarea('Admin Notu', 'members', index, 'notes', item.notes || '')}
+    </div>
+  `;
+}
+
+function renderNewsletterSubscribers() {
+  return collectionPanel('Bülten Üyeleri', 'newsletterSubscribers', state.content.newsletterSubscribers || [], newsletterSubscriberTemplate);
+}
+
+function newsletterSubscriberTemplate(item, index) {
+  return `
+    <div class="form-grid three">
+      ${collectionField('ID', 'newsletterSubscribers', index, 'id', item.id)}
+      ${collectionField('E-posta', 'newsletterSubscribers', index, 'email', item.email || '', 'text', 'email', true)}
+      <label>
+        Durum
+        <select data-collection="newsletterSubscribers" data-index="${index}" data-field="status">
+          ${option('active', 'Aktif', item.status || 'active')}
+          ${option('unsubscribed', 'Ayrıldı', item.status || 'active')}
+        </select>
+      </label>
+      ${collectionField('Kaynak', 'newsletterSubscribers', index, 'source', item.source || 'website')}
+      ${collectionField('Kayıt Tarihi', 'newsletterSubscribers', index, 'createdAt', item.createdAt || '', 'text', 'text')}
+      ${collectionField('Güncelleme Tarihi', 'newsletterSubscribers', index, 'updatedAt', item.updatedAt || '', 'text', 'text')}
+      ${collectionTextarea('Not', 'newsletterSubscribers', index, 'notes', item.notes || '')}
     </div>
   `;
 }
@@ -1765,7 +1835,7 @@ function collectionPanel(title, key, items, template) {
             (item, index) => `
               <article class="collection-item">
                 <div class="collection-heading">
-                  <strong>${escapeHtml(item.title || item.orderNumber || item.name || item.material || item.sku || item.id)}</strong>
+                  <strong>${escapeHtml(item.title || item.companyName || item.email || item.orderNumber || item.name || item.material || item.sku || item.id)}</strong>
                   <button class="mini-button danger" type="button" data-action="delete-collection" data-collection-type="${key}" data-index="${index}">Sil</button>
                 </div>
                 ${template(item, index)}
@@ -2037,13 +2107,36 @@ function addCollection(type) {
     },
     legalPages: {
       id: uid('legal'),
-      slug: 'yeni-yasal-sayfa',
-      title: 'Yeni Yasal Sayfa',
+      slug: 'yeni-bilgi-sayfasi',
+      title: 'Yeni Bilgi Sayfası',
       titleEn: '',
       content: '',
       contentEn: '',
       sortOrder: target.length + 1,
       isPublished: true,
+    },
+    members: {
+      id: uid('member'),
+      status: 'pending',
+      companyName: 'Yeni Firma',
+      address: '',
+      taxNo: '',
+      taxOffice: '',
+      authorizedName: '',
+      authorizedPhone: '',
+      authorizedEmail: '',
+      createdAt: new Date().toISOString(),
+      notes: '',
+      emailVerified: false,
+      agreement: false,
+    },
+    newsletterSubscribers: {
+      id: uid('newsletter'),
+      email: '',
+      status: 'active',
+      source: 'admin',
+      createdAt: new Date().toISOString(),
+      notes: '',
     },
     orders: {
       id: uid('order'),
