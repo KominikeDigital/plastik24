@@ -1123,8 +1123,6 @@ function heroTemplate(item, index) {
       ${collectionField('Başlık', 'heroSlides', index, 'title', item.title, 'text', 'text', true)}
       ${collectionTextarea('Açıklama', 'heroSlides', index, 'description', item.description)}
       ${collectionField('Görsel URL', 'heroSlides', index, 'image', item.image, 'text', 'text', true)}
-      ${collectionField('Birincil Buton', 'heroSlides', index, 'primaryCta', item.primaryCta)}
-      ${collectionField('Birincil Hedef', 'heroSlides', index, 'primaryTarget', item.primaryTarget || 'portfolio')}
       ${collectionField('Slider Süresi (ms)', 'heroSlides', index, 'durationMs', item.durationMs || 6000, 'int', 'number')}
       ${pathField('EN Rozet', `heroSlides.${index}.translations.en.badge`)}
       ${pathField('EN Başlık', `heroSlides.${index}.translations.en.title`, 'input', true)}
@@ -1808,9 +1806,6 @@ function renderPages() {
           ['Rozet', 'pageTexts.hero.badge'],
           ['Başlık', 'pageTexts.hero.title'],
           ['Açıklama', 'pageTexts.hero.description', 'textarea'],
-          ['Birincil Buton', 'pageTexts.hero.primaryCta'],
-          ['Rest Butonu', 'pageTexts.hero.restCta'],
-          ['Teklif Butonu', 'pageTexts.hero.quoteCta'],
           ['Arama Placeholder', 'pageTexts.hero.searchPlaceholder'],
           ['Arama Butonu', 'pageTexts.hero.searchButton'],
           ['Arka Plan Kelimesi', 'pageTexts.hero.backgroundWord'],
@@ -1819,10 +1814,6 @@ function renderPages() {
           ['Popüler Eyebrow', 'pageTexts.home.popularEyebrow'],
           ['Popüler Başlık', 'pageTexts.home.popularTitle'],
           ['Popüler Aksiyon', 'pageTexts.home.popularAction'],
-          ['Rest Eyebrow', 'pageTexts.home.restEyebrow'],
-          ['Rest Başlık', 'pageTexts.home.restTitle'],
-          ['Rest Açıklama', 'pageTexts.home.restDescription', 'textarea'],
-          ['Rest Aksiyon', 'pageTexts.home.restAction'],
           ['Sektör Eyebrow', 'pageTexts.home.sectorsEyebrow'],
           ['Sektör Başlık', 'pageTexts.home.sectorsTitle'],
         ])}
@@ -2019,8 +2010,6 @@ function addCollection(type) {
       title: 'Yeni Slider Başlığı',
       description: '',
       image: DEFAULT_PRODUCT_IMAGE,
-      primaryCta: 'Ürünleri İncele',
-      primaryTarget: 'portfolio',
       autoplayEnabled: true,
       durationMs: 6000,
       translations: { en: {} },
