@@ -1,27 +1,27 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-06-30T09:44:53.244Z",
+  "updatedAt": "2026-07-06T14:04:27.202Z",
   "settings": {
-    "siteTitle": "Raceplast Industrial",
+    "siteTitle": "Plastik24",
     "defaultLanguage": "tr",
     "enabledLanguages": [
       "tr",
       "en"
     ],
-    "logoUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuAaS0oUtuzWopRondlmKz4buNUQ2TKaxobMD7xWYE9bPES_XWqLO4EInRBWju03iYLdzXScHMhcdTmGVZgQQuIp-c8JYKUDYAG9K1aQvVJFP6ACswiH1F2vzNUzrzoOJZgzWEPYr8r_1G8dugPDa5ClxetNyMBq0BKwN-3SYauWqDFN56EBR0ct8rFbtgXmeaHZpbCJL1RY4oksKeQiVRDspxQkDo7RcYFJRb90_tUIh89vCijpy3Yk-DHsDbh4DrBOvoTb3t5huFj2",
-    "footerLogoUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuAaS0oUtuzWopRondlmKz4buNUQ2TKaxobMD7xWYE9bPES_XWqLO4EInRBWju03iYLdzXScHMhcdTmGVZgQQuIp-c8JYKUDYAG9K1aQvVJFP6ACswiH1F2vzNUzrzoOJZgzWEPYr8r_1G8dugPDa5ClxetNyMBq0BKwN-3SYauWqDFN56EBR0ct8rFbtgXmeaHZpbCJL1RY4oksKeQiVRDspxQkDo7RcYFJRb90_tUIh89vCijpy3Yk-DHsDbh4DrBOvoTb3t5huFj2",
+    "logoUrl": "assets/brand/plastik24-logo.png",
+    "footerLogoUrl": "assets/brand/plastik24-logo.png",
     "isoBadgeUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuB_S-gtoy89-81onBHLTdYXilORfnGr3icTUHHcAsOn0lAOxy42w7t4ubfayTtT-UNd6Bc4OirpZFVTcTJGTQjiYh1lzADPfOmEe8JZKGpPQDUr2xsm_1DKx2zqgStKeDmIwcGVvnsj7ntaZGdPpOqlftESHcPmL5iukp8_Ju2BQXOT1IYlKVkANuCROLKeK5fcOoIhVQoN-IPU35GnxLKongQ-cIbZU4U-EeYOzpX0e_RxLv7jd1QMhUYnco1hkNrRi8rLbh3_338R",
     "fdaBadgeUrl": "https://lh3.googleusercontent.com/aida-public/AB6AXuCXaUIAdi-kR44PvYtneyUGWu66I6T0P-A4QDgA04CAWaRn0rslTOCLvk2orPHpI2JBOMjbgqsbHbqC69eOyl7ArzT1p16AlzkQv5FfAK6BA7yvx6wCiuiLapylMWxqjp-9uuzD3TsSKC_xx12K5_44KDQgzRP1ETjpGDdIBQtBLux1i3lNHo4QUewmJRiPb_jW_XNexH9hm3YdMF0HITGa7sT9M_A1AitvWFeLDNAvCCKsizO4Xtr03kcvcrLMnqx6j5n9gu9_LGbB",
     "email": "info@raceplast.com.tr",
     "phone": "0507 119 16 79",
     "whatsapp": "0507 119 16 79",
     "address": "Malıköy Başkent OSB, 19. Cd. No:45, 06909 Sincan/Ankara",
-    "companyDescription": "Makine ve gıda işleme endüstrileri için yenilikçi mühendislik plastik çözümleri. Stoklu teknik polimer ve yarı mamul tedarik platformu.",
-    "copyrightCompany": "Raceplast Industrial",
-    "seoTitle": "Raceplast Industrial | Ürünlerimiz ve Stok Çözümleri",
-    "seoDescription": "Raceplast teknik plastik ürünleri, stoklu yarı mamuller ve teknik polimer tedarik platformu.",
-    "seoTitleEn": "Raceplast Industrial | Products and Stock Solutions",
-    "seoDescriptionEn": "Raceplast engineering plastics, cut-to-size stock, technical polymers and industrial procurement platform."
+    "companyDescription": "Mühendislik plastikleri, levha, çubuk ve özel ölçü çözümleri için stoklu teknik polimer tedarik platformu.",
+    "copyrightCompany": "Plastik24",
+    "seoTitle": "Plastik24 | Mühendislik Plastik Çözümleri",
+    "seoDescription": "Plastik24 mühendislik plastikleri, teknik levha, çubuk, özel ölçü ve stoklu yarı mamul çözümleri.",
+    "seoTitleEn": "Plastik24 | Engineering Plastic Solutions",
+    "seoDescriptionEn": "Plastik24 engineering plastics, cut-to-size sheets, rods, stock materials and technical polymer solutions."
   },
   "pageTexts": {
     "hero": {
@@ -33,11 +33,11 @@
       "quoteCta": "Teklif Al",
       "searchPlaceholder": "POM-C, PA6, PEEK veya malzeme adı ile arayın...",
       "searchButton": "Hızlı Bul",
-      "backgroundWord": "RACEPLAST"
+      "backgroundWord": "PLASTIK24"
     },
     "home": {
-      "popularEyebrow": "ENDÜSTRİYEL ÇÖZÜMLER",
-      "popularTitle": "Popüler Ürünlerimiz",
+      "popularEyebrow": "ÇOK SATANLAR",
+      "popularTitle": "Stoklu Teknik Plastik Ürünleri",
       "popularAction": "Tüm Ürünleri Gör",
       "restEyebrow": "ANLIK REST STOKLARI",
       "restTitle": "Artabil Parçalar, Uygun Fiyatlar",
@@ -101,7 +101,7 @@
       "quoteCta": "Request Quote",
       "searchPlaceholder": "Search POM-C, PA6, PEEK or material name...",
       "searchButton": "Quick Search",
-      "backgroundWord": "RACEPLAST"
+      "backgroundWord": "PLASTIK24"
     },
     "home": {
       "popularEyebrow": "INDUSTRIAL SOLUTIONS",
@@ -133,7 +133,7 @@
     "contact": {
       "eyebrow": "CONTACT",
       "title": "Talk to the Technical Team",
-      "description": "Reach Raceplast sales and technical support for products, stock, payment and custom dimension requests."
+      "description": "Reach Plastik24 sales and technical support for products, stock, payment and custom dimension requests."
     },
     "info": {
       "title": "Certificates & Quality Assurance",
