@@ -18,6 +18,8 @@ define('RACEPLAST_DATA_DIR', __DIR__ . '/data');
 define('RACEPLAST_CONTENT_FILE', RACEPLAST_DATA_DIR . '/site-data.json');
 define('RACEPLAST_MEMBERS_FILE', RACEPLAST_DATA_DIR . '/members.json');
 define('RACEPLAST_NEWSLETTER_FILE', RACEPLAST_DATA_DIR . '/newsletter-subscribers.json');
+define('RACEPLAST_MAIL_SETTINGS_FILE', RACEPLAST_DATA_DIR . '/mail-settings.json');
+define('RACEPLAST_VERIFICATION_FILE', RACEPLAST_DATA_DIR . '/verification-codes.json');
 define('RACEPLAST_ADMIN_FILE', RACEPLAST_DATA_DIR . '/admin.json');
 define('RACEPLAST_BACKUP_DIR', RACEPLAST_DATA_DIR . '/backups');
 define('RACEPLAST_UPLOAD_DIR', dirname(__DIR__) . '/uploads/products');
@@ -130,6 +132,204 @@ function rp_slug(string $value): string
     $value = trim($value, '-');
     $value = strtolower($value);
     return $value !== '' ? $value : 'item-' . time();
+}
+
+function rp_default_mail_settings(): array
+{
+    return [
+        'defaultFromName' => 'Plastik24',
+        'defaultFromEmail' => 'info@plastik24.com.tr',
+        'notificationEmail' => 'info@plastik24.com.tr',
+        'smtpHost' => 'mail.plastik24.com.tr',
+        'smtpPort' => 465,
+        'smtpSecure' => 'ssl',
+        'smtpAuth' => true,
+        'smtpUsername' => '_mainaccount@plastik24.com.tr',
+        'smtpPassword' => 'plastik24.com.tr',
+        'imapHost' => 'mail.plastik24.com.tr',
+        'imapPort' => 993,
+        'pop3Host' => 'mail.plastik24.com.tr',
+        'pop3Port' => 995,
+        'nilveraEnabled' => false,
+        'nilveraApiBase' => 'https://apitest.nilvera.com',
+        'nilveraApiKey' => '',
+        'updatedAt' => gmdate('c'),
+    ];
+}
+
+function rp_mail_settings(): array
+{
+    $settings = rp_read_json(RACEPLAST_MAIL_SETTINGS_FILE, []);
+    return array_merge(rp_default_mail_settings(), $settings);
+}
+
+function rp_mime_header(string $value): string
+{
+    if (function_exists('mb_encode_mimeheader')) {
+        return mb_encode_mimeheader($value, 'UTF-8', 'B', "\r\n");
+    }
+    return '=?UTF-8?B?' . base64_encode($value) . '?=';
+}
+
+function rp_smtp_read($socket): array
+{
+    $lines = [];
+    while (($line = fgets($socket, 515)) !== false) {
+        $lines[] = rtrim($line, "\r\n");
+        if (strlen($line) < 4 || $line[3] !== '-') {
+            break;
+        }
+    }
+    $code = isset($lines[0]) ? (int)substr($lines[0], 0, 3) : 0;
+    return [$code, $lines];
+}
+
+function rp_smtp_command($socket, string $command, array $acceptedCodes): bool
+{
+    if (fwrite($socket, $command . "\r\n") === false) {
+        return false;
+    }
+    [$code] = rp_smtp_read($socket);
+    return in_array($code, $acceptedCodes, true);
+}
+
+function rp_smtp_payload(string $subject, string $body, string $to, array $settings): string
+{
+    $fromName = trim((string)$settings['defaultFromName']);
+    $fromEmail = trim((string)$settings['defaultFromEmail']);
+    $headers = [
+        'Date: ' . date(DATE_RFC2822),
+        'From: ' . rp_mime_header($fromName) . ' <' . $fromEmail . '>',
+        'To: <' . $to . '>',
+        'Subject: ' . rp_mime_header($subject),
+        'MIME-Version: 1.0',
+        'Content-Type: text/plain; charset=UTF-8',
+        'Content-Transfer-Encoding: 8bit',
+        'Reply-To: ' . $fromEmail,
+        'X-Mailer: Plastik24',
+    ];
+
+    $payload = implode("\r\n", $headers) . "\r\n\r\n" . str_replace(["\r\n", "\r"], "\n", $body);
+    $lines = explode("\n", $payload);
+    $lines = array_map(static fn(string $line): string => $line !== '' && $line[0] === '.' ? '.' . $line : $line, $lines);
+    return implode("\r\n", $lines);
+}
+
+function rp_smtp_send(string $to, string $subject, string $body, array $settings): bool
+{
+    $host = trim((string)$settings['smtpHost']);
+    $port = (int)$settings['smtpPort'];
+    $username = trim((string)$settings['smtpUsername']);
+    $password = (string)$settings['smtpPassword'];
+    $fromEmail = trim((string)$settings['defaultFromEmail']);
+
+    if ($host === '' || $port <= 0 || $fromEmail === '' || $username === '' || $password === '') {
+        return false;
+    }
+
+    $transport = ((string)$settings['smtpSecure'] === 'ssl' ? 'ssl://' : '') . $host;
+    $socket = @stream_socket_client($transport . ':' . $port, $errno, $errstr, 20, STREAM_CLIENT_CONNECT);
+    if (!$socket) {
+        return false;
+    }
+    stream_set_timeout($socket, 20);
+
+    [$code] = rp_smtp_read($socket);
+    if ($code !== 220) {
+        fclose($socket);
+        return false;
+    }
+
+    $serverName = $_SERVER['SERVER_NAME'] ?? 'plastik24.com.tr';
+    $ok = rp_smtp_command($socket, 'EHLO ' . $serverName, [250]);
+    if (!$ok) {
+        $ok = rp_smtp_command($socket, 'HELO ' . $serverName, [250]);
+    }
+    if (!$ok) {
+        fclose($socket);
+        return false;
+    }
+
+    if (!empty($settings['smtpAuth'])) {
+        $ok = rp_smtp_command($socket, 'AUTH LOGIN', [334])
+            && rp_smtp_command($socket, base64_encode($username), [334])
+            && rp_smtp_command($socket, base64_encode($password), [235]);
+        if (!$ok) {
+            fclose($socket);
+            return false;
+        }
+    }
+
+    $payload = rp_smtp_payload($subject, $body, $to, $settings);
+    $ok = rp_smtp_command($socket, 'MAIL FROM:<' . $fromEmail . '>', [250])
+        && rp_smtp_command($socket, 'RCPT TO:<' . $to . '>', [250, 251])
+        && rp_smtp_command($socket, 'DATA', [354]);
+    if ($ok) {
+        fwrite($socket, $payload . "\r\n.\r\n");
+        [$dataCode] = rp_smtp_read($socket);
+        $ok = $dataCode === 250;
+    }
+
+    rp_smtp_command($socket, 'QUIT', [221, 250]);
+    fclose($socket);
+    return $ok;
+}
+
+function rp_send_mail(string $to, string $subject, string $body): bool
+{
+    $settings = rp_mail_settings();
+    $to = trim($to);
+    if (!filter_var($to, FILTER_VALIDATE_EMAIL)) {
+        return false;
+    }
+
+    if (rp_smtp_send($to, $subject, $body, $settings)) {
+        return true;
+    }
+
+    $fromEmail = trim((string)$settings['defaultFromEmail']);
+    $fromName = trim((string)$settings['defaultFromName']);
+    $headers = implode("\r\n", [
+        'From: ' . rp_mime_header($fromName) . ' <' . $fromEmail . '>',
+        'Reply-To: ' . $fromEmail,
+        'MIME-Version: 1.0',
+        'Content-Type: text/plain; charset=UTF-8',
+        'Content-Transfer-Encoding: 8bit',
+    ]);
+
+    return @mail($to, rp_mime_header($subject), $body, $headers, '-f' . $fromEmail);
+}
+
+function rp_render_mail_template(string $body, array $variables): string
+{
+    $replacements = [];
+    foreach ($variables as $key => $value) {
+        $replacements['{{' . $key . '}}'] = (string)$value;
+    }
+    return strtr($body, $replacements);
+}
+
+function rp_send_template_mail(string $to, string $trigger, array $variables): bool
+{
+    $content = rp_read_json(RACEPLAST_CONTENT_FILE, []);
+    $emailSettings = $content['emailSettings'] ?? [];
+    $templates = is_array($emailSettings['templates'] ?? null) ? $emailSettings['templates'] : [];
+    $template = null;
+
+    foreach ($templates as $candidate) {
+        if (($candidate['trigger'] ?? '') === $trigger || ($candidate['id'] ?? '') === $trigger) {
+            $template = $candidate;
+            break;
+        }
+    }
+
+    if (!$template || ($template['enabled'] ?? true) === false) {
+        return false;
+    }
+
+    $subject = rp_render_mail_template((string)($template['subject'] ?? 'Plastik24 bildirimi'), $variables);
+    $body = rp_render_mail_template((string)($template['body'] ?? ''), $variables);
+    return rp_send_mail($to, $subject, $body);
 }
 
 rp_storage_init();

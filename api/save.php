@@ -33,7 +33,10 @@ $payload['schemaVersion'] = 1;
 $payload['updatedAt'] = gmdate('c');
 $members = $payload['members'];
 $newsletterSubscribers = $payload['newsletterSubscribers'];
-unset($payload['members'], $payload['newsletterSubscribers']);
+$mailSettings = isset($payload['mailSettings']) && is_array($payload['mailSettings'])
+    ? array_merge(rp_mail_settings(), $payload['mailSettings'], ['updatedAt' => gmdate('c')])
+    : rp_mail_settings();
+unset($payload['members'], $payload['newsletterSubscribers'], $payload['mailSettings']);
 
 foreach ($payload['products'] as $index => &$product) {
     if (empty($product['id'])) {
@@ -49,6 +52,7 @@ unset($product);
 rp_backup_content();
 rp_write_json(RACEPLAST_MEMBERS_FILE, $members);
 rp_write_json(RACEPLAST_NEWSLETTER_FILE, $newsletterSubscribers);
+rp_write_json(RACEPLAST_MAIL_SETTINGS_FILE, $mailSettings);
 rp_write_json(RACEPLAST_CONTENT_FILE, $payload);
 
 rp_json_response([

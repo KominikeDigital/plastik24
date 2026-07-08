@@ -1,0 +1,19 @@
+{
+  "defaultFromName": "Plastik24",
+  "defaultFromEmail": "info@plastik24.com.tr",
+  "notificationEmail": "info@plastik24.com.tr",
+  "smtpHost": "mail.plastik24.com.tr",
+  "smtpPort": 465,
+  "smtpSecure": "ssl",
+  "smtpAuth": true,
+  "smtpUsername": "_mainaccount@plastik24.com.tr",
+  "smtpPassword": "plastik24.com.tr",
+  "imapHost": "mail.plastik24.com.tr",
+  "imapPort": 993,
+  "pop3Host": "mail.plastik24.com.tr",
+  "pop3Port": 995,
+  "nilveraEnabled": false,
+  "nilveraApiBase": "https://apitest.nilvera.com",
+  "nilveraApiKey": "",
+  "updatedAt": "2026-07-08T19:10:57.181105Z"
+}

@@ -39,6 +39,7 @@ const navGroups = [
       ['members', 'Üyeler'],
       ['newsletter', 'Bülten Üyeleri'],
       ['emails', 'E-postalar'],
+      ['mailSettings', 'Mail Ayarları'],
       ['forms', 'Form Ayarları'],
       ['payments', 'Ödeme'],
     ],
@@ -64,6 +65,10 @@ const state = {
   selectedProductId: null,
   selectedBlogPostId: null,
   selectedLegalPageId: null,
+  selectedOrderId: null,
+  selectedMemberId: null,
+  selectedNewsletterSubscriberId: null,
+  selectedEmailTemplateId: null,
   blogStatusFilter: 'all',
   blogCategoryFilter: 'all',
   blogSelectedIds: [],
@@ -130,13 +135,31 @@ const defaultContentPatch = {
   members: [],
   newsletterSubscribers: [],
   emailSettings: {
-    senderName: 'Raceplast Plastik A.Ş.',
-    senderEmail: '',
-    accountingEmail: '',
+    senderName: 'Plastik24',
+    senderEmail: 'info@plastik24.com.tr',
+    accountingEmail: 'info@plastik24.com.tr',
     orderDetailTemplateId: 'order-details',
     paymentReceivedTemplateId: 'payment-received',
     verificationTemplateId: 'email-verification',
     templates: [],
+  },
+  mailSettings: {
+    defaultFromName: 'Plastik24',
+    defaultFromEmail: 'info@plastik24.com.tr',
+    notificationEmail: 'info@plastik24.com.tr',
+    smtpHost: 'mail.plastik24.com.tr',
+    smtpPort: 465,
+    smtpSecure: 'ssl',
+    smtpAuth: true,
+    smtpUsername: '_mainaccount@plastik24.com.tr',
+    smtpPassword: 'plastik24.com.tr',
+    imapHost: 'mail.plastik24.com.tr',
+    imapPort: 993,
+    pop3Host: 'mail.plastik24.com.tr',
+    pop3Port: 995,
+    nilveraEnabled: false,
+    nilveraApiBase: 'https://apitest.nilvera.com',
+    nilveraApiKey: '',
   },
   mediaLibrary: [],
   socialLinks: {
@@ -517,6 +540,7 @@ function render() {
     members: renderMembers,
     newsletter: renderNewsletterSubscribers,
     emails: renderEmails,
+    mailSettings: renderMailSettings,
     contact: renderContact,
     forms: renderForms,
     social: renderSocial,
@@ -1223,7 +1247,27 @@ function getSelectedCollectionIndex(collectionKey, selectedId) {
   return index >= 0 ? index : 0;
 }
 
-function renderCompactCollectionEditor({ title, collectionKey, items, selectedId, emptyText, addLabel, renderEditor, summary }) {
+function compactRecordTitle(item) {
+  return item.title || item.companyName || item.email || item.orderNumber || item.name || item.slug || item.id || 'Kayıt';
+}
+
+function compactRecordStatus(item) {
+  if (item.status) return item.status;
+  return item.isPublished === false ? 'Gizli' : 'Yayında';
+}
+
+function renderCompactCollectionEditor({
+  title,
+  collectionKey,
+  items,
+  selectedId,
+  emptyText,
+  addLabel,
+  renderEditor,
+  summary,
+  itemTitle = compactRecordTitle,
+  itemStatus = compactRecordStatus,
+}) {
   const selectedIndex = getSelectedCollectionIndex(collectionKey, selectedId);
   const selectedItem = selectedIndex >= 0 ? items[selectedIndex] : null;
   return `
@@ -1249,9 +1293,9 @@ function renderCompactCollectionEditor({ title, collectionKey, items, selectedId
                       data-collection-type="${collectionKey}"
                       data-id="${escapeHtml(item.id || '')}"
                     >
-                      <strong>${escapeHtml(item.title || item.name || item.slug || item.id)}</strong>
+                      <strong>${escapeHtml(itemTitle(item))}</strong>
                       <span>${escapeHtml(summary(item))}</span>
-                      <small>${item.isPublished === false ? 'Gizli' : 'Yayında'}</small>
+                      <small>${escapeHtml(itemStatus(item))}</small>
                     </button>
                   `;
                 })
@@ -1265,7 +1309,7 @@ function renderCompactCollectionEditor({ title, collectionKey, items, selectedId
               <div class="record-editor-header">
                 <div>
                   <span class="eyebrow">Seçili Kayıt</span>
-                  <h3>${escapeHtml(selectedItem.title || selectedItem.name || selectedItem.slug || selectedItem.id)}</h3>
+                  <h3>${escapeHtml(itemTitle(selectedItem))}</h3>
                 </div>
                 <button class="mini-button danger" type="button" data-action="delete-collection" data-collection-type="${collectionKey}" data-index="${selectedIndex}">Sil</button>
               </div>
@@ -1480,7 +1524,31 @@ function legalTemplate(item, index) {
 }
 
 function renderOrders() {
-  return collectionPanel('Sipariş Takibi', 'orders', state.content.orders || [], orderTemplate);
+  return renderCompactCollectionEditor({
+    title: 'Sipariş Takibi',
+    collectionKey: 'orders',
+    items: state.content.orders || [],
+    selectedId: state.selectedOrderId,
+    emptyText: 'Henüz sipariş kaydı yok.',
+    addLabel: 'Yeni Sipariş',
+    renderEditor: orderTemplate,
+    itemTitle: (item) => item.orderNumber || item.id || 'Sipariş',
+    itemStatus: (item) => orderStatusLabel(item.status || 'pending'),
+    summary: (item) => `${item.customerName || 'Müşteri yok'} · ${item.createdAt || 'tarih yok'} · ${item.grandTotal || 0} ${item.currency || ''}`,
+  });
+}
+
+function orderStatusLabel(status) {
+  const labels = {
+    pending: 'Beklemede',
+    processing: 'İşlemde',
+    'on-hold': 'Askıda',
+    completed: 'Tamamlandı',
+    cancelled: 'İptal',
+    refunded: 'İade',
+    failed: 'Başarısız',
+  };
+  return labels[status] || status || 'Beklemede';
 }
 
 function orderTemplate(item, index) {
@@ -1556,7 +1624,28 @@ function membershipFieldTemplate(item, index) {
 }
 
 function renderMembers() {
-  return collectionPanel('Üyeler', 'members', state.content.members || [], memberTemplate);
+  return renderCompactCollectionEditor({
+    title: 'Üyeler',
+    collectionKey: 'members',
+    items: state.content.members || [],
+    selectedId: state.selectedMemberId,
+    emptyText: 'Henüz üye kaydı yok.',
+    addLabel: 'Yeni Üye',
+    renderEditor: memberTemplate,
+    itemTitle: (item) => item.companyName || item.authorizedEmail || item.id || 'Üye',
+    itemStatus: (item) => memberStatusLabel(item.status || 'pending'),
+    summary: (item) => `${item.authorizedName || 'Yetkili yok'} · ${item.authorizedEmail || 'mail yok'} · ${item.createdAt || 'tarih yok'}`,
+  });
+}
+
+function memberStatusLabel(status) {
+  const labels = {
+    pending: 'Onay bekliyor',
+    approved: 'Onaylandı',
+    rejected: 'Reddedildi',
+    inactive: 'Pasif',
+  };
+  return labels[status] || status || 'Onay bekliyor';
 }
 
 function memberTemplate(item, index) {
@@ -1588,7 +1677,18 @@ function memberTemplate(item, index) {
 }
 
 function renderNewsletterSubscribers() {
-  return collectionPanel('Bülten Üyeleri', 'newsletterSubscribers', state.content.newsletterSubscribers || [], newsletterSubscriberTemplate);
+  return renderCompactCollectionEditor({
+    title: 'Bülten Üyeleri',
+    collectionKey: 'newsletterSubscribers',
+    items: state.content.newsletterSubscribers || [],
+    selectedId: state.selectedNewsletterSubscriberId,
+    emptyText: 'Henüz bülten üyesi yok.',
+    addLabel: 'Yeni Bülten Üyesi',
+    renderEditor: newsletterSubscriberTemplate,
+    itemTitle: (item) => item.email || item.id || 'Bülten Üyesi',
+    itemStatus: (item) => (item.status === 'unsubscribed' ? 'Ayrıldı' : 'Aktif'),
+    summary: (item) => `${item.source || 'website'} · ${item.createdAt || 'tarih yok'}`,
+  });
 }
 
 function newsletterSubscriberTemplate(item, index) {
@@ -1614,24 +1714,112 @@ function newsletterSubscriberTemplate(item, index) {
 function renderEmails() {
   const templates = state.content.emailSettings.templates || [];
   return `
+    <div class="stack">
+      <section class="panel">
+        <div class="panel-header"><h2>Mail İçerikleri ve Bildirimler</h2></div>
+        <div class="panel-body stack">
+          ${sectionFields('Gönderici ve Muhasebe', [
+            ['Gönderici Adı', 'emailSettings.senderName'],
+            ['Gönderici E-posta', 'emailSettings.senderEmail'],
+            ['Muhasebe E-postası', 'emailSettings.accountingEmail'],
+          ])}
+          <section class="collection-item">
+            <div class="collection-heading"><strong>Otomatik Bildirim Eşleşmeleri</strong></div>
+            <div class="form-grid three">
+              ${templateSelect('Üyelik Doğrulama Şablonu', 'emailSettings.verificationTemplateId', templates)}
+              ${templateSelect('Sipariş Detayı Şablonu', 'emailSettings.orderDetailTemplateId', templates)}
+              ${templateSelect('Ödeme Alındı Şablonu', 'emailSettings.paymentReceivedTemplateId', templates)}
+            </div>
+            <p class="muted">Kullanılabilir değişkenler: {{customerName}}, {{customerEmail}}, {{companyName}}, {{authorizedName}}, {{verificationCode}}, {{orderNumber}}, {{orderItems}}, {{subtotal}}, {{taxTotal}}, {{grandTotal}}, {{currency}}.</p>
+          </section>
+        </div>
+      </section>
+      ${renderCompactCollectionEditor({
+        title: 'Mail Şablonları',
+        collectionKey: 'emailSettings.templates',
+        items: templates,
+        selectedId: state.selectedEmailTemplateId,
+        emptyText: 'Henüz mail şablonu yok.',
+        addLabel: 'Yeni Şablon',
+        renderEditor: emailTemplateTemplate,
+        itemTitle: (item) => item.name || item.subject || item.id || 'Mail Şablonu',
+        itemStatus: (item) => (item.enabled === false ? 'Pasif' : 'Aktif'),
+        summary: (item) => `${item.trigger || 'manual'} · ${item.subject || 'konu yok'}`,
+      })}
+    </div>
+  `;
+}
+
+function renderMailSettings() {
+  const settings = state.content.mailSettings || {};
+  return `
     <section class="panel">
-      <div class="panel-header"><h2>Mail İçerikleri ve Bildirimler</h2></div>
+      <div class="panel-header">
+        <div>
+          <h2>Mail Ayarları</h2>
+          <span class="muted">Formlar, üyelik doğrulama, sipariş ve bildirim mailleri bu ayarları kullanır.</span>
+        </div>
+      </div>
       <div class="panel-body stack">
-        ${sectionFields('Gönderici ve Muhasebe', [
-          ['Gönderici Adı', 'emailSettings.senderName'],
-          ['Gönderici E-posta', 'emailSettings.senderEmail'],
-          ['Muhasebe E-postası', 'emailSettings.accountingEmail'],
-        ])}
         <section class="collection-item">
-          <div class="collection-heading"><strong>Otomatik Bildirim Eşleşmeleri</strong></div>
+          <div class="collection-heading"><strong>Varsayılan Gönderim</strong></div>
           <div class="form-grid three">
-            ${templateSelect('Üyelik Doğrulama Şablonu', 'emailSettings.verificationTemplateId', templates)}
-            ${templateSelect('Sipariş Detayı Şablonu', 'emailSettings.orderDetailTemplateId', templates)}
-            ${templateSelect('Ödeme Alındı Şablonu', 'emailSettings.paymentReceivedTemplateId', templates)}
+            ${pathField('Gönderici Adı', 'mailSettings.defaultFromName')}
+            ${pathField('Gönderici Mail', 'mailSettings.defaultFromEmail')}
+            ${pathField('Bildirim Maili', 'mailSettings.notificationEmail')}
           </div>
-          <p class="muted">Kullanılabilir değişkenler: {{customerName}}, {{customerEmail}}, {{companyName}}, {{authorizedName}}, {{verificationCode}}, {{orderNumber}}, {{orderItems}}, {{subtotal}}, {{taxTotal}}, {{grandTotal}}, {{currency}}.</p>
         </section>
-        ${collectionPanel('Mail Şablonları', 'emailSettings.templates', templates, emailTemplateTemplate)}
+        <section class="collection-item">
+          <div class="collection-heading"><strong>SMTP</strong></div>
+          <div class="form-grid three">
+            ${pathField('SMTP Sunucusu', 'mailSettings.smtpHost')}
+            <label>
+              SMTP Port
+              <input type="number" value="${escapeHtml(settings.smtpPort ?? 465)}" data-path="mailSettings.smtpPort" />
+            </label>
+            <label>
+              Güvenlik
+              <select data-path="mailSettings.smtpSecure">
+                ${option('ssl', 'SSL/TLS', settings.smtpSecure || 'ssl')}
+                ${option('tls', 'STARTTLS', settings.smtpSecure || 'ssl')}
+                ${option('', 'Yok', settings.smtpSecure || 'ssl')}
+              </select>
+            </label>
+            ${pathField('SMTP Kullanıcı Adı', 'mailSettings.smtpUsername')}
+            <label>
+              SMTP Şifre
+              <input type="password" value="${escapeHtml(settings.smtpPassword || '')}" data-path="mailSettings.smtpPassword" autocomplete="new-password" />
+            </label>
+            <label class="check-pill"><input type="checkbox" data-path-checkbox="mailSettings.smtpAuth" ${settings.smtpAuth !== false ? 'checked' : ''} /> SMTP kimlik doğrulama aktif</label>
+          </div>
+        </section>
+        <section class="collection-item">
+          <div class="collection-heading"><strong>Gelen Posta Bilgileri</strong></div>
+          <div class="form-grid three">
+            ${pathField('IMAP Sunucusu', 'mailSettings.imapHost')}
+            <label>
+              IMAP Port
+              <input type="number" value="${escapeHtml(settings.imapPort ?? 993)}" data-path="mailSettings.imapPort" />
+            </label>
+            ${pathField('POP3 Sunucusu', 'mailSettings.pop3Host')}
+            <label>
+              POP3 Port
+              <input type="number" value="${escapeHtml(settings.pop3Port ?? 995)}" data-path="mailSettings.pop3Port" />
+            </label>
+          </div>
+        </section>
+        <section class="collection-item">
+          <div class="collection-heading"><strong>Vergi No Doğrulama</strong></div>
+          <div class="form-grid">
+            <label class="check-pill"><input type="checkbox" data-path-checkbox="mailSettings.nilveraEnabled" ${settings.nilveraEnabled ? 'checked' : ''} /> Nilvera VKN sorgusunu kullan</label>
+            ${pathField('Nilvera API Base URL', 'mailSettings.nilveraApiBase', 'input', true)}
+            <label class="wide">
+              Nilvera API Anahtarı
+              <input type="password" value="${escapeHtml(settings.nilveraApiKey || '')}" data-path="mailSettings.nilveraApiKey" autocomplete="new-password" />
+            </label>
+            <p class="muted wide">API anahtarı girilmezse sadece 10 hane/sadece rakam kontrolü uygulanır.</p>
+          </div>
+        </section>
       </div>
     </section>
   `;
@@ -2170,6 +2358,10 @@ function addCollection(type) {
   target.push(item);
   if (type === 'blogPosts') state.selectedBlogPostId = item.id;
   if (type === 'legalPages') state.selectedLegalPageId = item.id;
+  if (type === 'orders') state.selectedOrderId = item.id;
+  if (type === 'members') state.selectedMemberId = item.id;
+  if (type === 'newsletterSubscribers') state.selectedNewsletterSubscriberId = item.id;
+  if (type === 'emailSettings.templates') state.selectedEmailTemplateId = item.id;
   markDirty('Yeni kayıt eklendi.');
   render();
 }
@@ -2184,6 +2376,18 @@ function deleteCollection(type, index) {
   }
   if (type === 'legalPages' && deleted?.id === state.selectedLegalPageId) {
     state.selectedLegalPageId = target[Math.max(0, index - 1)]?.id || target[0]?.id || null;
+  }
+  if (type === 'orders' && deleted?.id === state.selectedOrderId) {
+    state.selectedOrderId = target[Math.max(0, index - 1)]?.id || target[0]?.id || null;
+  }
+  if (type === 'members' && deleted?.id === state.selectedMemberId) {
+    state.selectedMemberId = target[Math.max(0, index - 1)]?.id || target[0]?.id || null;
+  }
+  if (type === 'newsletterSubscribers' && deleted?.id === state.selectedNewsletterSubscriberId) {
+    state.selectedNewsletterSubscriberId = target[Math.max(0, index - 1)]?.id || target[0]?.id || null;
+  }
+  if (type === 'emailSettings.templates' && deleted?.id === state.selectedEmailTemplateId) {
+    state.selectedEmailTemplateId = target[Math.max(0, index - 1)]?.id || target[0]?.id || null;
   }
   markDirty('Kayıt silindi.');
   render();
@@ -2627,6 +2831,10 @@ async function handleMainClick(event) {
   if (action === 'select-collection-item') {
     if (button.dataset.collectionType === 'blogPosts') state.selectedBlogPostId = button.dataset.id;
     if (button.dataset.collectionType === 'legalPages') state.selectedLegalPageId = button.dataset.id;
+    if (button.dataset.collectionType === 'orders') state.selectedOrderId = button.dataset.id;
+    if (button.dataset.collectionType === 'members') state.selectedMemberId = button.dataset.id;
+    if (button.dataset.collectionType === 'newsletterSubscribers') state.selectedNewsletterSubscriberId = button.dataset.id;
+    if (button.dataset.collectionType === 'emailSettings.templates') state.selectedEmailTemplateId = button.dataset.id;
     render();
     return;
   }
