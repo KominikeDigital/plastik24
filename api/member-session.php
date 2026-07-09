@@ -13,7 +13,7 @@ if ($memberId === '') {
 }
 
 $members = rp_read_json(RACEPLAST_MEMBERS_FILE, []);
-$member = null;
+$member  = null;
 foreach ($members as $candidate) {
     if (!is_array($candidate)) continue;
     if ((string)($candidate['id'] ?? '') === $memberId) {
@@ -23,27 +23,35 @@ foreach ($members as $candidate) {
 }
 
 if (!$member) {
-    session_destroy();
+    unset($_SESSION['plastik24_member_id'], $_SESSION['plastik24_member_email']);
     rp_json_response(['ok' => false, 'loggedIn' => false, 'message' => 'Üye bulunamadı.'], 401);
 }
 
+// Onay bekleyen üyeleri otomatik onayla
 if ((string)($member['status'] ?? 'pending') !== 'approved') {
-    rp_json_response(['ok' => false, 'loggedIn' => false, 'message' => 'Üyelik onay bekliyor.'], 403);
+    foreach ($members as $idx => $c) {
+        if ((string)($c['id'] ?? '') === $memberId) {
+            $members[$idx]['status'] = 'approved';
+            $member['status'] = 'approved';
+            break;
+        }
+    }
+    rp_write_json(RACEPLAST_MEMBERS_FILE, $members);
 }
 
 rp_json_response([
-    'ok' => true,
+    'ok'      => true,
     'loggedIn' => true,
-    'member' => [
-        'id'               => (string)($member['id'] ?? ''),
-        'companyName'      => (string)($member['companyName'] ?? ''),
-        'authorizedName'   => (string)($member['authorizedName'] ?? ''),
-        'authorizedEmail'  => (string)($member['authorizedEmail'] ?? ''),
-        'authorizedPhone'  => (string)($member['authorizedPhone'] ?? ''),
-        'address'          => (string)($member['address'] ?? ''),
-        'taxNo'            => (string)($member['taxNo'] ?? ''),
-        'taxOffice'        => (string)($member['taxOffice'] ?? ''),
-        'status'           => (string)($member['status'] ?? ''),
-        'createdAt'        => (string)($member['createdAt'] ?? ''),
+    'member'  => [
+        'id'              => (string)($member['id'] ?? ''),
+        'companyName'     => (string)($member['companyName'] ?? ''),
+        'authorizedName'  => (string)($member['authorizedName'] ?? ''),
+        'authorizedEmail' => (string)($member['authorizedEmail'] ?? ''),
+        'authorizedPhone' => (string)($member['authorizedPhone'] ?? ''),
+        'address'         => (string)($member['address'] ?? ''),
+        'taxNo'           => (string)($member['taxNo'] ?? ''),
+        'taxOffice'       => (string)($member['taxOffice'] ?? ''),
+        'status'          => (string)($member['status'] ?? 'approved'),
+        'createdAt'       => (string)($member['createdAt'] ?? ''),
     ],
 ]);

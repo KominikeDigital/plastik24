@@ -380,11 +380,15 @@ $('securityForm').addEventListener('submit', async (e) => {
     try {
       state.member = JSON.parse(cached);
       await showPanel_main();
+      // Arka planda session doğrula — hata olursa logout yapma,
+      // çünkü cookie expired olabilir ama member verisi geçerli
       checkSession().then(loggedIn => {
-        if (!loggedIn) {
-          logout();
+        if (loggedIn) {
+          // Session geçerli, member verisini güncelle
+          sessionStorage.setItem('p24_member', JSON.stringify(state.member));
         }
-      });
+        // Session geçersizse paneli kapatma — kullanıcı deneyimini bozar
+      }).catch(() => {});
       return;
     } catch (e) {
       sessionStorage.removeItem('p24_member');

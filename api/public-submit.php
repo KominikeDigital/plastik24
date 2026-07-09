@@ -458,16 +458,34 @@ if ($type === 'membership') {
     }
 
     rp_write_json(RACEPLAST_MEMBERS_FILE, $members);
+
+    // Otomatik oturum aç - kayıt sonrası direkt panel'e girebilsin
+    if ($isAuto) {
+        $_SESSION['plastik24_member_id']    = $record['id'];
+        $_SESSION['plastik24_member_email'] = $authorizedEmail;
+    }
+
     rp_send_admin_notification(
         'Yeni Plastik24 üyelik başvurusu - ' . $companyName,
         "Yeni üyelik başvurusu alındı.\n\nFirma: {$companyName}\nVergi No: {$taxNo}\nVergi Dairesi: {$taxOffice}\nYetkili: {$authorizedName}\nTelefon: {$authorizedPhone}\nE-posta: {$authorizedEmail}\nTarih: {$now}"
     );
     rp_send_mail(
         $authorizedEmail,
-        'Plastik24 üyelik başvurunuz alındı',
-        "Merhaba {$authorizedName},\n\n{$companyName} adına oluşturduğunuz üyelik başvurusu alınmıştır. Firma bilgileriniz kontrol edildikten sonra hesabınız aktif edilecektir.\n\nPlastik24"
+        'Plastik24 üyeliğiniz aktif',
+        "Merhaba {$authorizedName},\n\n{$companyName} adına oluşturduğunuz üyelik hesabınız aktif edilmiştir. Aşağıdaki adresten üye panelinize giriş yapabilirsiniz:\n\nhttps://plastik24.com.tr/panel/\n\nPlastik24"
     );
-    rp_json_response(['ok' => true, 'message' => 'Üyelik başvurunuz alınmıştır.']);
+    rp_json_response([
+        'ok'      => true,
+        'message' => 'Üyeliğiniz oluşturuldu.',
+        'autoLoggedIn' => $isAuto,
+        'member'  => [
+            'id'              => $record['id'],
+            'companyName'     => $companyName,
+            'authorizedName'  => $authorizedName,
+            'authorizedEmail' => $authorizedEmail,
+            'status'          => $record['status'],
+        ],
+    ]);
 }
 
 if ($type === 'order' || $type === 'payment') {
