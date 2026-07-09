@@ -35,6 +35,7 @@ const navGroups = [
     title: 'Operasyon',
     items: [
       ['orders', 'Siparişler'],
+      ['formSubmissions', 'Form Talepleri'],
       ['membership', 'Üyelik'],
       ['members', 'Üyeler'],
       ['newsletter', 'Bülten Üyeleri'],
@@ -66,6 +67,7 @@ const state = {
   selectedBlogPostId: null,
   selectedLegalPageId: null,
   selectedOrderId: null,
+  selectedFormSubmissionId: null,
   selectedMemberId: null,
   selectedNewsletterSubscriberId: null,
   selectedEmailTemplateId: null,
@@ -134,6 +136,7 @@ const defaultContentPatch = {
   },
   members: [],
   newsletterSubscribers: [],
+  formSubmissions: [],
   emailSettings: {
     senderName: 'Plastik24',
     senderEmail: 'info@plastik24.com.tr',
@@ -307,6 +310,7 @@ function ensureContentShape() {
   if (!Array.isArray(state.content.membershipSettings.companyFields)) state.content.membershipSettings.companyFields = [];
   if (!Array.isArray(state.content.members)) state.content.members = [];
   if (!Array.isArray(state.content.newsletterSubscribers)) state.content.newsletterSubscribers = [];
+  if (!Array.isArray(state.content.formSubmissions)) state.content.formSubmissions = [];
   if (!Array.isArray(state.content.emailSettings.templates)) state.content.emailSettings.templates = [];
   if (!Array.isArray(state.content.mediaLibrary)) state.content.mediaLibrary = [];
   if (!Array.isArray(state.content.paymentSettings.providers)) state.content.paymentSettings.providers = [];
@@ -536,6 +540,7 @@ function render() {
     about: renderAbout,
     legal: renderLegal,
     orders: renderOrders,
+    formSubmissions: renderFormSubmissions,
     membership: renderMembership,
     members: renderMembers,
     newsletter: renderNewsletterSubscribers,
@@ -1582,6 +1587,80 @@ function orderTemplate(item, index) {
   `;
 }
 
+function renderFormSubmissions() {
+  return renderCompactCollectionEditor({
+    title: 'Form Talepleri',
+    collectionKey: 'formSubmissions',
+    items: state.content.formSubmissions || [],
+    selectedId: state.selectedFormSubmissionId,
+    emptyText: 'Henüz form talebi yok.',
+    addLabel: 'Yeni Talep',
+    renderEditor: formSubmissionTemplate,
+    itemTitle: (item) => item.code || item.company || item.fullName || item.name || item.email || item.id || 'Form Talebi',
+    itemStatus: (item) => formSubmissionStatusLabel(item.status || 'new'),
+    summary: (item) => `${formSubmissionTypeLabel(item.type)} · ${item.createdAt || 'tarih yok'} · ${item.email || 'mail yok'}`,
+  });
+}
+
+function formSubmissionTypeLabel(type) {
+  const labels = {
+    contact: 'İletişim',
+    quote: 'Teklif',
+    order: 'Sipariş',
+    payment: 'Ödeme',
+  };
+  return labels[type] || type || 'Form';
+}
+
+function formSubmissionStatusLabel(status) {
+  const labels = {
+    new: 'Yeni',
+    'in-review': 'İnceleniyor',
+    responded: 'Yanıtlandı',
+    archived: 'Arşiv',
+  };
+  return labels[status] || status || 'Yeni';
+}
+
+function formSubmissionTemplate(item, index) {
+  const nameField = item.type === 'quote' || item.fullName !== undefined ? 'fullName' : 'name';
+  return `
+    <div class="form-grid three">
+      ${collectionField('ID', 'formSubmissions', index, 'id', item.id || '')}
+      <label>
+        Talep Tipi
+        <select data-collection="formSubmissions" data-index="${index}" data-field="type">
+          ${option('contact', 'İletişim', item.type || 'contact')}
+          ${option('quote', 'Teklif', item.type || 'contact')}
+          ${option('order', 'Sipariş', item.type || 'contact')}
+          ${option('payment', 'Ödeme', item.type || 'contact')}
+        </select>
+      </label>
+      <label>
+        Durum
+        <select data-collection="formSubmissions" data-index="${index}" data-field="status">
+          ${option('new', 'Yeni', item.status || 'new')}
+          ${option('in-review', 'İnceleniyor', item.status || 'new')}
+          ${option('responded', 'Yanıtlandı', item.status || 'new')}
+          ${option('archived', 'Arşiv', item.status || 'new')}
+        </select>
+      </label>
+      ${collectionField('Talep / Sipariş No', 'formSubmissions', index, 'code', item.code || '')}
+      ${collectionField('Tarih', 'formSubmissions', index, 'createdAt', item.createdAt || '', 'text', 'text')}
+      ${collectionField('Ad Soyad', 'formSubmissions', index, nameField, item.fullName || item.name || '')}
+      ${collectionField('Şirket', 'formSubmissions', index, 'company', item.company || '')}
+      ${collectionField('E-posta', 'formSubmissions', index, 'email', item.email || '', 'text', 'email')}
+      ${collectionField('Telefon', 'formSubmissions', index, 'phone', item.phone || '', 'text', 'tel')}
+      ${collectionField('Şehir', 'formSubmissions', index, 'city', item.city || '')}
+      ${collectionField('Aciliyet', 'formSubmissions', index, 'urgency', item.urgency || '')}
+      ${collectionField('Kaynak', 'formSubmissions', index, 'source', item.source || '')}
+      ${collectionTextarea('Mesaj', 'formSubmissions', index, 'message', item.message || '')}
+      ${collectionTextarea('Notlar', 'formSubmissions', index, 'notes', item.notes || '')}
+      ${collectionTextarea('Ürünler JSON', 'formSubmissions', index, 'items', JSON.stringify(item.items || [], null, 2), 'json-array')}
+    </div>
+  `;
+}
+
 function renderMembership() {
   const settings = state.content.membershipSettings;
   return `
@@ -2326,6 +2405,19 @@ function addCollection(type) {
       createdAt: new Date().toISOString(),
       notes: '',
     },
+    formSubmissions: {
+      id: uid('form'),
+      type: 'contact',
+      status: 'new',
+      createdAt: new Date().toISOString(),
+      name: '',
+      company: '',
+      email: '',
+      phone: '',
+      message: '',
+      notes: '',
+      items: [],
+    },
     orders: {
       id: uid('order'),
       orderNumber: `RP-${Date.now().toString().slice(-6)}`,
@@ -2359,6 +2451,7 @@ function addCollection(type) {
   if (type === 'blogPosts') state.selectedBlogPostId = item.id;
   if (type === 'legalPages') state.selectedLegalPageId = item.id;
   if (type === 'orders') state.selectedOrderId = item.id;
+  if (type === 'formSubmissions') state.selectedFormSubmissionId = item.id;
   if (type === 'members') state.selectedMemberId = item.id;
   if (type === 'newsletterSubscribers') state.selectedNewsletterSubscriberId = item.id;
   if (type === 'emailSettings.templates') state.selectedEmailTemplateId = item.id;
@@ -2379,6 +2472,9 @@ function deleteCollection(type, index) {
   }
   if (type === 'orders' && deleted?.id === state.selectedOrderId) {
     state.selectedOrderId = target[Math.max(0, index - 1)]?.id || target[0]?.id || null;
+  }
+  if (type === 'formSubmissions' && deleted?.id === state.selectedFormSubmissionId) {
+    state.selectedFormSubmissionId = target[Math.max(0, index - 1)]?.id || target[0]?.id || null;
   }
   if (type === 'members' && deleted?.id === state.selectedMemberId) {
     state.selectedMemberId = target[Math.max(0, index - 1)]?.id || target[0]?.id || null;
@@ -2832,6 +2928,7 @@ async function handleMainClick(event) {
     if (button.dataset.collectionType === 'blogPosts') state.selectedBlogPostId = button.dataset.id;
     if (button.dataset.collectionType === 'legalPages') state.selectedLegalPageId = button.dataset.id;
     if (button.dataset.collectionType === 'orders') state.selectedOrderId = button.dataset.id;
+    if (button.dataset.collectionType === 'formSubmissions') state.selectedFormSubmissionId = button.dataset.id;
     if (button.dataset.collectionType === 'members') state.selectedMemberId = button.dataset.id;
     if (button.dataset.collectionType === 'newsletterSubscribers') state.selectedNewsletterSubscriberId = button.dataset.id;
     if (button.dataset.collectionType === 'emailSettings.templates') state.selectedEmailTemplateId = button.dataset.id;

@@ -89,6 +89,85 @@ function rp_send_admin_notification(string $subject, string $body): void
     }
 }
 
+function rp_valid_phone(string $phone, string $label = 'Telefon'): string
+{
+    $phone = trim($phone);
+    if ($phone !== '' && !preg_match('/^\d+$/', $phone)) {
+        rp_json_response(['ok' => false, 'message' => "{$label} sadece rakamlardan oluşmalıdır."], 422);
+    }
+    return $phone;
+}
+
+function rp_append_form_submission(array $record): void
+{
+    $records = rp_read_json(RACEPLAST_FORM_SUBMISSIONS_FILE, []);
+    array_unshift($records, $record);
+    rp_write_json(RACEPLAST_FORM_SUBMISSIONS_FILE, $records);
+}
+
+function rp_unique_emails(array $emails): array
+{
+    $valid = [];
+    foreach ($emails as $email) {
+        $email = strtolower(trim((string)$email));
+        if ($email !== '' && filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $valid[$email] = $email;
+        }
+    }
+    return array_values($valid);
+}
+
+function rp_send_many(array $emails, string $subject, string $body): int
+{
+    $sent = 0;
+    foreach (rp_unique_emails($emails) as $email) {
+        if (rp_send_mail($email, $subject, $body)) {
+            $sent++;
+        }
+    }
+    return $sent;
+}
+
+function rp_item_lines(array $items): string
+{
+    if (!$items) {
+        return 'Ürün bilgisi girilmedi.';
+    }
+
+    $lines = [];
+    foreach ($items as $item) {
+        if (!is_array($item)) {
+            continue;
+        }
+        $name = trim((string)($item['name'] ?? $item['productName'] ?? $item['title'] ?? 'Ürün'));
+        $sku = trim((string)($item['sku'] ?? ''));
+        $quantity = trim((string)($item['quantity'] ?? $item['qty'] ?? ''));
+        $category = trim((string)($item['category'] ?? ''));
+        $dimensions = trim((string)($item['dimensions'] ?? $item['measure'] ?? $item['size'] ?? ''));
+        $price = trim((string)($item['price'] ?? $item['priceLabel'] ?? ''));
+
+        $detail = [];
+        if ($sku !== '') {
+            $detail[] = 'SKU: ' . $sku;
+        }
+        if ($quantity !== '') {
+            $detail[] = 'Adet: ' . $quantity;
+        }
+        if ($category !== '') {
+            $detail[] = 'Kategori: ' . $category;
+        }
+        if ($dimensions !== '') {
+            $detail[] = 'Ölçü: ' . $dimensions;
+        }
+        if ($price !== '') {
+            $detail[] = 'Fiyat: ' . $price;
+        }
+        $lines[] = '- ' . $name . ($detail ? ' (' . implode(', ', $detail) . ')' : '');
+    }
+
+    return $lines ? implode("\n", $lines) : 'Ürün bilgisi girilmedi.';
+}
+
 function rp_nilvera_tax_check(string $taxNo): array
 {
     $settings = rp_mail_settings();
@@ -177,6 +256,101 @@ if ($type === 'newsletter') {
         "Yeni bülten kaydı alındı.\n\nE-posta: {$email}\nKaynak: {$record['source']}\nTarih: {$now}"
     );
     rp_json_response(['ok' => true, 'message' => 'Bülten aboneliğiniz alınmıştır.']);
+}
+
+if ($type === 'contact') {
+    $name = rp_required_string($payload, 'name', 'Ad soyad');
+    $company = rp_required_string($payload, 'company', 'Şirket adı');
+    $email = rp_valid_email(rp_required_string($payload, 'email', 'E-posta'));
+    $phone = rp_valid_phone((string)($payload['phone'] ?? ''));
+    $message = rp_required_string($payload, 'message', 'Mesaj');
+    $content = rp_read_json(RACEPLAST_CONTENT_FILE, []);
+    $record = [
+        'id' => 'contact-' . time() . '-' . bin2hex(random_bytes(3)),
+        'type' => 'contact',
+        'status' => 'new',
+        'createdAt' => $now,
+        'name' => $name,
+        'company' => $company,
+        'email' => $email,
+        'phone' => $phone,
+        'message' => $message,
+        'source' => 'contact-form',
+        'notes' => '',
+    ];
+    rp_append_form_submission($record);
+
+    $settings = rp_mail_settings();
+    $formSettings = is_array($content['formSettings'] ?? null) ? $content['formSettings'] : [];
+    $recipients = rp_unique_emails([
+        $settings['notificationEmail'] ?? '',
+        $formSettings['contactFormEmail'] ?? '',
+    ]);
+    $adminBody = "Yeni iletişim formu alındı.\n\nAd Soyad: {$name}\nŞirket: {$company}\nE-posta: {$email}\nTelefon: {$phone}\nTarih: {$now}\n\nMesaj:\n{$message}";
+    $adminSent = rp_send_many($recipients, 'Yeni Plastik24 iletişim formu - ' . $company, $adminBody);
+    $customerSent = rp_send_mail(
+        $email,
+        'Plastik24 iletişim talebiniz alındı',
+        "Merhaba {$name},\n\nPlastik24 iletişim formu üzerinden gönderdiğiniz talep alınmıştır. Satış ve teknik destek ekibimiz en kısa sürede sizinle iletişime geçecektir.\n\nŞirket: {$company}\n\nPlastik24"
+    );
+
+    rp_json_response([
+        'ok' => true,
+        'message' => (string)($formSettings['successMessage'] ?? 'Formunuz gönderildi.'),
+        'mailSent' => $adminSent > 0 || $customerSent,
+    ]);
+}
+
+if ($type === 'quote') {
+    $fullName = rp_required_string($payload, 'fullName', 'Ad soyad');
+    $company = rp_required_string($payload, 'company', 'Şirket');
+    $email = rp_valid_email(rp_required_string($payload, 'email', 'E-posta'));
+    $phone = rp_valid_phone(rp_required_string($payload, 'phone', 'Telefon'));
+    $city = trim((string)($payload['city'] ?? ''));
+    $notes = trim((string)($payload['notes'] ?? ''));
+    $urgency = trim((string)($payload['urgency'] ?? 'Normal'));
+    $items = is_array($payload['items'] ?? null) ? $payload['items'] : [];
+    $quoteCode = 'RFQ-' . random_int(100000, 999999);
+    $itemLines = rp_item_lines($items);
+    $content = rp_read_json(RACEPLAST_CONTENT_FILE, []);
+    $formSettings = is_array($content['formSettings'] ?? null) ? $content['formSettings'] : [];
+    $settings = rp_mail_settings();
+
+    $record = [
+        'id' => 'quote-' . time() . '-' . bin2hex(random_bytes(3)),
+        'type' => 'quote',
+        'status' => 'new',
+        'code' => $quoteCode,
+        'createdAt' => $now,
+        'fullName' => $fullName,
+        'company' => $company,
+        'email' => $email,
+        'phone' => $phone,
+        'city' => $city,
+        'urgency' => $urgency,
+        'notes' => $notes,
+        'items' => $items,
+    ];
+    rp_append_form_submission($record);
+
+    $recipients = rp_unique_emails([
+        $settings['notificationEmail'] ?? '',
+        $formSettings['quoteFormEmail'] ?? '',
+    ]);
+    $adminBody = "Yeni teklif talebi alındı.\n\nTalep No: {$quoteCode}\nAd Soyad: {$fullName}\nŞirket: {$company}\nE-posta: {$email}\nTelefon: {$phone}\nŞehir: {$city}\nAciliyet: {$urgency}\nTarih: {$now}\n\nÜrünler:\n{$itemLines}\n\nNotlar:\n{$notes}";
+    $adminSent = rp_send_many($recipients, 'Yeni Plastik24 teklif talebi - ' . $quoteCode, $adminBody);
+    $customerSent = rp_send_mail(
+        $email,
+        'Plastik24 teklif talebiniz alındı - ' . $quoteCode,
+        "Merhaba {$fullName},\n\n{$quoteCode} numaralı teklif talebiniz alınmıştır. Ekibimiz ürün ve stok bilgilerini kontrol edip sizinle iletişime geçecektir.\n\nÜrünler:\n{$itemLines}\n\nPlastik24"
+    );
+
+    rp_json_response([
+        'ok' => true,
+        'message' => 'Teklif talebiniz alınmıştır.',
+        'quoteCode' => $quoteCode,
+        'mailSent' => $adminSent > 0 || $customerSent,
+    ]);
 }
 
 if ($type === 'verification') {
@@ -285,6 +459,42 @@ if ($type === 'membership') {
         "Merhaba {$authorizedName},\n\n{$companyName} adına oluşturduğunuz üyelik başvurusu alınmıştır. Firma bilgileriniz kontrol edildikten sonra hesabınız aktif edilecektir.\n\nPlastik24"
     );
     rp_json_response(['ok' => true, 'message' => 'Üyelik başvurunuz alınmıştır.']);
+}
+
+if ($type === 'order' || $type === 'payment') {
+    $customerName = rp_required_string($payload, 'customerName', 'Müşteri adı');
+    $customerEmail = rp_valid_email(rp_required_string($payload, 'customerEmail', 'Müşteri e-postası'));
+    $orderNumber = trim((string)($payload['orderNumber'] ?? 'P24-' . random_int(100000, 999999)));
+    $items = is_array($payload['items'] ?? null) ? $payload['items'] : [];
+    $itemLines = rp_item_lines($items);
+    $variables = [
+        'customerName' => $customerName,
+        'customerEmail' => $customerEmail,
+        'orderNumber' => $orderNumber,
+        'orderItems' => $itemLines,
+        'subtotal' => (string)($payload['subtotal'] ?? ''),
+        'taxTotal' => (string)($payload['taxTotal'] ?? ''),
+        'grandTotal' => (string)($payload['grandTotal'] ?? ''),
+        'currency' => (string)($payload['currency'] ?? 'EUR'),
+    ];
+    $trigger = $type === 'payment' ? 'payment-received' : 'order-details';
+    $subject = $type === 'payment' ? 'Ödeme bildirimi alındı' : 'Yeni sipariş alındı';
+    $body = "{$subject}.\n\nSipariş No: {$orderNumber}\nMüşteri: {$customerName}\nE-posta: {$customerEmail}\nTarih: {$now}\n\nÜrünler:\n{$itemLines}\n\nGenel Toplam: {$variables['grandTotal']} {$variables['currency']}";
+
+    rp_append_form_submission([
+        'id' => $type . '-' . time() . '-' . bin2hex(random_bytes(3)),
+        'type' => $type,
+        'status' => 'new',
+        'code' => $orderNumber,
+        'createdAt' => $now,
+        'name' => $customerName,
+        'email' => $customerEmail,
+        'items' => $items,
+        'payload' => $payload,
+    ]);
+    rp_send_template_mail($customerEmail, $trigger, $variables);
+    rp_send_admin_notification('Plastik24 ' . $subject . ' - ' . $orderNumber, $body);
+    rp_json_response(['ok' => true, 'message' => 'Bildirim gönderildi.', 'orderNumber' => $orderNumber]);
 }
 
 rp_json_response(['ok' => false, 'message' => 'Geçersiz kayıt türü.'], 422);

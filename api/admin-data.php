@@ -16,6 +16,7 @@ if (!$content) {
 
 $content['members'] = rp_read_json(RACEPLAST_MEMBERS_FILE, []);
 $content['newsletterSubscribers'] = rp_read_json(RACEPLAST_NEWSLETTER_FILE, []);
+$content['formSubmissions'] = rp_read_json(RACEPLAST_FORM_SUBMISSIONS_FILE, []);
 $content['mailSettings'] = rp_mail_settings();
 
 rp_json_response([

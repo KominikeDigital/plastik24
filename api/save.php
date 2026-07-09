@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 rp_require_auth();
 
 $payload = rp_request_json();
-$arrayFields = ['products', 'restStocks', 'sectors', 'heroSlides', 'blogPosts', 'legalPages', 'mediaLibrary', 'orders', 'members', 'newsletterSubscribers'];
+$arrayFields = ['products', 'restStocks', 'sectors', 'heroSlides', 'blogPosts', 'legalPages', 'mediaLibrary', 'orders', 'members', 'newsletterSubscribers', 'formSubmissions'];
 
 foreach ($arrayFields as $key) {
     if (!isset($payload[$key])) {
@@ -33,10 +33,11 @@ $payload['schemaVersion'] = 1;
 $payload['updatedAt'] = gmdate('c');
 $members = $payload['members'];
 $newsletterSubscribers = $payload['newsletterSubscribers'];
+$formSubmissions = $payload['formSubmissions'];
 $mailSettings = isset($payload['mailSettings']) && is_array($payload['mailSettings'])
     ? array_merge(rp_mail_settings(), $payload['mailSettings'], ['updatedAt' => gmdate('c')])
     : rp_mail_settings();
-unset($payload['members'], $payload['newsletterSubscribers'], $payload['mailSettings']);
+unset($payload['members'], $payload['newsletterSubscribers'], $payload['formSubmissions'], $payload['mailSettings']);
 
 foreach ($payload['products'] as $index => &$product) {
     if (empty($product['id'])) {
@@ -52,6 +53,7 @@ unset($product);
 rp_backup_content();
 rp_write_json(RACEPLAST_MEMBERS_FILE, $members);
 rp_write_json(RACEPLAST_NEWSLETTER_FILE, $newsletterSubscribers);
+rp_write_json(RACEPLAST_FORM_SUBMISSIONS_FILE, $formSubmissions);
 rp_write_json(RACEPLAST_MAIL_SETTINGS_FILE, $mailSettings);
 rp_write_json(RACEPLAST_CONTENT_FILE, $payload);
 
