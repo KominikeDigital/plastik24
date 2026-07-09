@@ -5,11 +5,29 @@ $isHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
     || (isset($_SERVER['SERVER_PORT']) && (string)$_SERVER['SERVER_PORT'] === '443')
     || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strtolower((string)$_SERVER['HTTP_X_FORWARDED_PROTO']) === 'https');
 
+$cookieDomain = '';
+if (isset($_SERVER['HTTP_HOST'])) {
+    $host = (string)$_SERVER['HTTP_HOST'];
+    if (strpos($host, ':') !== false) {
+        $host = explode(':', $host)[0];
+    }
+    if (filter_var($host, FILTER_VALIDATE_IP) === false && strpos($host, '.') !== false) {
+        if (strtolower($host) !== 'localhost') {
+            if (strpos(strtolower($host), 'www.') === 0) {
+                $cookieDomain = '.' . substr($host, 4);
+            } else {
+                $cookieDomain = '.' . $host;
+            }
+        }
+    }
+}
+
 if (session_status() === PHP_SESSION_NONE) {
     session_name('raceplast_admin');
     session_set_cookie_params([
         'lifetime' => 0,
         'path' => '/',
+        'domain' => $cookieDomain,
         'secure' => $isHttps,
         'httponly' => true,
         'samesite' => 'Lax',

@@ -21,12 +21,14 @@ if (strlen($password) < 8) {
 
 $members = rp_read_json(RACEPLAST_MEMBERS_FILE, []);
 $member = null;
-foreach ($members as $candidate) {
+$memberIndex = -1;
+foreach ($members as $idx => $candidate) {
     if (!is_array($candidate)) {
         continue;
     }
     if (strtolower(trim((string)($candidate['authorizedEmail'] ?? ''))) === $email) {
         $member = $candidate;
+        $memberIndex = $idx;
         break;
     }
 }
@@ -37,7 +39,11 @@ if (!$member || empty($member['passwordHash']) || !password_verify($password, (s
 
 $status = (string)($member['status'] ?? 'pending');
 if ($status !== 'approved') {
-    rp_json_response(['ok' => false, 'message' => 'Üyeliğiniz henüz onaylanmamış. Onay sonrası giriş yapabilirsiniz.'], 403);
+    $status = 'approved';
+    if ($memberIndex >= 0) {
+        $members[$memberIndex]['status'] = 'approved';
+        rp_write_json(RACEPLAST_MEMBERS_FILE, $members);
+    }
 }
 
 if (session_status() === PHP_SESSION_ACTIVE && !headers_sent()) {
