@@ -1,1 +1,18 @@
-[]
+[
+    {
+        "id": "member-test-123456",
+        "status": "approved",
+        "companyName": "Plastik24 Test A.S.",
+        "address": "Malikoy OSB, Ankara",
+        "taxNo": "1234567890",
+        "taxOffice": "Ulus",
+        "authorizedName": "Test User",
+        "authorizedPhone": "05001234567",
+        "authorizedEmail": "test@plastik24.com",
+        "createdAt": "2026-07-09T12:19:41+00:00",
+        "updatedAt": "2026-07-09T12:19:41+00:00",
+        "emailVerified": true,
+        "agreement": true,
+        "passwordHash": "$2y$12$UywxIh3gqmUUnhgdUXbXw.hVWjDihmtco4ieZndi9WCzAZqPV6Hlm"
+    }
+]

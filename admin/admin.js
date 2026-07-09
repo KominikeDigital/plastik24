@@ -1709,7 +1709,7 @@ function renderMembership() {
               Onay Modu
               <select data-path="membershipSettings.approvalMode">
                 ${option('manual', 'Manuel firma onayı', settings.approvalMode || 'manual')}
-                ${option('automatic', 'Otomatik onay', settings.approvalMode || 'manual')}
+                ${option('auto', 'Otomatik onay', settings.approvalMode || 'manual')}
               </select>
             </label>
             <label class="check-pill"><input type="checkbox" data-path-checkbox="membershipSettings.emailVerificationRequired" ${settings.emailVerificationRequired ? 'checked' : ''} /> E-posta doğrulama zorunlu</label>

@@ -413,9 +413,15 @@ if ($type === 'membership') {
 
     $members = rp_read_json(RACEPLAST_MEMBERS_FILE, []);
     $index = rp_find_by_email($members, 'authorizedEmail', $authorizedEmail);
+    $approvalMode = (string)($content['membershipSettings']['approvalMode'] ?? 'manual');
+    $isAuto = $approvalMode === 'auto' || $approvalMode === 'automatic';
+    $defaultStatus = $isAuto ? 'approved' : 'pending';
+
     $record = [
         'id' => $index >= 0 ? ($members[$index]['id'] ?? ('member-' . time())) : ('member-' . time() . '-' . bin2hex(random_bytes(3))),
-        'status' => $index >= 0 ? ($members[$index]['status'] ?? 'pending') : 'pending',
+        'status' => $index >= 0
+            ? (($members[$index]['status'] ?? 'pending') === 'pending' && $isAuto ? 'approved' : ($members[$index]['status'] ?? $defaultStatus))
+            : $defaultStatus,
         'companyName' => $companyName,
         'address' => $address,
         'taxNo' => $taxNo,
