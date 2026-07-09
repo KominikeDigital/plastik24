@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 rp_require_auth();
 
 $payload = rp_request_json();
-$arrayFields = ['products', 'restStocks', 'sectors', 'heroSlides', 'blogPosts', 'legalPages', 'mediaLibrary', 'orders', 'members', 'newsletterSubscribers', 'formSubmissions'];
+$arrayFields = ['products', 'restStocks', 'sectors', 'heroSlides', 'blogPosts', 'legalPages', 'mediaLibrary', 'members', 'newsletterSubscribers', 'formSubmissions'];
 
 foreach ($arrayFields as $key) {
     if (!isset($payload[$key])) {
@@ -37,6 +37,34 @@ $formSubmissions = $payload['formSubmissions'];
 $mailSettings = isset($payload['mailSettings']) && is_array($payload['mailSettings'])
     ? array_merge(rp_mail_settings(), $payload['mailSettings'], ['updatedAt' => gmdate('c')])
     : rp_mail_settings();
+
+// Siparişler ayrı dosyaya yazılır (order-ship.php'nin yaptığı değişiklikler korunur)
+if (isset($payload['orders']) && is_array($payload['orders'])) {
+    $ordersFromAdmin = $payload['orders'];
+    // Mevcut orders.json'dan receipt_url, trackingNumber, shippedAt gibi alanları koru
+    $existingOrders = rp_read_json(RACEPLAST_ORDERS_FILE, []);
+    $existingById = [];
+    foreach ($existingOrders as $eo) {
+        if (!is_array($eo)) continue;
+        $existingById[(string)($eo['id'] ?? '')] = $eo;
+    }
+    foreach ($ordersFromAdmin as &$ao) {
+        if (!is_array($ao)) continue;
+        $eid = (string)($ao['id'] ?? '');
+        if (isset($existingById[$eid])) {
+            // Korunan alanlar
+            foreach (['receiptUrl', 'trackingNumber', 'shippedAt', 'carrier', 'memberId'] as $protected) {
+                if (!empty($existingById[$eid][$protected]) && empty($ao[$protected])) {
+                    $ao[$protected] = $existingById[$eid][$protected];
+                }
+            }
+        }
+    }
+    unset($ao);
+    rp_write_json(RACEPLAST_ORDERS_FILE, $ordersFromAdmin);
+}
+unset($payload['orders']);
+
 unset($payload['members'], $payload['newsletterSubscribers'], $payload['formSubmissions'], $payload['mailSettings']);
 
 foreach ($payload['products'] as $index => &$product) {

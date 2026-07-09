@@ -1544,7 +1544,7 @@ function renderOrders() {
     renderEditor: orderTemplate,
     itemTitle: (item) => item.orderNumber || item.id || 'Sipariş',
     itemStatus: (item) => orderStatusLabel(item.status || 'pending'),
-    summary: (item) => `${item.customerName || 'Müşteri yok'} · ${item.createdAt || 'tarih yok'} · ${item.grandTotal || 0} ${item.currency || ''}`,
+    summary: (item) => `${item.customerName || 'Müşteri yok'} · ${item.createdAt?.slice(0, 10) || 'tarih yok'} · ${item.grandTotal || 0} ${item.currency || ''}`,
   });
 }
 
@@ -1553,6 +1553,7 @@ function orderStatusLabel(status) {
     pending: 'Beklemede',
     processing: 'İşlemde',
     'on-hold': 'Askıda',
+    shipped: 'Kargoya Verildi',
     completed: 'Tamamlandı',
     cancelled: 'İptal',
     refunded: 'İade',
@@ -1562,28 +1563,52 @@ function orderStatusLabel(status) {
 }
 
 function orderTemplate(item, index) {
+  const receiptHtml = item.receiptUrl
+    ? `<div class="wide"><label>Dekont<br/><a href="../${escapeHtml(item.receiptUrl)}" target="_blank" class="ghost-action" style="display:inline-block;margin-top:4px;">Dekontu Görüntüle</a></label></div>`
+    : `<div class="wide"><label class="muted">Dekont: Yüklenmemiş</label></div>`;
+
+  const shippedHtml = item.shippedAt
+    ? `<div class="wide" style="padding:8px 0;"><span class="badge good">✓ Kargoya verildi: ${escapeHtml(item.shippedAt?.slice(0, 10) || '')}</span></div>`
+    : '';
+
   return `
     <div class="form-grid three">
       ${collectionField('Sipariş No', 'orders', index, 'orderNumber', item.orderNumber)}
       <label>
         Durum
         <select data-collection="orders" data-index="${index}" data-field="status">
-          ${['pending', 'processing', 'on-hold', 'completed', 'cancelled', 'refunded', 'failed']
-            .map((status) => option(status, status, item.status || 'pending'))
+          ${['pending', 'processing', 'on-hold', 'shipped', 'completed', 'cancelled', 'refunded', 'failed']
+            .map((status) => option(status, orderStatusLabel(status), item.status || 'pending'))
             .join('')}
         </select>
       </label>
-      ${collectionField('Tarih', 'orders', index, 'createdAt', item.createdAt, 'text', 'date')}
-      ${collectionField('Müşteri', 'orders', index, 'customerName', item.customerName)}
-      ${collectionField('E-posta', 'orders', index, 'customerEmail', item.customerEmail)}
+      ${collectionField('Tarih', 'orders', index, 'createdAt', item.createdAt?.slice(0, 10) || '', 'text', 'text')}
+      ${collectionField('Firma', 'orders', index, 'companyName', item.companyName || '')}
+      ${collectionField('Müşteri', 'orders', index, 'customerName', item.customerName || '')}
+      ${collectionField('E-posta', 'orders', index, 'customerEmail', item.customerEmail || '')}
       ${collectionField('Telefon', 'orders', index, 'customerPhone', item.customerPhone || '')}
+      ${collectionField('Vergi No', 'orders', index, 'taxNo', item.taxNo || '')}
       ${collectionField('Para Birimi', 'orders', index, 'currency', item.currency || 'EUR')}
       ${collectionField('Ara Toplam', 'orders', index, 'subtotal', item.subtotal || 0, 'number', 'number')}
       ${collectionField('Vergi', 'orders', index, 'taxTotal', item.taxTotal || 0, 'number', 'number')}
-      ${collectionField('Kargo', 'orders', index, 'shippingTotal', item.shippingTotal || 0, 'number', 'number')}
       ${collectionField('Genel Toplam', 'orders', index, 'grandTotal', item.grandTotal || 0, 'number', 'number')}
-      ${collectionField('Ödeme Yöntemi', 'orders', index, 'paymentMethod', item.paymentMethod || '')}
-      ${collectionField('Kargo Yöntemi', 'orders', index, 'shippingMethod', item.shippingMethod || '')}
+      ${receiptHtml}
+      ${shippedHtml}
+    </div>
+    <div style="margin-top:12px;padding:16px;background:var(--surface-alt, #18191e);border:1px solid var(--border-soft, #2a2d3a);border-radius:8px;">
+      <strong style="font-size:13px;display:block;margin-bottom:10px;">🚚 Kargo Bildirimi</strong>
+      <div class="form-grid three" style="padding:0;">
+        <label>Kargo Firması<input type="text" id="carrier-${index}" placeholder="Aras, MNG, Yurtiçi..." value="${escapeHtml(item.carrier || '')}" /></label>
+        <label class="wide">Kargo Takip No<input type="text" id="tracking-${index}" placeholder="Takip numarası" value="${escapeHtml(item.trackingNumber || '')}" /></label>
+      </div>
+      <div style="margin-top:10px;">
+        <button class="primary-action" type="button" data-action="ship-order" data-id="${escapeHtml(item.id || '')}" data-index="${index}">
+          ${item.shippedAt ? '✓ Kargo Bildirimini Güncelle' : '🚚 Kargoya Verildi – Müşteriye Bildir'}
+        </button>
+        ${item.shippedAt ? '' : ''}
+      </div>
+    </div>
+    <div style="margin-top:10px;">
       ${collectionTextarea('Fatura Adresi', 'orders', index, 'billingAddress', item.billingAddress || '')}
       ${collectionTextarea('Teslimat Adresi', 'orders', index, 'shippingAddress', item.shippingAddress || '')}
       ${collectionTextarea('Notlar', 'orders', index, 'notes', item.notes || '')}
@@ -1953,7 +1978,7 @@ function emailTemplateTemplate(item, index) {
       <label>
         Tetikleyici
         <select data-collection="emailSettings.templates" data-index="${index}" data-field="trigger">
-          ${['email-verification', 'order-details', 'payment-received', 'manual']
+          ${['email-verification', 'order-details', 'payment-received', 'shipping-notification', 'manual']
             .map((trigger) => option(trigger, trigger, item.trigger || 'manual'))
             .join('')}
         </select>
@@ -3048,6 +3073,43 @@ async function handleMainClick(event) {
     } catch (error) {
       if (handleAuthError(error)) return;
       showToast(error.message);
+    }
+  }
+
+  if (action === 'ship-order') {
+    const orderId = button.dataset.id;
+    const idx = Number(button.dataset.index);
+    if (!orderId) return showToast('Sipariş ID bulunamadı.');
+    const trackingInput = document.getElementById(`tracking-${idx}`);
+    const carrierInput  = document.getElementById(`carrier-${idx}`);
+    const trackingNumber = trackingInput?.value?.trim() || '';
+    const carrier        = carrierInput?.value?.trim() || '';
+
+    if (!window.confirm(`Sipariş kargoya verildi olarak işaretlensin mi?\nMüşteriye kargo bildirim maili gönderilecek.`)) return;
+
+    button.disabled = true;
+    button.textContent = 'Gönderiliyor...';
+    try {
+      const result = await api('order-ship.php', {
+        method: 'POST',
+        body: JSON.stringify({ orderId, trackingNumber, carrier }),
+      });
+      // Yerel state'i güncelle
+      const orders = state.content.orders || [];
+      const order = orders.find((o) => o.id === orderId);
+      if (order) {
+        order.status = 'shipped';
+        order.shippedAt = result.order?.shippedAt || new Date().toISOString();
+        order.trackingNumber = trackingNumber;
+        order.carrier = carrier;
+      }
+      showToast('✓ Kargo bildirimi gönderildi. Müşteriye mail atıldı.');
+      render();
+    } catch (error) {
+      if (handleAuthError(error)) return;
+      showToast(error.message);
+      button.disabled = false;
+      button.textContent = '🚚 Kargoya Verildi – Müşteriye Bildir';
     }
   }
 }

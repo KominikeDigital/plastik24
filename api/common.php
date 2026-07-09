@@ -22,8 +22,10 @@ define('RACEPLAST_MAIL_SETTINGS_FILE', RACEPLAST_DATA_DIR . '/mail-settings.json
 define('RACEPLAST_VERIFICATION_FILE', RACEPLAST_DATA_DIR . '/verification-codes.json');
 define('RACEPLAST_FORM_SUBMISSIONS_FILE', RACEPLAST_DATA_DIR . '/form-submissions.json');
 define('RACEPLAST_ADMIN_FILE', RACEPLAST_DATA_DIR . '/admin.json');
+define('RACEPLAST_ORDERS_FILE', RACEPLAST_DATA_DIR . '/orders.json');
 define('RACEPLAST_BACKUP_DIR', RACEPLAST_DATA_DIR . '/backups');
 define('RACEPLAST_UPLOAD_DIR', dirname(__DIR__) . '/uploads/products');
+
 
 function rp_json_response(array $payload, int $status = 200): void
 {

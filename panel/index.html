@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plastik24 | Üye Paneli</title>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="panel.css" />
+  </head>
+  <body>
+    <!-- Login View -->
+    <div id="loginView">
+      <div class="login-card">
+        <div class="login-logo">
+          <img src="/favicon.png" alt="Plastik24" />
+          <span>Plastik24</span>
+        </div>
+        <h1>Üye Girişi</h1>
+        <p class="login-sub">Kurumsal üye hesabınızla giriş yapın</p>
+        <form id="loginForm">
+          <label>E-posta<input type="email" name="email" id="loginEmail" required placeholder="info@firma.com" /></label>
+          <label>Şifre<input type="password" name="password" id="loginPassword" required placeholder="••••••••" /></label>
+          <button class="primary-action" type="submit" id="loginBtn">Giriş Yap</button>
+          <p id="loginMessage" class="form-error" hidden></p>
+        </form>
+        <p class="login-footer">Henüz üye değil misiniz? <a href="/">Üyelik başvurusu yapın</a></p>
+      </div>
+    </div>
+
+    <!-- Panel View -->
+    <div id="panelView" hidden>
+      <!-- Sidebar -->
+      <aside id="sidebar">
+        <div class="sidebar-logo">
+          <img src="/favicon.png" alt="Plastik24" />
+          <div>
+            <strong>Plastik24</strong>
+            <small>Üye Paneli</small>
+          </div>
+        </div>
+        <nav id="sidebarNav">
+          <button class="nav-item active" data-panel="dashboard" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            Genel Bakış
+          </button>
+          <button class="nav-item" data-panel="orders" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 17H5a2 2 0 0 0-2 2v0a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v0a2 2 0 0 0-2-2h-4"/><path d="M12 3v14"/><path d="m8 11 4-4 4 4"/></svg>
+            Siparişlerim
+          </button>
+          <button class="nav-item" data-panel="profile" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Profil Bilgileri
+          </button>
+          <button class="nav-item" data-panel="security" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Güvenlik
+          </button>
+        </nav>
+        <div class="sidebar-footer">
+          <div class="member-chip" id="memberChip">
+            <div class="member-avatar" id="memberAvatar">?</div>
+            <div>
+              <strong id="memberName">Yükleniyor...</strong>
+              <small id="memberEmail">—</small>
+            </div>
+          </div>
+          <button class="logout-btn" id="logoutBtn" type="button">Çıkış</button>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main id="mainPanel">
+        <header id="panelHeader">
+          <h1 id="panelTitle">Genel Bakış</h1>
+          <a href="/" class="header-link">← Siteye Dön</a>
+        </header>
+
+        <!-- Toast -->
+        <div id="toast" class="toast" hidden></div>
+
+        <!-- Dashboard Panel -->
+        <section id="panel-dashboard" class="panel-section">
+          <div class="kpi-row">
+            <div class="kpi-card">
+              <span>Toplam Sipariş</span>
+              <strong id="kpiTotal">—</strong>
+            </div>
+            <div class="kpi-card">
+              <span>Bekleyen</span>
+              <strong id="kpiPending">—</strong>
+            </div>
+            <div class="kpi-card">
+              <span>Kargoda</span>
+              <strong id="kpiShipped">—</strong>
+            </div>
+            <div class="kpi-card">
+              <span>Tamamlanan</span>
+              <strong id="kpiCompleted">—</strong>
+            </div>
+          </div>
+          <div class="panel-card">
+            <div class="card-header"><h2>Son Siparişler</h2><button class="link-btn" data-panel="orders" type="button">Tümünü Gör</button></div>
+            <div id="dashboardOrdersList" class="order-list-wrap">
+              <div class="loading-state">Siparişler yükleniyor...</div>
+            </div>
+          </div>
+          <div class="panel-card info-banner">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <div>
+              <strong>Ödeme Bilgisi</strong>
+              <p>Havale/EFT ile ödeme yapabilirsiniz. Dekontunuza sipariş numaranızı yazmayı unutmayın. Sorularınız için <a href="mailto:info@plastik24.com.tr">info@plastik24.com.tr</a></p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Orders Panel -->
+        <section id="panel-orders" class="panel-section" hidden>
+          <div class="panel-card">
+            <div class="card-header"><h2>Siparişlerim</h2></div>
+            <div id="ordersList" class="order-list-wrap">
+              <div class="loading-state">Siparişler yükleniyor...</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Profile Panel -->
+        <section id="panel-profile" class="panel-section" hidden>
+          <div class="panel-card">
+            <div class="card-header"><h2>Firma ve İletişim Bilgileri</h2></div>
+            <form id="profileForm" class="form-grid">
+              <label>Firma Adı<input type="text" name="companyName" id="fCompanyName" /></label>
+              <label>Vergi No<input type="text" name="taxNo" id="fTaxNo" readonly /></label>
+              <label>Vergi Dairesi<input type="text" name="taxOffice" id="fTaxOffice" /></label>
+              <label class="wide">Firma Adresi<textarea name="address" id="fAddress" rows="3"></textarea></label>
+              <label>Yetkili Adı Soyadı<input type="text" name="authorizedName" id="fAuthorizedName" /></label>
+              <label>Yetkili Telefonu<input type="tel" name="authorizedPhone" id="fAuthorizedPhone" /></label>
+              <label>E-posta<input type="email" name="authorizedEmail" id="fEmail" readonly /></label>
+              <div class="wide form-actions">
+                <button class="primary-action" type="submit">Bilgileri Güncelle</button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- Security Panel -->
+        <section id="panel-security" class="panel-section" hidden>
+          <div class="panel-card">
+            <div class="card-header"><h2>Şifre Değiştir</h2></div>
+            <form id="securityForm" class="form-grid narrow">
+              <label class="wide">Mevcut Şifre<input type="password" name="currentPassword" required /></label>
+              <label class="wide">Yeni Şifre<input type="password" name="newPassword" required minlength="8" /></label>
+              <label class="wide">Yeni Şifre (Tekrar)<input type="password" name="newPasswordConfirm" required minlength="8" /></label>
+              <div class="wide form-actions">
+                <button class="primary-action" type="submit">Şifreyi Değiştir</button>
+              </div>
+            </form>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="panel.js"></script>
+  </body>
+</html>

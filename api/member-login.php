@@ -47,6 +47,7 @@ session_write_close();
 rp_json_response([
     'ok' => true,
     'message' => 'Üye girişi başarılı.',
+    'panelRedirect' => true,
     'member' => [
         'id' => (string)($member['id'] ?? ''),
         'companyName' => (string)($member['companyName'] ?? ''),

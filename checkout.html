@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plastik24 | Ödeme</title>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="checkout.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="checkout-header">
+      <a href="/" class="logo-link">
+        <img src="/favicon.png" alt="Plastik24" />
+        <span>Plastik24</span>
+      </a>
+      <div class="checkout-steps">
+        <span class="step active" id="step1indicator">1. Bilgiler</span>
+        <span class="step-divider">›</span>
+        <span class="step" id="step2indicator">2. Ödeme</span>
+        <span class="step-divider">›</span>
+        <span class="step" id="step3indicator">3. Onay</span>
+      </div>
+      <a href="/" class="header-back">← Alışverişe Dön</a>
+    </header>
+
+    <!-- Not logged in -->
+    <div id="guestView" hidden>
+      <div class="center-card">
+        <h2>Sipariş vermek için giriş yapmalısınız</h2>
+        <p>Kurumsal üyeliğinizle giriş yapın veya üye olun.</p>
+        <div class="btn-row">
+          <a class="primary-action" href="/panel/">Üye Girişi</a>
+          <a class="secondary-action" href="/">Üyelik Başvurusu</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty cart -->
+    <div id="emptyCartView" hidden>
+      <div class="center-card">
+        <h2>Sepetiniz boş</h2>
+        <p>Sipariş vermeden önce sepetinize ürün eklemelisiniz.</p>
+        <a class="primary-action" href="/">Ürünlere Git</a>
+      </div>
+    </div>
+
+    <!-- Checkout Content -->
+    <div id="checkoutView" hidden>
+      <div class="checkout-layout">
+
+        <!-- Left: Steps -->
+        <div class="checkout-left">
+
+          <!-- Step 1: Billing Info -->
+          <section id="step1" class="checkout-step">
+            <div class="step-header"><span class="step-num">1</span><h2>Fatura Bilgileri</h2></div>
+            <form id="billingForm" class="checkout-form">
+              <div class="form-row">
+                <label>Yetkili Adı Soyadı<input type="text" name="authorizedName" id="bName" required /></label>
+                <label>Telefon<input type="tel" name="authorizedPhone" id="bPhone" /></label>
+              </div>
+              <label>E-posta<input type="email" name="email" id="bEmail" readonly /></label>
+              <label>Firma Adı<input type="text" name="companyName" id="bCompany" required /></label>
+              <div class="form-row">
+                <label>Vergi No<input type="text" name="taxNo" id="bTaxNo" readonly /></label>
+                <label>Vergi Dairesi<input type="text" name="taxOffice" id="bTaxOffice" /></label>
+              </div>
+              <label>Fatura Adresi<textarea name="address" id="bAddress" rows="3" required></textarea></label>
+
+              <div class="same-address-row">
+                <label class="check-label">
+                  <input type="checkbox" id="sameAddress" checked />
+                  Teslimat adresi fatura adresiyle aynı
+                </label>
+              </div>
+
+              <div id="shippingSection" hidden>
+                <label>Teslimat Adresi<textarea name="shippingAddress" id="bShipping" rows="3"></textarea></label>
+              </div>
+
+              <label>Sipariş Notu (isteğe bağlı)<textarea name="notes" id="bNotes" rows="2" placeholder="Kargo veya sipariş hakkında eklemek istediğiniz bilgi..."></textarea></label>
+
+              <button class="primary-action full" type="submit">Ödeme Adımına Geç →</button>
+            </form>
+          </section>
+
+          <!-- Step 2: Payment -->
+          <section id="step2" class="checkout-step" hidden>
+            <div class="step-header"><span class="step-num">2</span><h2>Ödeme</h2></div>
+
+            <!-- Order Number highlight -->
+            <div class="order-number-box" id="orderNumberBox" hidden>
+              <div class="onb-label">Sipariş Numaranız</div>
+              <div class="onb-number" id="orderNumberDisplay">—</div>
+              <div class="onb-hint">
+                🔔 Havale / EFT yaparken <strong>dekontunuzun açıklama kısmına bu numarayı yazın.</strong>
+                Siparişinizi takip edebilmemiz için bu adım kritik öneme sahiptir.
+              </div>
+            </div>
+
+            <!-- Bank info -->
+            <div class="bank-box" id="bankBox">
+              <div class="bank-box-header">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                Banka Bilgileri
+              </div>
+              <div id="bankAccountsList" class="bank-list">
+                <div class="loading-text">Banka bilgileri yükleniyor...</div>
+              </div>
+            </div>
+
+            <!-- Submit order first -->
+            <div id="submitOrderSection">
+              <button class="primary-action full" id="submitOrderBtn" type="button">Siparişi Oluştur</button>
+              <p class="submit-note">Siparişi oluşturduktan sonra ödeme dekontu yükleyebileceksiniz.</p>
+            </div>
+
+            <!-- Receipt upload (after order created) -->
+            <div id="receiptSection" hidden>
+              <div class="receipt-box">
+                <div class="receipt-title">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                  Ödeme Dekontu Yükle
+                </div>
+                <p class="receipt-note">PDF, JPG veya PNG (max 10 MB). İsterseniz <a href="mailto:info@plastik24.com.tr" id="receiptMailLink">e-posta ile de gönderebilirsiniz.</a></p>
+                <input type="file" id="receiptFile" accept=".pdf,.jpg,.jpeg,.png,.webp" />
+                <div class="btn-row">
+                  <button class="primary-action" id="uploadReceiptBtn" type="button">Dekontu Yükle</button>
+                  <button class="secondary-action" id="skipReceiptBtn" type="button">Şimdi Değil →</button>
+                </div>
+                <p id="receiptStatus" class="receipt-status" hidden></p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Step 3: Confirmation -->
+          <section id="step3" class="checkout-step" hidden>
+            <div class="step-header"><span class="step-num">✓</span><h2>Siparişiniz Alındı!</h2></div>
+            <div class="confirm-card">
+              <div class="confirm-icon">🎉</div>
+              <h3>Teşekkürler!</h3>
+              <p>Siparişiniz başarıyla oluşturuldu ve size onay maili gönderildi.</p>
+
+              <div class="confirm-order-num">
+                <span>Sipariş Numaranız</span>
+                <strong id="confirmOrderNum">—</strong>
+              </div>
+
+              <div class="confirm-steps">
+                <div class="confirm-step">
+                  <span class="cs-icon">📧</span>
+                  <span>Onay maili e-posta adresinize gönderildi.</span>
+                </div>
+                <div class="confirm-step">
+                  <span class="cs-icon">🏦</span>
+                  <span>Ödemenizi IBAN'a havale/EFT yapabilirsiniz. Açıklamaya sipariş numarasını eklemeyi unutmayın.</span>
+                </div>
+                <div class="confirm-step">
+                  <span class="cs-icon">🚚</span>
+                  <span>Siparişiniz hazırlandığında kargo takip numarasıyla bilgilendirileceksiniz.</span>
+                </div>
+              </div>
+
+              <div class="btn-row">
+                <a class="primary-action" href="/panel/">Siparişlerimi Takip Et</a>
+                <a class="secondary-action" href="/">Alışverişe Devam Et</a>
+              </div>
+            </div>
+          </section>
+
+        </div><!-- /.checkout-left -->
+
+        <!-- Right: Order Summary -->
+        <aside class="checkout-right">
+          <div class="summary-card">
+            <div class="summary-header">Sipariş Özeti</div>
+            <div id="summaryItems" class="summary-items">
+              <div class="loading-text">Yükleniyor...</div>
+            </div>
+            <div class="summary-totals">
+              <div class="total-row"><span>Ara Toplam</span><strong id="sumSubtotal">—</strong></div>
+              <div class="total-row" id="taxRow"><span>KDV</span><strong id="sumTax">—</strong></div>
+              <div class="total-row grand"><span>Toplam</span><strong id="sumTotal">—</strong></div>
+            </div>
+          </div>
+        </aside>
+
+      </div><!-- /.checkout-layout -->
+    </div><!-- /#checkoutView -->
+
+    <!-- Toast -->
+    <div id="toast" class="toast" hidden></div>
+
+    <script src="checkout.js"></script>
+  </body>
+</html>
