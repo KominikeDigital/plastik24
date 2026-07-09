@@ -161,7 +161,17 @@ function rp_default_mail_settings(): array
 function rp_mail_settings(): array
 {
     $settings = rp_read_json(RACEPLAST_MAIL_SETTINGS_FILE, []);
-    return array_merge(rp_default_mail_settings(), $settings);
+    return rp_normalize_mail_settings($settings);
+}
+
+function rp_normalize_mail_settings(array $settings = []): array
+{
+    $merged = array_merge(rp_default_mail_settings(), $settings);
+    $merged['smtpPort'] = (int)($merged['smtpPort'] ?? 465);
+    $merged['imapPort'] = (int)($merged['imapPort'] ?? 993);
+    $merged['pop3Port'] = (int)($merged['pop3Port'] ?? 995);
+    $merged['smtpAuth'] = (bool)($merged['smtpAuth'] ?? true);
+    return $merged;
 }
 
 function rp_mime_header(string $value): string
@@ -276,9 +286,9 @@ function rp_smtp_send(string $to, string $subject, string $body, array $settings
     return $ok;
 }
 
-function rp_send_mail(string $to, string $subject, string $body): bool
+function rp_send_mail(string $to, string $subject, string $body, ?array $overrideSettings = null): bool
 {
-    $settings = rp_mail_settings();
+    $settings = $overrideSettings === null ? rp_mail_settings() : rp_normalize_mail_settings($overrideSettings);
     $to = trim($to);
     if (!filter_var($to, FILTER_VALIDATE_EMAIL)) {
         return false;

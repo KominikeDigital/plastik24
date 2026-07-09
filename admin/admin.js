@@ -71,11 +71,16 @@ const state = {
   selectedMemberId: null,
   selectedNewsletterSubscriberId: null,
   selectedEmailTemplateId: null,
+  testMail: {
+    to: 'info@plastik24.com.tr',
+    subject: 'Plastik24 test maili',
+    body: 'Bu mail Plastik24 admin panelinden gönderilen test mesajıdır.',
+  },
   blogStatusFilter: 'all',
   blogCategoryFilter: 'all',
   blogSelectedIds: [],
   productTab: 'general',
-  openNavGroups: ['general'],
+  openNavGroups: navGroups.map((group) => group.id),
   importPreview: [],
   dirty: false,
 };
@@ -1831,6 +1836,7 @@ function renderEmails() {
 
 function renderMailSettings() {
   const settings = state.content.mailSettings || {};
+  const testMail = state.testMail || {};
   return `
     <section class="panel">
       <div class="panel-header">
@@ -1870,6 +1876,29 @@ function renderMailSettings() {
               <input type="password" value="${escapeHtml(settings.smtpPassword || '')}" data-path="mailSettings.smtpPassword" autocomplete="new-password" />
             </label>
             <label class="check-pill"><input type="checkbox" data-path-checkbox="mailSettings.smtpAuth" ${settings.smtpAuth !== false ? 'checked' : ''} /> SMTP kimlik doğrulama aktif</label>
+          </div>
+        </section>
+        <section class="collection-item">
+          <div class="collection-heading">
+            <strong>Test Mail</strong>
+            <span class="muted">Kaydetmeden önce bu ekrandaki SMTP bilgileriyle deneme gönderimi yapar.</span>
+          </div>
+          <div class="form-grid">
+            <label>
+              Test Alıcısı
+              <input type="email" value="${escapeHtml(testMail.to || settings.notificationEmail || 'info@plastik24.com.tr')}" data-test-mail-field="to" placeholder="info@plastik24.com.tr" />
+            </label>
+            <label>
+              Konu
+              <input type="text" value="${escapeHtml(testMail.subject || 'Plastik24 test maili')}" data-test-mail-field="subject" />
+            </label>
+            <label class="wide">
+              Mesaj
+              <textarea rows="5" data-test-mail-field="body">${escapeHtml(testMail.body || 'Bu mail Plastik24 admin panelinden gönderilen test mesajıdır.')}</textarea>
+            </label>
+          </div>
+          <div class="row-actions">
+            <button class="primary-action" type="button" data-action="send-test-mail">Test Maili Gönder</button>
           </div>
         </section>
         <section class="collection-item">
@@ -2897,6 +2926,7 @@ async function handleMainClick(event) {
   }
 
   if (action === 'add-product') return addProduct();
+  if (action === 'send-test-mail') return sendTestMail(button);
   if (action === 'load-google-sheet') {
     try {
       await loadGoogleSheetPreview();
@@ -3024,6 +3054,11 @@ async function handleMainClick(event) {
 
 function handleMainInput(event) {
   const target = event.target;
+  if (target.dataset.testMailField) {
+    state.testMail[target.dataset.testMailField] = target.value;
+    return;
+  }
+
   if (target.matches('[data-blog-search]')) {
     state.query = target.value;
     render();
@@ -3075,6 +3110,40 @@ function handleMainInput(event) {
     if (!Array.isArray(items) || !items[index]) return;
     items[index][fieldName] = value;
     markDirty();
+  }
+}
+
+async function sendTestMail(button) {
+  const payload = {
+    to: state.testMail.to,
+    subject: state.testMail.subject,
+    body: state.testMail.body,
+    settings: state.content.mailSettings || {},
+  };
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(payload.to || '').trim())) {
+    showToast('Geçerli bir test alıcısı girin.');
+    return;
+  }
+
+  const previousText = button.textContent;
+  button.disabled = true;
+  button.textContent = 'Gönderiliyor...';
+
+  try {
+    const result = await api('test-mail.php', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    });
+    els.alertBar.hidden = false;
+    els.alertBar.textContent = `${result.to || payload.to} adresine test maili gönderildi.`;
+    showToast(result.message || 'Test maili gönderildi.');
+  } catch (error) {
+    if (handleAuthError(error)) return;
+    showToast(error.message);
+  } finally {
+    button.disabled = false;
+    button.textContent = previousText;
   }
 }
 
