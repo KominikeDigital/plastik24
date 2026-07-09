@@ -40,6 +40,7 @@ if ($status !== 'approved') {
     rp_json_response(['ok' => false, 'message' => 'Üyeliğiniz henüz onaylanmamış. Onay sonrası giriş yapabilirsiniz.'], 403);
 }
 
+session_regenerate_id(true);
 $_SESSION['plastik24_member_id'] = (string)($member['id'] ?? '');
 $_SESSION['plastik24_member_email'] = $email;
 session_write_close();

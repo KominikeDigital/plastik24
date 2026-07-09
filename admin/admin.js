@@ -2286,24 +2286,42 @@ function pathField(label, path, type = 'input', wide = false) {
 function renderSettings() {
   return `
     <div class="split">
-      <section class="panel">
-        <div class="panel-header"><h2>Genel Ayarlar</h2></div>
-        <div class="panel-body form-grid">
-          ${settingsField('Site Başlığı', 'settings.siteTitle')}
-          ${settingsField('E-posta', 'settings.email')}
-          ${settingsField('Telefon', 'settings.phone')}
-          ${settingsField('WhatsApp', 'settings.whatsapp')}
-          ${settingsField('Logo URL', 'settings.logoUrl', true)}
-          ${settingsField('Footer Logo URL', 'settings.footerLogoUrl', true)}
-          ${settingsField('ISO Badge URL', 'settings.isoBadgeUrl', true)}
-          ${settingsField('FDA Badge URL', 'settings.fdaBadgeUrl', true)}
-          ${settingsField('Adres', 'settings.address', true)}
-          ${settingsField('Şirket Açıklaması', 'settings.companyDescription', true, 'textarea')}
-          ${settingsField('Telif Şirket Adı', 'settings.copyrightCompany')}
-          ${settingsField('SEO Başlık', 'settings.seoTitle', true)}
-          ${settingsField('SEO Açıklama', 'settings.seoDescription', true, 'textarea')}
-        </div>
-      </section>
+      <div class="stack">
+        <section class="panel">
+          <div class="panel-header"><h2>Genel Ayarlar</h2></div>
+          <div class="panel-body form-grid">
+            ${settingsField('Site Başlığı', 'settings.siteTitle')}
+            ${settingsField('WhatsApp Telefonu', 'settings.whatsapp')}
+            ${settingsField('Adres', 'settings.address', true)}
+            ${settingsField('SEO Başlık (TR)', 'settings.seoTitle', true)}
+            ${settingsField('SEO Açıklama (TR)', 'settings.seoDescription', true, 'textarea')}
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header"><h2>Header (Başlık) Ayarları</h2></div>
+          <div class="panel-body form-grid">
+            ${settingsField('Site Logosu URL', 'settings.logoUrl', true)}
+            ${settingsField('Header Telefonu', 'settings.phone')}
+            ${settingsField('Header E-postası', 'settings.email')}
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header"><h2>Footer (Altbilgi) Ayarları</h2></div>
+          <div class="panel-body form-grid">
+            ${settingsField('Footer Logosu URL', 'settings.footerLogoUrl', true)}
+            ${settingsField('Şirket Açıklaması', 'settings.companyDescription', true, 'textarea')}
+            ${settingsField('Telif Şirket Adı', 'settings.copyrightCompany')}
+            ${pathField('Instagram Linki', 'socialLinks.instagram')}
+            ${pathField('Facebook Linki', 'socialLinks.facebook')}
+            ${pathField('LinkedIn Linki', 'socialLinks.linkedin')}
+            ${settingsField('ISO Kalite Belgesi URL', 'settings.isoBadgeUrl', true)}
+            ${settingsField('FDA Uyumluluk Belgesi URL', 'settings.fdaBadgeUrl', true)}
+          </div>
+        </section>
+      </div>
+
       <section class="panel">
         <div class="panel-header"><h2>Güvenlik</h2></div>
         <form id="passwordForm" class="panel-body stack">

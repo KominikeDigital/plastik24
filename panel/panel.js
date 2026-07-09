@@ -2,7 +2,7 @@
    Plastik24 – Üye Paneli JavaScript
    ================================================== */
 
-const API = '../api/';
+const API = '/api/';
 
 const state = {
   member: null,
@@ -71,10 +71,14 @@ async function login(email, password) {
     body: JSON.stringify({ email, password }),
   });
   state.member = data.member || null;
+  if (state.member) {
+    sessionStorage.setItem('p24_member', JSON.stringify(state.member));
+  }
   return data;
 }
 
 async function logout() {
+  sessionStorage.removeItem('p24_member');
   await apiFetch('logout.php', { method: 'POST', body: '{}' }).catch(() => {});
   state.member = null;
   state.orders = [];
@@ -371,8 +375,25 @@ $('securityForm').addEventListener('submit', async (e) => {
 
 // ─── Init ────────────────────────────────────────────
 (async () => {
+  const cached = sessionStorage.getItem('p24_member');
+  if (cached) {
+    try {
+      state.member = JSON.parse(cached);
+      await showPanel_main();
+      checkSession().then(loggedIn => {
+        if (!loggedIn) {
+          logout();
+        }
+      });
+      return;
+    } catch (e) {
+      sessionStorage.removeItem('p24_member');
+    }
+  }
+
   const loggedIn = await checkSession();
   if (loggedIn) {
+    sessionStorage.setItem('p24_member', JSON.stringify(state.member));
     await showPanel_main();
   } else {
     showLogin();
