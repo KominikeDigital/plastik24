@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="panel.css?v=20260709" />
+    <link rel="stylesheet" href="panel.css?v=20260710-membership" />
   </head>
   <body>
     <!-- Login View -->
@@ -23,10 +23,23 @@
         <form id="loginForm">
           <label>E-posta<input type="email" name="email" id="loginEmail" required placeholder="info@firma.com" /></label>
           <label>Şifre<input type="password" name="password" id="loginPassword" required placeholder="••••••••" /></label>
+          <button class="text-action" type="button" id="forgotToggle">Şifremi unuttum</button>
           <button class="primary-action" type="submit" id="loginBtn">Giriş Yap</button>
           <p id="loginMessage" class="form-error" hidden></p>
         </form>
-        <p class="login-footer">Henüz üye değil misiniz? <a href="/">Üyelik başvurusu yapın</a></p>
+        <form id="forgotForm" class="forgot-box" hidden>
+          <strong>Şifre Hatırlatma</strong>
+          <p>Kayıtlı e-posta adresinize 6 haneli sıfırlama kodu gönderilir.</p>
+          <label>E-posta<input type="email" name="resetEmail" id="resetEmail" required placeholder="info@firma.com" /></label>
+          <button class="secondary-action" type="button" id="resetCodeBtn">Kod Gönder</button>
+          <div class="reset-code-grid">
+            <label>Kod<input type="text" name="resetCode" id="resetCode" inputmode="numeric" maxlength="6" placeholder="000000" /></label>
+            <label>Yeni Şifre<input type="password" name="resetPassword" id="resetPassword" minlength="8" placeholder="En az 8 karakter" /></label>
+          </div>
+          <button class="primary-action" type="submit" id="resetPasswordBtn">Şifreyi Güncelle</button>
+          <p id="resetMessage" class="form-error" hidden></p>
+        </form>
+        <p class="login-footer">Henüz üye değil misiniz? <a href="/uyelik/">Üyelik başvurusu yapın</a></p>
       </div>
     </div>
 
@@ -162,6 +175,6 @@
       </main>
     </div>
 
-    <script src="panel.js?v=20260709b"></script>
+    <script src="panel.js?v=20260710-membership"></script>
   </body>
 </html>

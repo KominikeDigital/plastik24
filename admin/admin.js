@@ -1872,7 +1872,10 @@ function renderMailSettings() {
       </div>
       <div class="panel-body stack">
         <section class="collection-item">
-          <div class="collection-heading"><strong>Varsayılan Gönderim</strong></div>
+          <div class="collection-heading">
+            <strong>Gönderen Kimliği</strong>
+            <span class="muted">Maillerde görünen gönderen adı, gönderen adresi ve admin bildirim adresi.</span>
+          </div>
           <div class="form-grid three">
             ${pathField('Gönderici Adı', 'mailSettings.defaultFromName')}
             ${pathField('Gönderici Mail', 'mailSettings.defaultFromEmail')}
@@ -1880,27 +1883,30 @@ function renderMailSettings() {
           </div>
         </section>
         <section class="collection-item">
-          <div class="collection-heading"><strong>SMTP</strong></div>
+          <div class="collection-heading">
+            <strong>Giden Posta (SMTP) Bilgileri</strong>
+            <span class="muted">Doğrulama kodları, formlar, siparişler ve tüm site mailleri bu giden SMTP ayarlarıyla gönderilir.</span>
+          </div>
           <div class="form-grid three">
-            ${pathField('SMTP Sunucusu', 'mailSettings.smtpHost')}
+            ${pathField('Giden SMTP Sunucusu', 'mailSettings.smtpHost')}
             <label>
-              SMTP Port
+              Giden SMTP Port
               <input type="number" value="${escapeHtml(settings.smtpPort ?? 465)}" data-path="mailSettings.smtpPort" />
             </label>
             <label>
-              Güvenlik
+              Giden SMTP Güvenlik
               <select data-path="mailSettings.smtpSecure">
                 ${option('ssl', 'SSL/TLS', settings.smtpSecure || 'ssl')}
                 ${option('tls', 'STARTTLS', settings.smtpSecure || 'ssl')}
                 ${option('', 'Yok', settings.smtpSecure || 'ssl')}
               </select>
             </label>
-            ${pathField('SMTP Kullanıcı Adı', 'mailSettings.smtpUsername')}
+            ${pathField('Giden SMTP Kullanıcı Adı', 'mailSettings.smtpUsername')}
             <label>
-              SMTP Şifre
+              Giden SMTP Şifre
               <input type="password" value="${escapeHtml(settings.smtpPassword || '')}" data-path="mailSettings.smtpPassword" autocomplete="new-password" />
             </label>
-            <label class="check-pill"><input type="checkbox" data-path-checkbox="mailSettings.smtpAuth" ${settings.smtpAuth !== false ? 'checked' : ''} /> SMTP kimlik doğrulama aktif</label>
+            <label class="check-pill"><input type="checkbox" data-path-checkbox="mailSettings.smtpAuth" ${settings.smtpAuth !== false ? 'checked' : ''} /> Giden SMTP kimlik doğrulama aktif</label>
           </div>
         </section>
         <section class="collection-item">
@@ -1927,7 +1933,10 @@ function renderMailSettings() {
           </div>
         </section>
         <section class="collection-item">
-          <div class="collection-heading"><strong>Gelen Posta Bilgileri</strong></div>
+          <div class="collection-heading">
+            <strong>Gelen Posta Bilgileri (IMAP / POP3 - Opsiyonel)</strong>
+            <span class="muted">Bu alan sadece gelen postayı okumak içindir; mail gönderimi yukarıdaki Giden Posta (SMTP) alanından yapılır.</span>
+          </div>
           <div class="form-grid three">
             ${pathField('IMAP Sunucusu', 'mailSettings.imapHost')}
             <label>

@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>Plastik24 | Kurumsal Üyelik</title>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="uyelik.css?v=20260710-membership" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">
+        <img src="/favicon.png" alt="Plastik24" />
+        <span>Plastik24</span>
+      </a>
+      <nav>
+        <a href="/">Anasayfa</a>
+        <a href="/panel/">Üye Paneli</a>
+      </nav>
+    </header>
+
+    <main class="auth-shell">
+      <section class="intro-panel">
+        <span class="eyebrow">Kurumsal Üyelik</span>
+        <h1>Firma hesabınızla teklif, sipariş ve ödeme süreçlerinizi takip edin.</h1>
+        <p>Üyelik başvurusu e-posta doğrulama kodu ile tamamlanır. Firma adı, adres, vergi no, vergi dairesi ve yetkili bilgileri zorunludur.</p>
+        <div class="intro-list">
+          <div><strong>1</strong><span>Mail doğrulama kodunu alın</span></div>
+          <div><strong>2</strong><span>Firma bilgilerini doldurun</span></div>
+          <div><strong>3</strong><span>Şifrenizle üye paneline girin</span></div>
+        </div>
+      </section>
+
+      <section class="auth-grid">
+        <article class="card login-card">
+          <span class="section-label">Mevcut Üye</span>
+          <h2>Üye Girişi</h2>
+          <p>Onaylı firma hesabınızla panele giriş yapın.</p>
+
+          <form id="loginForm" class="form-stack">
+            <label>E-posta
+              <input id="loginEmail" name="email" type="email" autocomplete="email" required placeholder="info@firma.com" />
+            </label>
+            <label>Şifre
+              <input id="loginPassword" name="password" type="password" autocomplete="current-password" required placeholder="En az 8 karakter" />
+            </label>
+            <button class="primary-action" type="submit" id="loginButton">Giriş Yap</button>
+            <p id="loginStatus" class="status" hidden></p>
+          </form>
+
+          <button class="text-action" type="button" id="forgotToggle">Şifremi unuttum</button>
+          <form id="forgotForm" class="reset-box" hidden>
+            <strong>Şifre Hatırlatma</strong>
+            <p>Kayıtlı e-postanıza gelen kodu girerek yeni şifre oluşturun.</p>
+            <label>E-posta
+              <input id="forgotEmail" name="forgotEmail" type="email" required placeholder="info@firma.com" />
+            </label>
+            <button class="secondary-action" type="button" id="forgotCodeButton">Kod Gönder</button>
+            <div class="two-col">
+              <label>Kod
+                <input id="forgotCode" name="forgotCode" inputmode="numeric" maxlength="6" placeholder="000000" />
+              </label>
+              <label>Yeni Şifre
+                <input id="forgotPassword" name="forgotPassword" type="password" minlength="8" placeholder="En az 8 karakter" />
+              </label>
+            </div>
+            <button class="primary-action" type="submit" id="forgotSubmitButton">Şifreyi Güncelle</button>
+            <p id="forgotStatus" class="status" hidden></p>
+          </form>
+        </article>
+
+        <article class="card register-card">
+          <span class="section-label">Yeni Üyelik</span>
+          <h2>Kurumsal Başvuru</h2>
+          <p class="card-copy">Doğrulama kodu yetkili e-posta adresine gönderilir. Kod onaylanmadan başvuru tamamlanmaz.</p>
+
+          <form id="registerForm" class="form-grid">
+            <div class="form-section wide">
+              <h3>Mail Doğrulama</h3>
+              <div class="three-col">
+                <label>Yetkili E-postası *
+                  <input id="authorizedEmail" name="authorizedEmail" type="email" required placeholder="yetkili@firma.com" />
+                </label>
+                <label>Yetkili Adı *
+                  <input id="authorizedName" name="authorizedName" type="text" required placeholder="Ad Soyad" />
+                </label>
+                <label>Firma Adı *
+                  <input id="companyName" name="companyName" type="text" required placeholder="Firma adı" />
+                </label>
+              </div>
+              <div class="verification-row">
+                <button class="secondary-action" type="button" id="sendVerificationButton">Doğrulama Kodu Gönder</button>
+                <label>Doğrulama Kodu *
+                  <input id="verificationCode" name="verificationCode" inputmode="numeric" maxlength="6" required placeholder="000000" />
+                </label>
+                <button class="secondary-action" type="button" id="verifyCodeButton">Kodu Onayla</button>
+              </div>
+              <p id="verificationStatus" class="status" hidden></p>
+            </div>
+
+            <div class="form-section wide">
+              <h3>Firma Bilgileri</h3>
+              <div class="two-col">
+                <label>Vergi No *
+                  <input id="taxNo" name="taxNo" inputmode="numeric" maxlength="10" required placeholder="10 haneli vergi no" />
+                  <span id="taxNoHint" class="field-hint"></span>
+                </label>
+                <label>Vergi Dairesi *
+                  <input id="taxOffice" name="taxOffice" type="text" required placeholder="Vergi dairesi" />
+                </label>
+              </div>
+              <label>Firma Adresi *
+                <textarea id="address" name="address" rows="3" required placeholder="Açık firma adresi"></textarea>
+              </label>
+            </div>
+
+            <div class="form-section wide">
+              <h3>Yetkili ve Şifre</h3>
+              <div class="three-col">
+                <label>Yetkili Telefonu *
+                  <input id="authorizedPhone" name="authorizedPhone" inputmode="numeric" required placeholder="05071191679" />
+                </label>
+                <label>Şifre *
+                  <input id="password" name="password" type="password" minlength="8" required placeholder="En az 8 karakter" />
+                </label>
+                <label>Şifre Tekrar *
+                  <input id="passwordConfirm" name="passwordConfirm" type="password" minlength="8" required placeholder="Şifre tekrar" />
+                </label>
+              </div>
+              <label class="check-row">
+                <input id="agreement" name="agreement" type="checkbox" required />
+                <span>Firma bilgilerinin doğru olduğunu ve Plastik24 üyelik/KVKK koşullarını kabul ediyorum.</span>
+              </label>
+            </div>
+
+            <div class="form-actions wide">
+              <button class="primary-action" type="submit" id="registerButton">Üyelik Başvurusunu Tamamla</button>
+            </div>
+            <p id="registerStatus" class="status wide" hidden></p>
+          </form>
+        </article>
+      </section>
+    </main>
+
+    <script src="uyelik.js?v=20260710-membership"></script>
+  </body>
+</html>

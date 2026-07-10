@@ -79,10 +79,24 @@ async function login(email, password) {
 
 async function logout() {
   sessionStorage.removeItem('p24_member');
-  await apiFetch('logout.php', { method: 'POST', body: '{}' }).catch(() => {});
+  await apiFetch('member-logout.php', { method: 'POST', body: '{}' }).catch(() => {});
   state.member = null;
   state.orders = [];
   showLogin();
+}
+
+async function requestPasswordReset(email) {
+  return apiFetch('member-password.php', {
+    method: 'POST',
+    body: JSON.stringify({ action: 'request-reset', email }),
+  });
+}
+
+async function resetPassword(email, code, newPassword) {
+  return apiFetch('member-password.php', {
+    method: 'POST',
+    body: JSON.stringify({ action: 'reset', email, code, newPassword }),
+  });
 }
 
 // ─── Orders ──────────────────────────────────────────
@@ -314,6 +328,77 @@ $('loginForm').addEventListener('submit', async (e) => {
 });
 
 $('logoutBtn').addEventListener('click', logout);
+
+$('forgotToggle').addEventListener('click', () => {
+  const form = $('forgotForm');
+  form.hidden = !form.hidden;
+  $('resetMessage').hidden = true;
+  if (!form.hidden && $('loginEmail').value.trim()) {
+    $('resetEmail').value = $('loginEmail').value.trim();
+  }
+});
+
+$('resetCode').addEventListener('input', (event) => {
+  event.target.value = event.target.value.replace(/\D/g, '').slice(0, 6);
+});
+
+$('resetCodeBtn').addEventListener('click', async () => {
+  const email = $('resetEmail').value.trim();
+  const msg = $('resetMessage');
+  const btn = $('resetCodeBtn');
+  msg.hidden = true;
+  btn.disabled = true;
+  btn.textContent = 'Gönderiliyor...';
+  try {
+    const data = await requestPasswordReset(email);
+    msg.textContent = data.message || 'Kod gönderildi.';
+    msg.className = 'form-info';
+    msg.hidden = false;
+  } catch (err) {
+    msg.textContent = err.message;
+    msg.className = 'form-error';
+    msg.hidden = false;
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Kod Gönder';
+  }
+});
+
+$('forgotForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = $('resetEmail').value.trim();
+  const code = $('resetCode').value.replace(/\D/g, '').slice(0, 6);
+  const newPassword = $('resetPassword').value;
+  const msg = $('resetMessage');
+  const btn = $('resetPasswordBtn');
+  msg.hidden = true;
+
+  if (code.length !== 6) {
+    msg.textContent = '6 haneli doğrulama kodunu girin.';
+    msg.className = 'form-error';
+    msg.hidden = false;
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Güncelleniyor...';
+  try {
+    const data = await resetPassword(email, code, newPassword);
+    msg.textContent = data.message || 'Şifreniz güncellendi.';
+    msg.className = 'form-info';
+    msg.hidden = false;
+    $('loginEmail').value = email;
+    $('loginPassword').focus();
+    e.target.reset();
+  } catch (err) {
+    msg.textContent = err.message;
+    msg.className = 'form-error';
+    msg.hidden = false;
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Şifreyi Güncelle';
+  }
+});
 
 document.getElementById('sidebarNav').addEventListener('click', (e) => {
   const btn = e.target.closest('[data-panel]');

@@ -26207,7 +26207,7 @@
   "membershipSettings": {
     "title": "Kurumsal Üyelik",
     "description": "Firma müşterileri için e-posta doğrulamalı üyelik başvurusu. Sipariş, ödeme ve teklif süreçlerinde firma bilgileri esas alınır.",
-    "emailVerificationRequired": false,
+    "emailVerificationRequired": true,
     "requireCompanyInfo": true,
     "approvalMode": "auto",
     "successMessage": "Üyelik başvurunuz ve e-posta doğrulamanız alındı. Raceplast ekibi firma bilgilerinizi kontrol ettikten sonra hesabınızı aktif eder.",

@@ -367,12 +367,13 @@ if ($type === 'verification') {
 
     if (!$sent) {
         rp_json_response([
-            'ok' => true, 
-            'message' => 'Doğrulama e-postası gönderilemedi (Mail sunucusu hatası). Test amaçlı doğrulama kodunuz: ' . $code
-        ]);
+            'ok' => false,
+            'message' => 'Doğrulama e-postası gönderilemedi. Mail ayarlarını ve SMTP bilgilerini kontrol edin.',
+            'mailSent' => false,
+        ], 500);
     }
 
-    rp_json_response(['ok' => true, 'message' => 'Doğrulama kodu e-posta adresinize gönderildi.']);
+    rp_json_response(['ok' => true, 'message' => 'Doğrulama kodu e-posta adresinize gönderildi.', 'mailSent' => true]);
 }
 
 if ($type === 'verify-code') {

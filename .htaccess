@@ -1,3 +1,4 @@
+DirectoryIndex index.html index.php
 Options -MultiViews
 
 <IfModule mod_rewrite.c>
@@ -8,5 +9,9 @@ Options -MultiViews
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  RewriteRule ^ index.html [L]
+  RewriteRule ^(admin|api|assets|panel|templates|uploads|uyelik)(/.*)?$ - [L]
+
+  RewriteRule . /index.html [L]
 </IfModule>
+
+ErrorDocument 404 /404.html
