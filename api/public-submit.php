@@ -396,6 +396,10 @@ if ($type === 'membership') {
     $verificationCode = preg_replace('/\D+/', '', (string)($payload['verificationCode'] ?? '')) ?: '';
     $password = (string)($payload['password'] ?? '');
 
+    if (strlen($password) < 8) {
+        rp_json_response(['ok' => false, 'message' => 'Şifre en az 8 karakter olmalıdır.'], 422);
+    }
+
     if (!preg_match('/^\d{10}$/', $taxNo)) {
         rp_json_response(['ok' => false, 'message' => 'Vergi no 10 haneli olmalı ve sadece rakam içermelidir.'], 422);
     }

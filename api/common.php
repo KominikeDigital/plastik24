@@ -261,7 +261,8 @@ function rp_smtp_send(string $to, string $subject, string $body, array $settings
         return false;
     }
 
-    $transport = ((string)$settings['smtpSecure'] === 'ssl' ? 'ssl://' : '') . $host;
+    $secure = strtolower(trim((string)($settings['smtpSecure'] ?? '')));
+    $transport = ($secure === 'ssl' ? 'ssl://' : '') . $host;
     $socket = @stream_socket_client($transport . ':' . $port, $errno, $errstr, 20, STREAM_CLIENT_CONNECT);
     if (!$socket) {
         return false;
@@ -282,6 +283,24 @@ function rp_smtp_send(string $to, string $subject, string $body, array $settings
     if (!$ok) {
         fclose($socket);
         return false;
+    }
+
+    // Port 587/STARTTLS kullanan sunucularda kimlik doğrulamadan önce şifreli
+    // bağlantıya geç. 465/SSL bağlantısı zaten stream katmanında şifrelenir.
+    if ($secure === 'tls' || $secure === 'starttls') {
+        if (!rp_smtp_command($socket, 'STARTTLS', [220])) {
+            fclose($socket);
+            return false;
+        }
+        if (!@stream_socket_enable_crypto($socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) {
+            fclose($socket);
+            return false;
+        }
+        $ok = rp_smtp_command($socket, 'EHLO ' . $serverName, [250]);
+        if (!$ok) {
+            fclose($socket);
+            return false;
+        }
     }
 
     if (!empty($settings['smtpAuth'])) {
@@ -358,6 +377,17 @@ function rp_send_template_mail(string $to, string $trigger, array $variables): b
     }
 
     if (!$template || ($template['enabled'] ?? true) === false) {
+        // Yönetim panelindeki şablon silinmiş/kapalı olsa bile kritik hesap
+        // e-postaları tamamen durmasın.
+        if ($trigger === 'email-verification') {
+            $name = trim((string)($variables['authorizedName'] ?? ''));
+            $code = trim((string)($variables['verificationCode'] ?? ''));
+            return rp_send_mail(
+                $to,
+                'Plastik24 e-posta doğrulama kodunuz',
+                "Merhaba {$name},\n\nPlastik24 üyeliğinizi doğrulamak için kodunuz: {$code}\n\nBu kod 20 dakika geçerlidir.\n\nPlastik24"
+            );
+        }
         return false;
     }
 
