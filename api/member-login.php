@@ -48,6 +48,7 @@ if ($status !== 'approved') {
 }
 
 // Oturum yönetimi - güvenli yenileme
+session_regenerate_id(true);
 $_SESSION['plastik24_member_id']    = (string)($member['id'] ?? '');
 $_SESSION['plastik24_member_email'] = $email;
 // Admin oturumunu etkilememek için sadece üye değişkenlerini set ediyoruz

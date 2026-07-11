@@ -23,9 +23,13 @@ if (isset($_SERVER['HTTP_HOST'])) {
 }
 
 if (session_status() === PHP_SESSION_NONE) {
+    // Üye oturumu sayfa yenilemelerinde ve tarayıcı yeniden açıldığında
+    // korunur. Sunucu tarafı oturum süresi de cookie ile aynı tutulur.
+    $sessionLifetime = 60 * 60 * 24 * 30;
+    ini_set('session.gc_maxlifetime', (string)$sessionLifetime);
     session_name('raceplast_admin');
     session_set_cookie_params([
-        'lifetime' => 0,
+        'lifetime' => $sessionLifetime,
         'path' => '/',
         'domain' => $cookieDomain,
         'secure' => $isHttps,
@@ -88,7 +92,23 @@ function rp_write_json(string $file, array $payload): void
         rp_json_response(['ok' => false, 'message' => 'JSON verisi hazırlanamadı.'], 500);
     }
 
-    $tmp = $file . '.tmp';
+    // Üye kayıtları güncellenmeden önce zaman damgalı bir yedek oluştur.
+    // Böylece profil güncellemesi veya eşzamanlı bir yazma sorunu mevcut
+    // kullanıcıların geri döndürülemez biçimde silinmesine yol açmaz.
+    if ($file === RACEPLAST_MEMBERS_FILE && is_file($file)) {
+        if (!is_dir(RACEPLAST_BACKUP_DIR)) {
+            @mkdir(RACEPLAST_BACKUP_DIR, 0755, true);
+        }
+        $backup = RACEPLAST_BACKUP_DIR . '/members-' . gmdate('Ymd-His') . '-' . bin2hex(random_bytes(2)) . '.json';
+        @copy($file, $backup);
+        $backups = glob(RACEPLAST_BACKUP_DIR . '/members-*.json') ?: [];
+        rsort($backups);
+        foreach (array_slice($backups, 20) as $oldBackup) {
+            @unlink($oldBackup);
+        }
+    }
+
+    $tmp = $file . '.' . bin2hex(random_bytes(6)) . '.tmp';
     if (file_put_contents($tmp, $encoded . PHP_EOL, LOCK_EX) === false) {
         rp_json_response(['ok' => false, 'message' => 'Veri dosyası yazılamadı. Yazma iznini kontrol edin.'], 500);
     }

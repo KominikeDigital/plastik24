@@ -22,6 +22,40 @@
   --sidebar-w: 240px;
 }
 
+/* Plastik24 açık renkli site tasarımı */
+:root {
+  --bg: #f5f7fb;
+  --surface: #ffffff;
+  --surface2: #f1f5f9;
+  --border: #dce3ef;
+  --text: #0f172a;
+  --muted: #64748b;
+  --accent: #1457d9;
+  --accent2: #0f2f6f;
+  --success: #16794c;
+  --warn: #b45309;
+  --danger: #b42318;
+}
+html, body { height: auto; min-height: 100%; }
+body { background: var(--bg); color: var(--text); }
+#loginView { min-height: 620px; background: var(--bg); }
+.login-card { background: #fff; box-shadow: 0 18px 50px rgba(15,23,42,.08); }
+#panelView { height: auto; min-height: 720px; width: min(1280px, calc(100% - 32px)); margin: 0 auto; padding: 28px 0; overflow: visible; gap: 20px; }
+#sidebar { border: 1px solid var(--border); border-radius: 12px; min-height: 680px; }
+#mainPanel { min-width: 0; overflow: visible; border: 1px solid var(--border); border-radius: 12px; background: #f8fafc; }
+#panelHeader { border-radius: 12px 12px 0 0; }
+.panel-card,.kpi-card { box-shadow: 0 8px 28px rgba(15,23,42,.04); }
+.badge-shipped { color: #6d28d9; }
+.tracking-box strong { color: #6d28d9; }
+@media (max-width: 840px) {
+  #panelView { flex-direction: column; }
+  #sidebar { width: 100%; min-height: auto; }
+  #sidebarNav { display: grid; grid-template-columns: repeat(2,1fr); }
+  .sidebar-footer { flex-direction: row; align-items: center; }
+  .member-chip { flex: 1; }
+  .logout-btn { width: auto; }
+}
+
 html, body { height: 100%; }
 
 body {
@@ -427,4 +461,19 @@ body {
   .form-grid { grid-template-columns: 1fr; }
   .order-row { grid-template-columns: 1fr auto; }
   .order-total { display: none; }
+}
+
+/* Son katman: paneli ana sitenin açık renkli yüzeyiyle eşleştirir. */
+html, body { height: auto; min-height: 100%; }
+#loginView { min-height: 620px; background: #f5f7fb; }
+.login-card { background: #fff; box-shadow: 0 18px 50px rgba(15,23,42,.08); }
+#panelView { height: auto; min-height: 720px; width: min(1280px, calc(100% - 32px)); margin: 0 auto; padding: 28px 0; overflow: visible; gap: 20px; }
+#sidebar { border: 1px solid var(--border); border-radius: 12px; min-height: 680px; }
+#mainPanel { min-width: 0; overflow: visible; border: 1px solid var(--border); border-radius: 12px; background: #f8fafc; }
+#panelHeader { border-radius: 12px 12px 0 0; }
+.panel-card,.kpi-card { box-shadow: 0 8px 28px rgba(15,23,42,.04); }
+@media (max-width: 840px) {
+  #panelView { flex-direction: column; }
+  #sidebar { width: 100%; min-height: auto; height: auto; }
+  #sidebarNav { display: grid; grid-template-columns: repeat(2,1fr); }
 }
