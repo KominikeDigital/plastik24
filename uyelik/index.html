@@ -23,14 +23,9 @@
 
     <main class="auth-shell">
       <section class="intro-panel">
-        <span class="eyebrow">Kurumsal Üyelik</span>
-        <h1>Firma hesabınızla teklif, sipariş ve ödeme süreçlerinizi takip edin.</h1>
-        <p>Üyelik başvurusu e-posta doğrulama kodu ile tamamlanır. Firma adı, adres, vergi no, vergi dairesi ve yetkili bilgileri zorunludur.</p>
-        <div class="intro-list">
-          <div><strong>1</strong><span>Mail doğrulama kodunu alın</span></div>
-          <div><strong>2</strong><span>Firma bilgilerini doldurun</span></div>
-          <div><strong>3</strong><span>Şifrenizle üye paneline girin</span></div>
-        </div>
+        <span class="eyebrow">HESABIM</span>
+        <h1>Giriş yapın veya kurumsal hesabınızı oluşturun.</h1>
+        <p>Tekliflerinizi, siparişlerinizi ve firma bilgilerinizi tek yerden yönetin.</p>
       </section>
 
       <section class="auth-grid">
@@ -73,10 +68,12 @@
 
         <article class="card register-card">
           <span class="section-label">Yeni Üyelik</span>
-          <h2>Kurumsal Başvuru</h2>
-          <p class="card-copy">Doğrulama kodu yetkili e-posta adresine gönderilir. Kod onaylanmadan başvuru tamamlanmaz.</p>
+          <h2>Yeni müşteri misiniz?</h2>
+          <p class="card-copy">Ücretsiz firma hesabıyla teklif ve sipariş süreçlerinizi daha hızlı yönetin.</p>
+          <ul class="account-benefits"><li>Sipariş ve teklif geçmişini görüntüleyin</li><li>Firma bilgilerinizi güvenle saklayın</li><li>Tekrar girişte bilgilerinize hızlıca ulaşın</li></ul>
+          <button class="primary-action register-toggle" type="button" id="registrationToggle" aria-expanded="false">Hesap Oluştur</button>
 
-          <form id="registerForm" class="form-grid">
+          <form id="registerForm" class="form-grid registration-content" hidden>
             <div class="form-section wide">
               <h3>Mail Doğrulama</h3>
               <div class="three-col">

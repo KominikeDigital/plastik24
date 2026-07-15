@@ -219,6 +219,24 @@ input:focus, textarea:focus {
 
 .form-actions { display: flex; justify-content: flex-end; }
 
+/* Sade hesap ekranı */
+.auth-shell { max-width: 1180px; padding-top: 46px; }
+.intro-panel { display: block; max-width: 720px; margin: 0 auto 30px; text-align: center; }
+.intro-panel h1 { margin: 10px auto; max-width: 680px; font-size: clamp(30px,4vw,44px); }
+.intro-panel p { margin: 0 auto; }
+.auth-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 24px; align-items: start; }
+.card { padding: 30px; }
+.login-card,.register-card { min-height: 390px; }
+.account-benefits { display: grid; gap: 12px; margin: 22px 0 26px; padding: 0; list-style: none; }
+.account-benefits li { position: relative; padding-left: 26px; color: var(--muted); font-size: 14px; font-weight: 650; }
+.account-benefits li::before { content: "✓"; position: absolute; left: 0; color: var(--success); font-weight: 900; }
+.register-toggle { width: 100%; }
+.registration-content { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--line); }
+.registration-content[hidden] { display: none !important; }
+.register-card:has(.registration-content:not([hidden])) { grid-column: 1/-1; }
+.register-card:has(.registration-content:not([hidden])) .account-benefits { display: none; }
+@media(max-width:850px){.auth-grid{grid-template-columns:1fr}.login-card,.register-card{min-height:0}.register-card:has(.registration-content:not([hidden])){grid-column:auto}}
+
 @media (max-width: 1020px) {
   .intro-panel, .auth-grid { grid-template-columns: 1fr; }
   .intro-list { min-width: 0; }

@@ -5,6 +5,16 @@ const state = {
   verifiedEmail: '',
 };
 
+$('registrationToggle').addEventListener('click', () => {
+  const form = $('registerForm');
+  const button = $('registrationToggle');
+  const opening = form.hidden;
+  form.hidden = !opening;
+  button.setAttribute('aria-expanded', String(opening));
+  button.textContent = opening ? 'Başvuruyu Kapat' : 'Hesap Oluştur';
+  if (opening) $('authorizedEmail').focus();
+});
+
 function setStatus(id, message, type = 'info') {
   const el = $(id);
   el.textContent = message;
